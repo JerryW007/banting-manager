@@ -50,9 +50,8 @@ export default {
       return name.trim().toLocaleLowerCase() === 'Dashboard'.toLocaleLowerCase()
     },
     pathCompile(path) {
-      // To solve this problem https://github.com/PanJiaChen/banting/issues/561
       const { params } = this.$route
-      var toPath = pathToRegexp.compile(path)
+      let toPath = pathToRegexp.compile(path)
       return toPath(params)
     },
     handleLink(item) {

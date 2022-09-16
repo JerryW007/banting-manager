@@ -63,6 +63,7 @@
 import path from 'path'
 import { deepClone } from '@/utils'
 import { getRoutes, getRoles, addRole, deleteRole, updateRole } from '@/api/role'
+import  { constantRoutes } from './../../router/index.js'
 
 const defaultRole = {
   key: '',
@@ -98,9 +99,10 @@ export default {
   },
   methods: {
     async getRoutes() {
-      const res = await getRoutes()
-      this.serviceRoutes = res.data
-      this.routes = this.generateRoutes(res.data)
+      this.serviceRoutes = constantRoutes
+      console.log('~~~~~~~~~~~~')
+      console.log(this.serviceRoutes)
+      this.routes = this.generateRoutes(constantRoutes)
     },
     async getRoles() {
       const res = await getRoles()
@@ -110,7 +112,7 @@ export default {
     // Reshape the routes structure so that it looks the same as the sidebar
     generateRoutes(routes, basePath = '/') {
       const res = []
-
+      console.log('~~~~~~~~~~~~')
       for (let route of routes) {
         // skip some route
         if (route.hidden) { continue }

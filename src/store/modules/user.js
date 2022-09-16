@@ -55,6 +55,8 @@ const actions = {
         if (!data) {
           reject('Verification failed, please Login again.')
         }
+        console.log(data)
+        commit('SET_NAME', data.nickname)
         resolve(data)
       }).catch(error => {
         reject(error)
@@ -72,7 +74,6 @@ const actions = {
         resetRouter()
 
         // reset visited views and cached views
-        // to fixed https://github.com/PanJiaChen/banting/issues/2485
         dispatch('tagsView/delAllViews', null, { root: true })
 
         resolve()

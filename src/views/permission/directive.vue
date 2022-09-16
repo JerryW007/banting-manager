@@ -41,7 +41,7 @@
       </aside>
 
       <el-tabs type="border-card" style="width:550px;">
-        <el-tab-pane v-if="checkPermission(['admin'])" label="Admin">
+        <el-tab-pane label="Admin">
           Admin can see this
           <el-tag class="permission-sourceCode" type="info">
             admin

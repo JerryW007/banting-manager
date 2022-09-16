@@ -86,13 +86,52 @@ export const constantRoutes = [
     path: '/profile',
     component: Layout,
     redirect: '/profile/index',
-    hidden: true,
     children: [
       {
         path: 'index',
         component: () => import('@/views/profile/index'),
         name: 'Profile',
         meta: { title: 'Profile', icon: 'user', noCache: true }
+      }
+    ]
+  }, {
+    path: '/permission',
+    component: Layout,
+    redirect: '/permission/page',
+    alwaysShow: true, // will always show the root menu
+    name: 'Permission',
+    meta: {
+      title: 'Permission',
+      icon: 'lock',
+      roles: ['13509662514', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'page',
+        component: () => import('@/views/permission/page'),
+        name: 'PagePermission',
+        meta: {
+          title: 'Page Permission',
+          roles: ['13509662514'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'directive',
+        component: () => import('@/views/permission/directive'),
+        name: 'DirectivePermission',
+        meta: {
+          title: 'Directive Permission'
+          // if do not set roles, means: this page does not require permission
+        }
+      },
+      {
+        path: 'role',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: 'Role Permission',
+          roles: ['13509662514']
+        }
       }
     ]
   }
@@ -368,8 +407,6 @@ const createRouter = () => new Router({
 })
 
 const router = createRouter()
-
-// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router

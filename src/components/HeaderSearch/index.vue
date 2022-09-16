@@ -41,6 +41,7 @@ export default {
   },
   watch: {
     routes() {
+      console.log('LLL:' + this.routes)
       this.searchPool = this.generateRoutes(this.routes)
     },
     searchPool(list) {

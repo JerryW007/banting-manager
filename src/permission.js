@@ -24,6 +24,7 @@ router.beforeEach(async(to, from, next) => {
       next({ path: '/' })
       NProgress.done() 
     } else {
+      console.log('12345667')
       next()
       NProgress.done() 
     }

@@ -23,18 +23,22 @@ import { mapGetters } from 'vuex'
 import Logo from './Logo'
 import SidebarItem from './SidebarItem'
 import variables from '@/styles/variables.scss'
-
+import { asyncRoutes } from '@/router'
 export default {
   components: { SidebarItem, Logo },
-  computed: {
+  data(){
+    return {permission_routes:[]}
+  },
+  created() {
+    this.permission_routes = asyncRoutes
+  },
+  computed: {    
     ...mapGetters([
-      'permission_routes',
       'sidebar'
     ]),
     activeMenu() {
       const route = this.$route
       const { meta, path } = route
-      // if set path, the sidebar will highlight the path you set
       if (meta.activeMenu) {
         return meta.activeMenu
       }

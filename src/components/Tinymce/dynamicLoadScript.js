@@ -1,7 +1,6 @@
 let callbacks = []
 
 function loadedTinymce() {
-  // to fixed https://github.com/PanJiaChen/banting/issues/2144
   // check is successfully downloaded script
   return window.tinymce
 }
