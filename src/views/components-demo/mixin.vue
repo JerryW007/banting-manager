@@ -64,7 +64,7 @@
             <span>图片hover效果</span>
           </div>
           <div class="component-item">
-            <pan-thumb width="100px" height="100px" image="https://wpimg.wallstcn.com/577965b9-bb9e-4e02-9f0c-095b41417191">
+            <pan-thumb width="100px" height="100px" image="http://img.pcauto.com.cn/images/ttauto/2021/09/27/7011297659734524453/75b8634bcf654ca8801308929b8a20a2.png">
               banting
             </pan-thumb>
           </div>

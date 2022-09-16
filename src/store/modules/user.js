@@ -5,7 +5,7 @@ import router, { resetRouter } from '@/router'
 const state = {
   token: getToken(),
   name: '',
-  avatar: '',
+  avatar: 'http://img.pcauto.com.cn/images/ttauto/2021/09/27/7011297659734524453/75b8634bcf654ca8801308929b8a20a2.png',
   introduction: '',
   roles: []
 }
@@ -104,7 +104,7 @@ const actions = {
     resetRouter()
 
     // generate accessible routes map based on roles
-    const accessRoutes = await dispatch('permission/generateRoutes', roles, { root: true })
+    const accessRoutes = await dispatch('permission/generateRoutes', roles, { root: true })    
     // dynamically add accessible routes
     router.addRoutes(accessRoutes)
 

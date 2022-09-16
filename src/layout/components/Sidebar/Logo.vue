@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       title: '队列系统管理平台',
-      logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+      logo: 'http://img.pcauto.com.cn/images/ttauto/2021/09/27/7011297659734524453/75b8634bcf654ca8801308929b8a20a2.png'
     }
   }
 }

@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       errGif: errGif + '?' + +new Date(),
-      ewizardClap: 'https://wpimg.wallstcn.com/007ef517-bafd-4066-aae4-6883632d9646',
+      ewizardClap: 'http://img.pcauto.com.cn/images/ttauto/2021/09/27/7011297659734524453/75b8634bcf654ca8801308929b8a20a2.png',
       dialogVisible: false
     }
   },

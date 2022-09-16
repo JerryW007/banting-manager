@@ -10,7 +10,7 @@
       </a>
     </aside>
     <a href="#">
-      <img src="https://wpimg.wallstcn.com/360e4842-4db5-42d0-b078-f9a84a825546.gif">
+      <img src="http://img.pcauto.com.cn/images/ttauto/2021/09/27/7011297659734524453/75b8634bcf654ca8801308929b8a20a2.png">
     </a>
   </div>
 </template>

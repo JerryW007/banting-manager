@@ -5,8 +5,6 @@ module.exports = {
         "es6":true
     },
     "extends": ["plugin:vue/essential"],
-    "overrides": [
-    ],
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"

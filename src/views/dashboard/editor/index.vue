@@ -12,7 +12,6 @@
       </div>
     </div>
     <div>
-      <img :src="emptyGif" class="emptyGif">
     </div>
   </div>
 </template>
@@ -27,7 +26,7 @@ export default {
   components: { PanThumb, GithubCorner },
   data() {
     return {
-      emptyGif: 'https://wpimg.wallstcn.com/0e03b7da-db9e-4819-ba10-9016ddfdaed3'
+      emptyGif: 'http://img.pcauto.com.cn/images/ttauto/2021/09/27/7011297659734524453/75b8634bcf654ca8801308929b8a20a2.png'
     }
   },
   computed: {
@@ -41,12 +40,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .emptyGif {
-    display: block;
-    width: 45%;
-    margin: 0 auto;
-  }
-
   .dashboard-editor-container {
     background-color: #e3e3e3;
     min-height: 100vh;

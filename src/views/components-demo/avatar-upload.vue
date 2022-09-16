@@ -35,7 +35,7 @@ export default {
     return {
       imagecropperShow: false,
       imagecropperKey: 0,
-      image: 'https://wpimg.wallstcn.com/577965b9-bb9e-4e02-9f0c-095b41417191'
+      image: 'http://img.pcauto.com.cn/images/ttauto/2021/09/27/7011297659734524453/75b8634bcf654ca8801308929b8a20a2.png'
     }
   },
   methods: {

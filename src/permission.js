@@ -20,22 +20,16 @@ router.beforeEach(async(to, from, next) => {
   // determine whether the user has logged in
   const hasToken = getToken()
   if (hasToken) {
-    console.log('111111111')
-    // if is logged in, redirect to the home page
-    next({ path: '/' })
-    NProgress.done() // hack: https://github.com/PanJiaChen/banting/pull/2939
-  } else {
-    /* has no token*/
-
-    if (whiteList.indexOf(to.path) !== -1) {
-      // in the free login whitelist, go directly
-      next()
+    if (to.path === '/login') {
+      next({ path: '/' })
+      NProgress.done() 
     } else {
-      // other pages that do not have permission to access are redirected to the login page.
-      next(`/login?redirect=${to.path}`)
-      NProgress.done()
+      next()
+      NProgress.done() 
     }
-  }
+  } else {
+    next()
+  } 
 })
 
 router.afterEach(() => {
