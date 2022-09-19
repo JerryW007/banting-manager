@@ -136,7 +136,6 @@ export default {
               this.loading = false
             })
             .catch((e) => {
-              console.log(e)
               this.loading = false
             })
         } else {

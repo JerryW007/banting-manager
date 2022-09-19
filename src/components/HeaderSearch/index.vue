@@ -41,7 +41,6 @@ export default {
   },
   watch: {
     routes() {
-      console.log('LLL:' + this.routes)
       this.searchPool = this.generateRoutes(this.routes)
     },
     searchPool(list) {
@@ -99,7 +98,6 @@ export default {
     // And generate the internationalized title
     generateRoutes(routes, basePath = '/', prefixTitle = []) {
       let res = []
-      console.log(routes)
       for (const router of routes) {
         // skip hidden router
         if (router.hidden) { continue }
@@ -127,7 +125,7 @@ export default {
           }
         }
       }
-      console.log(res)
+      console.log('res' + res)
       return res
     },
     querySearch(query) {

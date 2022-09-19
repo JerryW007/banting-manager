@@ -36,16 +36,21 @@ const state = {
 const mutations = {
   SET_ROUTES: (state, routes) => {
     state.addRoutes = routes
-    console.log('PPPPPPPPPPPPPP')
     state.routes = constantRoutes.concat(routes)
-    console.log(state.routes)
   }
 }
 
 const actions = {
   generateRoutes({ commit }, roles) {
     return new Promise(resolve => {
-      accessedRoutes = asyncRoutes || []
+      let accessedRoutes
+      console.log('++++++++++++++++++++++++')
+      if (roles.includes('13509662514')) {
+        accessedRoutes = asyncRoutes || []
+      } else {
+        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+      }
+      console.log(accessedRoutes)
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })

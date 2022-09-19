@@ -31,17 +31,14 @@ const mutations = {
 const actions = {
   // user login
   login({ commit }, userInfo) {
-    console.log("登录")
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
         const data = response.body
-        console.log(data)
         commit('SET_TOKEN', data.token)
         setToken(data.token)
         resolve()
       }).catch(error => {
-        console.log('23456')
         reject(error)
       })
     })
@@ -55,7 +52,6 @@ const actions = {
         if (!data) {
           reject('Verification failed, please Login again.')
         }
-        console.log(data)
         commit('SET_NAME', data.nickname)
         resolve(data)
       }).catch(error => {
@@ -91,27 +87,8 @@ const actions = {
       removeToken()
       resolve()
     })
-  },
-
-  // dynamically modify permissions
-  async changeRoles({ commit, dispatch }, role) {
-    const token = role + '-token'
-
-    commit('SET_TOKEN', token)
-    setToken(token)
-
-    const { roles } = await dispatch('getInfo')
-
-    resetRouter()
-
-    // generate accessible routes map based on roles
-    const accessRoutes = await dispatch('permission/generateRoutes', roles, { root: true })    
-    // dynamically add accessible routes
-    router.addRoutes(accessRoutes)
-
-    // reset visited views and cached views
-    dispatch('tagsView/delAllViews', null, { root: true })
   }
+
 }
 
 export default {

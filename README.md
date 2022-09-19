@@ -3,11 +3,6 @@
 ```
 - Login / Logout
 
-- Permission Authentication
-  - Page permission
-  - Directive permission
-  - Permission configuration page
-  - Two-step login
 
 - Multi-environment build
   - Develop (dev)

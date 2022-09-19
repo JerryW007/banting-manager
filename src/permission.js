@@ -24,12 +24,26 @@ router.beforeEach(async(to, from, next) => {
       next({ path: '/' })
       NProgress.done() 
     } else {
-      console.log('12345667')
-      next()
-      NProgress.done() 
+      const hasName = store.getters.name 
+      if (hasName) {
+        next()
+      }else{
+        const data = await store.dispatch('user/getInfo')
+        console.log(data)
+        const accessRoutes = await store.dispatch('permission/generateRoutes', [])
+        console.log(accessRoutes)
+        router.addRoutes(accessRoutes)
+        next({ ...to, replace: true })
+        NProgress.done() 
+      }
     }
   } else {
-    next()
+    if (whiteList.indexOf(to.path) !== -1) {
+      next()
+    } else {
+      next(`/login?redirect=${to.path}`)
+      NProgress.done()
+    }
   } 
 })
 

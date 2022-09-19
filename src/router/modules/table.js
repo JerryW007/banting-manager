@@ -3,39 +3,27 @@
 import Layout from '@/layout'
 
 const tableRouter = {
-  path: '/table',
+  path: 'table',
   component: Layout,
   redirect: '/table/complex-table',
-  name: 'Table',
+  name: 'table',
   meta: {
-    title: 'Table',
+    title: '系统监测',
     icon: 'table'
   },
   children: [
     {
-      path: 'dynamic-table',
+      path: 'dbLogic',
       component: () => import('@/views/table/dynamic-table/index'),
-      name: 'DynamicTable',
-      meta: { title: 'Dynamic Table' }
+      name: 'dynamicTable',
+      meta: { title: '数据库状态',url_params:'' }
     },
     {
       path: 'drag-table',
       component: () => import('@/views/table/drag-table'),
       name: 'DragTable',
-      meta: { title: 'Drag Table' }
+      meta: { title: '可拖拽表格' }
     },
-    {
-      path: 'inline-edit-table',
-      component: () => import('@/views/table/inline-edit-table'),
-      name: 'InlineEditTable',
-      meta: { title: 'Inline Edit' }
-    },
-    {
-      path: 'complex-table',
-      component: () => import('@/views/table/complex-table'),
-      name: 'ComplexTable',
-      meta: { title: 'Complex Table' }
-    }
   ]
 }
 export default tableRouter
