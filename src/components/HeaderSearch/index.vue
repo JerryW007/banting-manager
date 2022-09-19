@@ -125,7 +125,6 @@ export default {
           }
         }
       }
-      console.log('res' + res)
       return res
     },
     querySearch(query) {

@@ -1,10 +1,7 @@
 <template>
   <div class="dashboard-container">
     <div class="dashboard-editor-container">
-      <github-corner class="github-corner" />
-
-      <panel-group @handleSetLineChartData="handleSetLineChartData" />
-
+      <db-info />
       <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
         <line-chart :chart-data="lineChartData" />
       </el-row>
@@ -26,23 +23,12 @@
           </div>
         </el-col>
       </el-row>
-
-      <el-row :gutter="8">
-        <el-col :xs="{span: 24}" :sm="{span: 24}" :md="{span: 24}" :lg="{span: 12}" :xl="{span: 12}" style="padding-right:8px;margin-bottom:30px;">
-        </el-col>
-        <el-col :xs="{span: 24}" :sm="{span: 12}" :md="{span: 12}" :lg="{span: 6}" :xl="{span: 6}" style="margin-bottom:30px;">
-          <todo-list />
-        </el-col>
-        <el-col :xs="{span: 24}" :sm="{span: 12}" :md="{span: 12}" :lg="{span: 6}" :xl="{span: 6}" style="margin-bottom:30px;">
-          <box-card />
-        </el-col>
-      </el-row>
     </div>
   </div>
 </template>
 
 <script>
-import PanelGroup from './components/PanelGroup'
+import DbInfo from './components/DbInfo'
 import LineChart from './components/LineChart'
 import RaddarChart from './components/RaddarChart'
 import PieChart from './components/PieChart'
@@ -70,7 +56,7 @@ const lineChartData = {
 export default {
   name: 'DashboardAdmin',
   components: {
-    PanelGroup,
+    DbInfo,
     LineChart,
     RaddarChart,
     PieChart,
@@ -83,7 +69,6 @@ export default {
   },
   methods: {
     handleSetLineChartData(type) {
-      console.log(type)
       this.lineChartData = lineChartData[type]
     }
   }

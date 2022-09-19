@@ -3,9 +3,9 @@
 import Layout from '@/layout'
 
 const tableRouter = {
-  path: 'table',
+  path: '/table',
   component: Layout,
-  redirect: '/table/complex-table',
+  redirect: '/table/dynamic-table',
   name: 'table',
   meta: {
     title: '系统监测',
@@ -13,16 +13,16 @@ const tableRouter = {
   },
   children: [
     {
-      path: 'dbLogic',
+      path: 'dynamic-table',
       component: () => import('@/views/table/dynamic-table/index'),
       name: 'dynamicTable',
-      meta: { title: '数据库状态',url_params:'' }
+      meta: { title: '数据库状态',icon:'tree' }
     },
     {
       path: 'drag-table',
       component: () => import('@/views/table/drag-table'),
       name: 'DragTable',
-      meta: { title: '可拖拽表格' }
+      meta: { title: '可拖拽表格', icon: 'tree-table' }
     },
   ]
 }
