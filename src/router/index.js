@@ -77,32 +77,32 @@ export const asyncRoutes = [
   /** when your routing map is too long, you can split it into small modules **/
   tableRouter,
   {
-    path: '/example',
+    path:'/question',
     component: Layout,
-    redirect: '/example/list',
-    name: 'example',
+    name:'question',
+    redirect:'/question/list',
     meta: {
-      title: '示例',
-      icon: 'el-icon-s-help'
+      title: '题库管理',
+      icon: 'el-icon-s-order'
     },
-    children: [
+    children:[
       {
         path: 'list',
-        component: () => import('@/views/example/list'),
-        name: 'exampleList',
-        meta: { title: '文章列表', icon: 'list' }
+        component: () => import('@/views/questions/list'),
+        name: 'questionList',
+        meta: { title: '题库列表', icon: 'list' }
       },
       {
-        path: 'create',
-        component: () => import('@/views/example/create'),
-        name: 'createExample',
-        meta: { title: '添加文章', icon: 'edit' }
+        path: 'termConfig',
+        component: () => import('@/views/questions/termConfig'),
+        name: 'termConfig',
+        meta: { title: '配置题库选项', icon: 'edit' }
       },
       {
-        path: 'edit/:id(\\d+)',
-        component: () => import('@/views/example/edit'),
-        name: 'editExample',
-        meta: { title: '修改文章', noCache: true, activeMenu: '/example/list',icon: 'chart'},
+        path: 'relation',
+        component: () => import('@/views/questions/relation'),
+        name: 'relation',
+        meta: { title: '配置题库依赖', icon: 'el-icon-attract'},
       }
     ]
   },
