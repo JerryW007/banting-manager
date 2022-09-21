@@ -11,5 +11,5 @@ module.exports = {
       'plugins': ['dynamic-import-node','syntax-dynamic-import']
     }
   },
-  "plugins":['syntax-dynamic-import']
+  "plugins":['syntax-dynamic-import','transform-remove-strict-mode']
 }

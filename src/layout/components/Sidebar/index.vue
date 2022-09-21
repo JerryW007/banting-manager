@@ -31,8 +31,6 @@ export default {
       'sidebar'
     ]),
     activeMenu() {
-      console.log('#######################')
-      console.log(this.permission_routes)
       const route = this.$route
       const { meta, path } = route
       if (meta.activeMenu) {

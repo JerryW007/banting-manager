@@ -29,9 +29,7 @@ router.beforeEach(async(to, from, next) => {
         next()
       }else{
         const data = await store.dispatch('user/getInfo')
-        console.log(data)
         const accessRoutes = await store.dispatch('permission/generateRoutes', [])
-        console.log(accessRoutes)
         router.addRoutes(accessRoutes)
         next({ ...to, replace: true })
         NProgress.done() 

@@ -32,7 +32,6 @@ export default {
     async getDbInfo() {
       this.listLoading = true
       const info = await admin.dbInfo();
-      console.log(info);
       this.db_info = info;
       this.listLoading = false
     },
