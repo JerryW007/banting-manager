@@ -61,6 +61,11 @@
           <span>{{ row.zh_cn }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="完成的队列" align="center">
+        <template slot-scope="{ row }">
+          <span>{{ row.disease_ids }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="{ row }">
           <el-button type="primary" @click="showUpdate(row.content)">修改</el-button>
@@ -122,6 +127,11 @@ export default {
   },
   created() {
     this.getList();
+  },
+  watch:{
+    dialogUpdateVisible:function(){
+      this.getList()
+    }
   },
   methods: {
     getList() {

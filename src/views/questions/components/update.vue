@@ -123,7 +123,7 @@ export default {
       return row.term_id
     },
     handlerClose() {
-      this.$emit("update:visible", false);
+      this.$emit("update:visible", false);      
     },
     saveTermInfos() {
       let term_orders = [];
@@ -141,8 +141,10 @@ export default {
       questions.saveTermInfos(formData).then((response) => {
         setTimeout(() => {
           this.listLoading = false;
+          this.$emit("update:visible", false);
         }, 1 * 200);
       });
+
     },
     rowDrop() {
       const tbody = document.querySelector("#qu tbody");
