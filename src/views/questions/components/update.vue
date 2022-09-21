@@ -99,8 +99,11 @@ export default {
       for (let index in this.list) {
         new_item_type.push(newValue + "." + this.list[index].term_id);
         this.item_type = new_item_type;
-      }
+      }     
     },
+    disease_id:function(newValue, oldValue) {
+      this.getList()
+    }
   },
   mounted() {
     this.$nextTick(() => {
@@ -109,8 +112,10 @@ export default {
   },
   methods: {
     deleteRow(index, row){
-      this.list.splice(index,1)
-      this.resetTermOrders()
+      this.list.splice(index, 1)
+      this.$nextTick(()=>{
+        this.resetTermOrders()
+      })
     },
     resetTermOrders() {
       const elementList = document.getElementsByName('data-id')
@@ -126,11 +131,6 @@ export default {
       this.$emit("update:visible", false);      
     },
     saveTermInfos() {
-      let term_orders = [];
-      for (let index in this.list) {
-        term_orders.push(this.list[index].term_id);
-      }
-      this.term_orders = term_orders  
       const formData = {
         content: this.content,
         item_type: this.item_type,
@@ -160,9 +160,20 @@ export default {
     },
     getList() {
       this.listLoading = true;
-      questions.questionTerms({content: this.content}).then((response) => {
+      questions.questionTerms({content: this.content, disease_id: this.disease_id}).then((response) => {
         const body = response.body;
         this.list = body.result;
+        let item_type = []
+        let term_orders = []
+        for (let index in this.list) {
+          term_orders.push(this.list[index].term_id)
+          if (this.list[index].item_type != undefined) {
+            item_type.push(this.list[index].item_type +'.' + this.list[index].term_id)
+          
+          }
+        }
+        this.term_orders = term_orders
+        this.item_type = item_type
         setTimeout(() => {
           this.listLoading = false;
         }, 1 * 200);
