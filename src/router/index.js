@@ -75,7 +75,7 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   /** when your routing map is too long, you can split it into small modules **/
-  tableRouter,
+  // tableRouter,
   {
     path:'/question',
     component: Layout,
@@ -93,17 +93,17 @@ export const asyncRoutes = [
         meta: { title: '题库列表', icon: 'list' }
       },
       {
+        path: 'relation',
+        component: () => import('@/views/questions/relation'),
+        name: 'relation',
+        meta: { title: '题库依赖配置', icon: 'el-icon-attract'},
+      },
+      {
         path: 'termConfig',
         component: () => import('@/views/questions/termConfig'),
         name: 'termConfig',
         meta: { title: '题库选项配置', icon: 'edit' }
       },
-      {
-        path: 'relation',
-        component: () => import('@/views/questions/relation'),
-        name: 'relation',
-        meta: { title: '题库依赖配置', icon: 'el-icon-attract'},
-      }
     ]
   },
   // 404 page must be placed at the end !!!
