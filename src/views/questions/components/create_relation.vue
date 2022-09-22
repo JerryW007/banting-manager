@@ -34,7 +34,7 @@
     <div style="margin-bottom: 10px">
       <span style="font-weight: bold">表:</span>
       <el-select
-        v-model="current_table_name"
+        v-model="table_name"
         filterable
         placeholder="请选择"
         style="margin-left: 64px; margin-right: 20px"
@@ -49,7 +49,7 @@
       </el-select>
       <span style="font-weight: bold;margin-left:25px;">列名:</span>
       <el-select
-        v-model="current_column_name"
+        v-model="column_name"
         filterable
         placeholder="请选择"
         style="margin-left: 10px"
@@ -69,22 +69,24 @@
       <el-radio v-model="relation_type" label="OPTION_OTHER">OTHER依赖</el-radio>
     </div>
     <span slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="saveTermInfos">保存</el-button>
+      <el-button type="primary" @click="saveRelations">保存</el-button>
     </span>
     <div id="permissionTag" v-if="column_terms.length > 0 && relation_type == 'OPTION_RELATION'">
-      <span style="margin-right: 20px; margin-bottom: 15px; font-weight: bold">可选值:</span>
-      <div style="margin-bottom: 5px"></div>
-      <el-checkbox
-        style="margin-bottom: 5px; margin-left: 45px; align-self: center"
-        align="left"
-        v-for="item in column_terms"
-        v-bind:key="item.term_id"
-        v-model="permissible_value"
-        :label="item.term_id"
-        >{{ item.zh_cn }}</el-checkbox
-      >      
+      <span style="margin-right: 20px; margin-bottom: 15px; font-weight: bold;float: left;">可选值:</span>
+      <div style="margin-bottom: 15px;margin-left: 80px;">
+        <el-checkbox
+          style="margin-bottom: 5px; align-self: center"
+          align="left"
+          v-for="item in column_terms"
+          v-bind:key="item.term_id"
+          v-model="permissible_value"
+          :label="item.term_id"
+          >{{ item.zh_cn }}</el-checkbox
+        > 
+      </div>
+      <div style="margin-bottom: 5px"></div>     
     </div>
-    <relation-dom :disease_id="disease_id" @removeRelation="removeRelation" :index="n" v-for="n in relation_count" :key="n"/>
+    <relation-dom :disease_id="disease_id" @addRelationData="addRelationData" @removeRelation="removeRelation" :index="n" :relation_count="relation_count" v-for="n in relation_count" :key="n"/>
   </el-dialog>
 </template>
 <script>
@@ -105,10 +107,11 @@ export default {
       column_terms: [],
       permissible_value: [],
       table_options: [],
-      current_table_name: "",
+      table_name: "",
       column_options: [],
-      current_column_name: "",
-      relation_count:[]
+      column_name: "",
+      relation_count:[],
+      relation_data:{},
     };
   },
   props: {
@@ -118,11 +121,11 @@ export default {
   created() {
     this.getTableOptions();
   },
-  watch: {
-    current_table_name: function (newValue, oldValue) {
+  watch: {  
+    table_name: function (newValue, oldValue) {
       this.getColumnOptions();
     },
-    current_column_name: function (newValue, oldValue) {
+    column_name: function (newValue, oldValue) {
       this.getQuestionTerms();
     },
     all_item_type: function (newValue, oldValue) {
@@ -143,11 +146,13 @@ export default {
   },
   mounted() {},
   methods: {
+    addRelationData: function(index, relation_data){
+      this.relation_data[index] = relation_data
+    },
     addRelation() {
       this.relation_count.push(this.relation_count.length)
     },
     removeRelation(index) {
-      console.log('remove relation')
       for (let i in this.relation_count) {
         if (this.relation_count[i] == index) {
           this.relation_count.splice(i, 1)
@@ -166,13 +171,17 @@ export default {
     handlerClose() {
       this.$emit("update:visible", false);
     },
-    saveTermInfos() {
+    saveRelations() {
       const formData = {
-        content: this.content,
-        item_type: this.item_type,
+        order: this.order,
         disease_id: this.disease_id,
-        term_orders: this.term_orders,
+        comment:this.comment,
+        permissible_value: this.permissible_value,
+        tableName: this.table_name,
+        columnName: this.column_name,
+        relations: this.relation_data,
       };
+      console.log(formData)
       this.listLoading = true;
       questions.saveTermInfos(formData).then((response) => {
         setTimeout(() => {
@@ -194,13 +203,13 @@ export default {
         });
     },
     getQuestionTerms() {
-      if (this.current_column_name.length == 0) {
+      if (this.column_name == '') {
         return;
       }
       questions
         .questionTerms({
           disease_id: this.disease_id,
-          content: this.current_column_name,
+          content: this.column_name,
         })
         .then((response) => {
           const body = response.body;
@@ -215,7 +224,7 @@ export default {
       questions
         .columnOptions({
           disease_id: this.disease_id,
-          tableName: this.current_table_name,
+          tableName: this.table_name,
         })
         .then((response) => {
           const body = response.body;

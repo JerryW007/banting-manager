@@ -2,16 +2,19 @@
 
     <div
       style="
-        margin-bottom: 10px;
-        margin-top: 10px;
+        /* margin-bottom: 10px; */
+        /* margin-top: 10px; */
         /* border: #a9a9a9 solid 1px; */
-        padding: 5px 5px;
         border-radius: 6px;      
       "
-    >
+    > <div v-if="index > 0 && relation_count[0] != index">
+        <div style="margin-left:20px;">|</div>
+        <div style="margin-left:15px;color:blue; font-weight:bold;cursor:default" @click="changeRelationType" >{{form_data.relation_type == '&' ? '且' : '或'}}</div>
+        <div style="margin-left:20px;">|</div>
+      </div>
       <span style="font-weight: bold">依赖表:</span>
       <el-select
-        v-model="table_name"
+        v-model="form_data.table_name"
         filterable
         placeholder="请选择"
         style="margin-left: 35px; margin-right: 20px"
@@ -26,7 +29,7 @@
       </el-select>
       <span style="font-weight: bold">依赖字段:</span>
       <el-select
-        v-model="column_name"
+        v-model="form_data.column_name"
         filterable
         placeholder="请选择"
         style="margin-left: 10px"
@@ -41,7 +44,7 @@
       </el-select>
       <span style="font-weight: bold; margin-left: 10px">依赖选项:</span>
       <el-select
-        v-model="term_id"
+        v-model="form_data.term_id"
         filterable
         multiple
         placeholder="请选择"
@@ -56,8 +59,8 @@
         </el-option>
       </el-select>
       <span style="font-weight: bold; margin-left: 15px; margin-right: 10px">关系:</span>
-      <el-radio v-model="relation_type" label="and" style="margin-right: 15px">且</el-radio>
-      <el-radio v-model="relation_type" label="or" style="margin-right: 15px">或</el-radio>
+      <el-radio v-model="form_data.option_relation_type" label="and" style="margin-right: 15px">且</el-radio>
+      <el-radio v-model="form_data.option_relation_type" label="or" style="margin-right: 15px">或</el-radio>
       <el-button style="padding:6px;" type="danger" size="mini" icon="el-icon-delete" circle @click="deleteRelation(index)"></el-button>
     </div>
 </template>
@@ -69,13 +72,17 @@ export default {
   props: {
     disease_id: String,
     index: Number,
+    relation_count: Array
   },
   data() {
     return {
-      term_id: '',
-      table_name: '',
-      column_name: '',
-      relation_type: '',
+      form_data:{
+        term_id: [],
+        table_name: '',
+        column_name: '',
+        relation_type:'&',
+        option_relation_type: 'and',
+      },
       table_options: [],
       column_options: [],
       term_options: [],
@@ -85,16 +92,26 @@ export default {
     this.getTableOptions();
   },
   watch: {
-    table_name: function (newValue, oldValue) {
+    'form_data.table_name': function (newValue, oldValue) {
       this.getColumnOptions();
+      this.term_id = []
     },
-    column_name: function (newValue, oldValue) {
+    'form_data.column_name': function (newValue, oldValue) {
       this.getTermOptions();
+      this.term_id = []
+    },
+    'form_data.term_id': function(new_list, old_list) {
+      this.deliverData();
     },
   },
   methods: {
+    deliverData() {
+      this.$emit('addRelationData', this.index, this.form_data)
+    },
+    changeRelationType() {
+      this.relation_type = this.relation_type == '&' ? '|' :'&'
+    },
     deleteRelation(index) {
-      console.log('child remove relation', index)
       this.$emit('removeRelation', index)
     },
     getTableOptions() {
@@ -110,17 +127,16 @@ export default {
         });
     },
     getTermOptions() {
-      if (this.column_name.length == 0) {
+      if (this.column_name == '') {
         return;
       }
       questions
         .questionTerms({
           disease_id: this.disease_id,
-          content: this.column_name,
+          content: this.form_data.column_name,
         })
         .then((response) => {
           const body = response.body;
-          console.log(body.result);
           let term_options = [];
           for (let index in body.result) {
             term_options.push({
@@ -139,7 +155,7 @@ export default {
       questions
         .columnOptions({
           disease_id: this.disease_id,
-          tableName: this.table_name,
+          tableName: this.form_data.table_name,
         })
         .then((response) => {
           const body = response.body;
