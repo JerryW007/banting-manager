@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    width="60%"
+    width="75%"
     :visible.sync="open"
     title="添加题目依赖"
     :before-close="handlerClose"
@@ -116,7 +116,6 @@ export default {
   },
   props: {
     open: Boolean,
-    content: "",
   },
   created() {
     this.getTableOptions();
@@ -124,6 +123,8 @@ export default {
   watch: {  
     table_name: function (newValue, oldValue) {
       this.getColumnOptions();
+      this.column_options = []
+      this.permissible_value = []
     },
     column_name: function (newValue, oldValue) {
       this.getQuestionTerms();
@@ -141,6 +142,8 @@ export default {
     relation_type: function (newValue, oldValue) {
       if (newValue == "OPTION_RELATION") {
         this.getQuestionTerms();
+      }else {
+        this.permissible_value = []
       }
     },
   },
@@ -177,13 +180,12 @@ export default {
         disease_id: this.disease_id,
         comment:this.comment,
         permissible_value: this.permissible_value,
-        tableName: this.table_name,
-        columnName: this.column_name,
+        table_name: this.table_name,
+        table_column: this.column_name,
         relations: this.relation_data,
       };
-      console.log(formData)
       this.listLoading = true;
-      questions.saveTermInfos(formData).then((response) => {
+      questions.saveRelations(formData).then((response) => {
         setTimeout(() => {
           this.listLoading = false;
           this.$emit("update:visible", false);

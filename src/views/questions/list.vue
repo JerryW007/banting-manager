@@ -9,7 +9,7 @@
       >
         搜索
       </el-button>
-      <el-button
+      <!-- <el-button
         class="filter-item"
         style="margin-left: 10px"
         type="primary"
@@ -17,6 +17,16 @@
         @click="handleCreate"
       >
         添加
+      </el-button> -->
+      <el-button
+        v-waves
+        :loading="uploading"
+        class="filter-item"
+        type="primary"
+        icon="el-icon-upload2"
+        @click="handleUpload"
+      >
+        导入
       </el-button>
       <el-button
         v-waves
@@ -123,6 +133,7 @@ export default {
         ],
       },
       downloadLoading: false,
+      uploading: false,
     };
   },
   created() {
@@ -175,12 +186,7 @@ export default {
       this.dialogUpdateVisible = true;
     },
     handleCreate() {
-      this.resetTemp();
-      this.dialogStatus = "create";
-      this.dialogFormVisible = true;
-      this.$nextTick(() => {
-        this.$refs["dataForm"].clearValidate();
-      });
+      alert('该功能正在开发中...')
     },
     handleUpdate(row) {
       this.temp = Object.assign({}, row); // copy obj
@@ -191,25 +197,29 @@ export default {
         this.$refs["dataForm"].clearValidate();
       });
     },
+    handleUpload(){
+      alert('该功能正在开发中...')
+    },
     handleDownload() {
-      this.downloadLoading = true;
-      import("@/vendor/Export2Excel").then((excel) => {
-        const tHeader = ["timestamp", "title", "type", "importance", "status"];
-        const filterVal = [
-          "timestamp",
-          "title",
-          "type",
-          "importance",
-          "status",
-        ];
-        const data = this.formatJson(filterVal);
-        excel.export_json_to_excel({
-          header: tHeader,
-          data,
-          filename: "table-list",
-        });
-        this.downloadLoading = false;
-      });
+      alert('该功能正在开发中...')
+      // this.downloadLoading = true;
+      // import("@/vendor/Export2Excel").then((excel) => {
+      //   const tHeader = ["timestamp", "title", "type", "importance", "status"];
+      //   const filterVal = [
+      //     "timestamp",
+      //     "title",
+      //     "type",
+      //     "importance",
+      //     "status",
+      //   ];
+      //   const data = this.formatJson(filterVal);
+      //   excel.export_json_to_excel({
+      //     header: tHeader,
+      //     data,
+      //     filename: "table-list",
+      //   });
+      //   this.downloadLoading = false;
+      // });
     },
     formatJson(filterVal) {
       return this.list.map((v) =>

@@ -17,6 +17,16 @@
         @click="handleCreate"
       >
         添加
+      </el-button>      
+      <el-button
+        v-waves
+        :loading="upLoading"
+        class="filter-item"
+        type="primary"
+        icon="el-icon-upload2"
+        @click="handleUpLoad"
+      >
+        导入
       </el-button>
       <el-button
         v-waves
@@ -40,40 +50,60 @@
       style="width: 100%"
     >
       <el-table-column
-        label="列名"
+        label="表名"
         prop="id"
         sortable="custom"
         align="center"
         :class-name="getSortClass('id')"
       >
         <template slot-scope="{ row }">
-          <span>{{ row.content }}</span>
+          <span>{{ row.table_name }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="termID计数" align="center">
+      <el-table-column label="列名" align="center">
         <template slot-scope="{ row }">
-          <span>{{ row.count }}</span>
+          <span>{{ row.table_column }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="排序" align="center">
+        <template slot-scope="{ row }">
+          <span>{{ row.order }}</span>
         </template>
       </el-table-column>
       <el-table-column label="备注" align="center">
         <template slot-scope="{ row }">
-          <span>{{ row.zh_cn }}</span>
+          <span>{{ row.comment }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="完成的队列" align="center">
+      <el-table-column label="所属疾病" align="center">
         <template slot-scope="{ row }">
-          <span>{{ row.disease_ids }}</span>
+          <span>{{ row.disease_id }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center">
+      <el-table-column label="选项" align="center">
+        <template slot-scope="{ row }">
+          <span>{{ row.permissible_value }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="依赖" align="center">
+        <template slot-scope="{ row }">
+          <span>{{ row.condition }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="创建时间" align="center">
+        <template slot-scope="{ row }">
+          <span>{{ row.create_time }}</span>
+        </template>
+      </el-table-column>
+      <!-- <el-table-column label="操作" align="center">
         <template slot-scope="{ row }">
           <el-button type="primary" @click="showUpdate(row.content)">修改</el-button>
       </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
 
-    <pagination v-show="total > 0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList"/>
-    <create-relation-dialog :visible.sync="dialogUpdateVisible" :open="dialogUpdateVisible" :content="currentContent" v-if="dialogUpdateVisible" />
+    <pagination v-show="total > 0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="relationList"/>
+    <create-relation-dialog :visible.sync="dialogUpdateVisible" :open="dialogUpdateVisible" v-if="dialogUpdateVisible" />
   </div>
 </template>
 
@@ -122,21 +152,23 @@ export default {
         ],
       },
       downloadLoading: false,
+      upLoading: false,
     };
   },
   created() {
-    this.getList();
+    this.relationList();
   },
   watch:{
     dialogUpdateVisible:function(){
-      this.getList()
+      this.relationList()
     }
   },
   methods: {
-    getList() {
+    relationList() {
       this.listLoading = true;
-      questions.getAllQuestions(this.listQuery).then((response) => {
+      questions.relationList(this.listQuery).then((response) => {
         const body = response.body;
+        console.log(body.result)
         this.list = body.result;
         this.total = body.total;
         setTimeout(() => {
@@ -146,31 +178,35 @@ export default {
     },
     handleFilter() {
       this.listQuery.page = 1;
-      this.getList();
+      this.relationList();
     },
     handleCreate(content) {
       this.currentContent = content
       this.dialogUpdateVisible = true;
     },
+    handleUpLoad(){
+      alert('该功能正在开发中...')
+    },
     handleDownload() {
-      this.downloadLoading = true;
-      import("@/vendor/Export2Excel").then((excel) => {
-        const tHeader = ["timestamp", "title", "type", "importance", "status"];
-        const filterVal = [
-          "timestamp",
-          "title",
-          "type",
-          "importance",
-          "status",
-        ];
-        const data = this.formatJson(filterVal);
-        excel.export_json_to_excel({
-          header: tHeader,
-          data,
-          filename: "table-list",
-        });
-        this.downloadLoading = false;
-      });
+      alert('该功能正在开发中...')
+      // this.downloadLoading = true;
+      // import("@/vendor/Export2Excel").then((excel) => {
+      //   const tHeader = ["timestamp", "title", "type", "importance", "status"];
+      //   const filterVal = [
+      //     "timestamp",
+      //     "title",
+      //     "type",
+      //     "importance",
+      //     "status",
+      //   ];
+      //   const data = this.formatJson(filterVal);
+      //   excel.export_json_to_excel({
+      //     header: tHeader,
+      //     data,
+      //     filename: "table-list",
+      //   });
+      //   this.downloadLoading = false;
+      // });
     },
     formatJson(filterVal) {
       return this.list.map((v) =>

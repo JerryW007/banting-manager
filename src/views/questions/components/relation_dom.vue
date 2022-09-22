@@ -109,7 +109,7 @@ export default {
       this.$emit('addRelationData', this.index, this.form_data)
     },
     changeRelationType() {
-      this.relation_type = this.relation_type == '&' ? '|' :'&'
+      this.form_data.relation_type = this.form_data.relation_type == '&' ? '|' :'&'
     },
     deleteRelation(index) {
       this.$emit('removeRelation', index)
