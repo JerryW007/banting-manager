@@ -23,10 +23,10 @@
         :loading="uploading"
         class="filter-item"
         type="primary"
-        icon="el-icon-upload2"
+        icon="el-icon-upload"
         @click="handleUpload"
       >
-        导入
+        上传
       </el-button>
       <el-button
         v-waves

@@ -14,7 +14,7 @@ const name = defaultSettings.title || 'disease queue manager system' // page tit
 // You can change the port by the following method:
 // port = 9527 npm run dev OR npm run dev --port = 9527
 const port = process.env.port || process.env.npm_config_port || 9527 // dev port
-
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
   /**
@@ -28,6 +28,7 @@ module.exports = {
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: false,
+  transpileDependencies: ['swiper'],
   productionSourceMap: false,
   devServer: {
     port: port,
@@ -53,10 +54,15 @@ module.exports = {
       }
     }
   },
+  pages:{
+    index:{
+      entry: 'src/main.js'
+    }
+  },
   chainWebpack(config) {
     // it can improve the speed of the first screen, it is recommended to turn on preload
     // it can improve the speed of the first screen, it is recommended to turn on preload
-    config.plugin('preload').tap(() => [
+    config.plugin(`preload-index`).use(HtmlWebpackPlugin).tap(() => [
       {
         rel: 'preload',
         // to ignore runtime.js
@@ -65,6 +71,7 @@ module.exports = {
         include: 'initial'
       }
     ])
+   
 
     // when there are many pages, it will cause too many meaningless requests
     config.plugins.delete('prefetch')
