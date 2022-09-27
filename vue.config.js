@@ -7,7 +7,6 @@ function resolve(dir) {
 }
 
 const name = defaultSettings.title || 'disease queue manager system' // page title
-
 // If your port is set to 80,
 // use administrator privileges to execute the command line.
 // For example, Mac: sudo npm run
@@ -15,7 +14,8 @@ const name = defaultSettings.title || 'disease queue manager system' // page tit
 // port = 9527 npm run dev OR npm run dev --port = 9527
 const port = process.env.port || process.env.npm_config_port || 9527 // dev port
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-// All configuration item explanations can be find in https://cli.vuejs.org/config/
+// All configuration item explanations can be find in https://cli.vuejs.org/config/we
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
 module.exports = {
   /**
    * You will need to set publicPath if you plan to deploy your site under a sub path,
@@ -24,7 +24,7 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  publicPath: '/',
+  publicPath: './',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: false,
@@ -52,7 +52,8 @@ module.exports = {
       alias: {
         '@': resolve('src')
       }
-    }
+    },
+    plugins:[new NodePolyfillPlugin()]
   },
   pages:{
     index:{
@@ -67,7 +68,7 @@ module.exports = {
         rel: 'preload',
         // to ignore runtime.js
         // https://github.com/vuejs/vue-cli/blob/dev/packages/@vue/cli-service/lib/config/app.js#L171
-        fileBlacklist: [/\.map$/, /hot-update\.js$/, /runtime\..*\.js$/],
+        fileBlacklist: [/\.map$/, /hot-update\.js$/],
         include: 'initial'
       }
     ])
@@ -96,14 +97,14 @@ module.exports = {
     config
       .when(process.env.NODE_ENV !== 'development',
         config => {
+          // config
+          //   .plugin('html')
+          //   .use(HtmlWebpackPlugin).tap();
           config
-            .plugin('ScriptExtHtmlWebpackPlugin')
-            .after('html')
-            .use('script-ext-html-webpack-plugin', [{
-            // `runtime` must same as runtimeChunk name. default is `runtime`
-              inline: /runtime\..*\.js$/
-            }])
-            .end()
+          .plugin('ScriptExtHtmlWebpackPlugin')
+          .after('html')
+          .use('script-ext-html-webpack-plugin')
+          .end()
           config
             .optimization.splitChunks({
               chunks: 'all',
