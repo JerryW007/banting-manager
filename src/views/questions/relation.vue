@@ -68,12 +68,12 @@
           <span>{{ row.table_name }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="列名" align="center">
+      <el-table-column label="列名" align="center" >
         <template slot-scope="{ row }">
           <span>{{ row.table_column }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="排序" align="center">
+      <el-table-column label="排序" align="center" width="80px">
         <template slot-scope="{ row }">
           <span>{{ row.order }}</span>
         </template>
@@ -83,35 +83,36 @@
           <span>{{ row.comment }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="所属疾病" align="center">
+      <el-table-column label="所属疾病" align="center" width="80px">
         <template slot-scope="{ row }">
           <span>{{ row.disease_id }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="选项" align="center">
+      <el-table-column label="选项" align="center" :show-overflow-tooltip="true">
         <template slot-scope="{ row }">
           <span>{{ row.permissible_value }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="依赖" align="center">
+      <el-table-column label="依赖" align="center"  :show-overflow-tooltip="true">
         <template slot-scope="{ row }">
           <span>{{ row.condition }}</span>
         </template>
       </el-table-column>
       <el-table-column label="创建时间" align="center">
         <template slot-scope="{ row }">
-          <span>{{ row.create_time }}</span>
+          <span>{{ row.create_time.split(".")[0] }}</span>
         </template>
       </el-table-column>
-      <!-- <el-table-column label="操作" align="center">
+      <el-table-column label="操作" align="center">
         <template slot-scope="{ row }">
-          <el-button type="primary" @click="showUpdate(row.content)">修改</el-button>
+          <el-button type="primary" @click="handleUpdate(row)">修改</el-button>
       </template>
-      </el-table-column> -->
+      </el-table-column>
     </el-table>
 
     <pagination v-show="total > 0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="relationList"/>
-    <create-relation-dialog :visible.sync="dialogUpdateVisible" :open="dialogUpdateVisible" v-if="dialogUpdateVisible" />
+    <create-relation-dialog :visible.sync="dialogCreateVisible" :open="dialogCreateVisible" v-if="dialogCreateVisible" />
+    <update-relation-dialog :visible.sync="dialogUpdateVisible" :open="dialogUpdateVisible" v-if="dialogUpdateVisible" :row="currentRow" />
   </div>
 </template>
 
@@ -125,6 +126,7 @@ export default {
   name: "questionList",
   components: {
     Pagination,
+    "update-relation-dialog": () => import("./components/update_relation"),
     "create-relation-dialog": () => import("./components/create_relation")
   },
   directives: { waves },
@@ -145,8 +147,10 @@ export default {
         { label: "ID Ascending", key: "+id" },
         { label: "ID Descending", key: "-id" },
       ],
+      dialogCreateVisible: false,
       dialogUpdateVisible: false,
       currentContent:'',
+      currentRow:{},
       rules: {
         type: [
           { required: true, message: "type is required", trigger: "change" },
@@ -170,6 +174,9 @@ export default {
   watch:{
     dialogUpdateVisible:function(){
       this.relationList()
+    },
+    dialogCreateVisible:function(){
+      this.relationList()
     }
   },
   methods: {
@@ -177,7 +184,6 @@ export default {
       this.listLoading = true;
       questions.relationList(this.listQuery).then((response) => {
         const body = response.body;
-        console.log(body.result)
         this.list = body.result;
         this.total = body.total;
         setTimeout(() => {
@@ -191,6 +197,31 @@ export default {
     },
     handleCreate(content) {
       this.currentContent = content
+      this.dialogCreateVisible = true;
+    },
+    handleUpdate(row) {
+      this.currentRow = row
+      if (row.permissible_value != 'OPTION_OTHER') {
+          let permissible_value = row.permissible_value.split(',')
+          let permissible_list = []
+          for (let i=0; i < permissible_value.length; i++) {
+            if (permissible_value[i] == '') {
+              continue;
+            }
+            if (permissible_value[i].includes('+')) {
+              let sub_values = permissible_value[i].split('+')
+              for (let j=0; j<sub_values.length; j++) {
+                if (sub_values[j] == ''){
+                  continue;
+                }
+                permissible_list.push(sub_values[j])
+              }
+            }else{
+              permissible_list.push(permissible_value[i])
+            }
+          }
+          row.permissible_value = permissible_list
+      }
       this.dialogUpdateVisible = true;
     },
     handleUpLoad(){

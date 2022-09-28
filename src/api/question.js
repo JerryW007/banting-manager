@@ -61,6 +61,14 @@ const question = {
             data: banting_body(data)
         })
     },
+    updateRelation: function (data) {
+        return request({
+            url: this.url,
+            method: 'POST',
+            params: banting_params('QuestionLogic', 'updateRelation'),
+            data: banting_body(data)
+        })
+    },
 
 }
 
