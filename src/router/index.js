@@ -106,6 +106,24 @@ export const asyncRoutes = [
       },
     ]
   },
+  {
+    path:'/formLibrary',
+    component: Layout,
+    name:'formLibrary',
+    redirect:'/formLibrary/list',
+    meta: {
+      title: '表单管理',
+      icon: 'el-icon-film'
+    },
+    children:[
+      {
+        path: 'list',
+        component: () => import('@/views/formLibrary/index'),
+        name: 'formLibraryList',
+        meta: { title: '表单列表', icon: 'list' }
+      }
+    ]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
