@@ -1,11 +1,11 @@
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
-
+import defaultAvatar from './../../assets/imgs/default-avatar.gif'
 const state = {
   token: getToken(),
   name: '',
-  avatar: 'http://img.pcauto.com.cn/images/ttauto/2021/09/27/7011297659734524453/75b8634bcf654ca8801308929b8a20a2.png',
+  avatar: defaultAvatar,
   introduction: '',
   roles: []
 }
