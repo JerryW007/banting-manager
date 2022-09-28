@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    width="75%"
+    width="80%"
     :visible.sync="open"
     title="添加题目依赖"
     :before-close="handlerClose"
