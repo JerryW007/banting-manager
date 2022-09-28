@@ -15,7 +15,6 @@ const name = defaultSettings.title || 'disease queue manager system' // page tit
 const port = process.env.port || process.env.npm_config_port || 9527 // dev port
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 // All configuration item explanations can be find in https://cli.vuejs.org/config/we
-const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
 module.exports = {
   /**
    * You will need to set publicPath if you plan to deploy your site under a sub path,
@@ -48,12 +47,13 @@ module.exports = {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
     name: name,
+    // devtool: 'eval-source-map',
     resolve: {
       alias: {
         '@': resolve('src')
       }
     },
-    plugins:[new NodePolyfillPlugin()]
+    plugins:[new HtmlWebpackPlugin()]
   },
   pages:{
     index:{

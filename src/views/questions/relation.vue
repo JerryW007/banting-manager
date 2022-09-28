@@ -1,7 +1,13 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="listQuery.content" placeholder="翻译" style="width: 200px; margin-right: 10px" class="filter-item" @keyup.enter.native="handleFilter"/>
+      <el-input v-model="listQuery.content" placeholder="表名或者字段名" style="width: 200px; margin-right: 10px" class="filter-item" @keyup.enter.native="handleFilter"/>
+      <span style="margin-left:10px;">筛选队列:</span>
+        <el-radio v-model="listQuery.disease_id" label="AML" style="margin-left: 10px">AML</el-radio>
+        <el-radio v-model="listQuery.disease_id" label="MM">MM</el-radio>
+        <el-radio v-model="listQuery.disease_id" label="MDS">MDS</el-radio>
+        <el-radio v-model="listQuery.disease_id" label="ALL">ALL</el-radio>
+        <el-radio v-model="listQuery.disease_id" label="CLL">CLL</el-radio>
       <el-button v-waves class="filter-item"
         type="primary"
         icon="el-icon-search"
@@ -10,20 +16,12 @@
         搜索
       </el-button>
       <el-button
-        class="filter-item"
-        style="margin-left: 10px"
-        type="primary"
-        icon="el-icon-edit"
-        @click="handleCreate"
-      >
-        添加
-      </el-button>      
-      <el-button
         v-waves
         :loading="upLoading"
         class="filter-item"
         type="primary"
         icon="el-icon-upload"
+        style="float: right;"
         @click="handleUpLoad"
       >
         上传
@@ -33,11 +31,21 @@
         :loading="downloadLoading"
         class="filter-item"
         type="primary"
+        style="float: right;"
         icon="el-icon-download"
         @click="handleDownload"
       >
         导出
       </el-button>
+      <el-button
+        class="filter-item"
+        style="margin-left: 10px; float: right;"
+        type="warning"
+        icon="el-icon-edit"
+        @click="handleCreate"
+      >
+        添加
+      </el-button> 
     </div>
 
     <el-table
@@ -131,6 +139,7 @@ export default {
         limit: 10,
         content: undefined,
         sort: "+id",
+        disease_id:''
       },
       sortOptions: [
         { label: "ID Ascending", key: "+id" },

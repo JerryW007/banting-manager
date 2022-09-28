@@ -1,18 +1,18 @@
 import router from './router'
 import store from './store'
 import { Message } from 'element-ui'
-import NProgress from 'nprogress' // progress bar
-import 'nprogress/nprogress.css' // progress bar style
+// import NProgress from 'nprogress' // progress bar
+// import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
 
-NProgress.configure({ showSpinner: false }) // NProgress Configuration
+// NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
 
 router.beforeEach(async(to, from, next) => {
   // start progress bar
-  NProgress.start()
+  // NProgress.start()
 
   // set page title
   document.title = getPageTitle(to.meta.title)
@@ -22,17 +22,17 @@ router.beforeEach(async(to, from, next) => {
   if (hasToken) {
     if (to.path === '/login') {
       next({ path: '/' })
-      NProgress.done() 
+      // NProgress.done() 
     } else {
       const hasName = store.getters.name 
       if (hasName) {
         next()
       }else{
-        const data = await store.dispatch('user/getInfo')
+        await store.dispatch('user/getInfo')
         const accessRoutes = await store.dispatch('permission/generateRoutes', [])
         router.addRoutes(accessRoutes)
         next({ ...to, replace: true })
-        NProgress.done() 
+        // NProgress.done() 
       }
     }
   } else {
@@ -40,12 +40,13 @@ router.beforeEach(async(to, from, next) => {
       next()
     } else {
       next(`/login?redirect=${to.path}`)
-      NProgress.done()
+      // NProgress.done()
     }
   } 
 })
 
 router.afterEach(() => {
   // finish progress bar
-  NProgress.done()
+  // console.log(NProgress)
+  // NProgress.done()
 })
