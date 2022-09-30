@@ -6,6 +6,7 @@
     :before-close="handlerClose"
   >    
     <disease-select v-model="disease_id" :tagType="diseaseSelectType" style ="margin-right:20px" :title="diseaseSelectTitle"/>
+    
     <div style="margin-bottom: 15px">
       <span style="font-weight: bold">排序:</span>
       <el-input
@@ -14,6 +15,7 @@
         v-model="order"
         placeholder="排序"
       />
+      
     </div>
     <div style="margin-bottom: 15px">
       <span style="font-weight: bold">备注:</span>
@@ -56,6 +58,7 @@
         >
         </el-option>
       </el-select>
+      <el-button type="primary" @click="addRelation" style="margin-left:30px">添加依赖</el-button>
     </div>
     <div style="margin-bottom: 15px;margin-top:15px;">
       <span style="font-weight: bold">依赖类型:</span>

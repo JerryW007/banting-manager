@@ -11,7 +11,7 @@
         <el-option
           v-for="item in diseaseOptions"
           :key="item.value"
-          :label="item.label"
+          :label="item.value"
           :value="item.value"
         >
         </el-option>
@@ -23,7 +23,7 @@
         <el-radio
           v-for="item in diseaseOptions"
           :key="item.value"
-          :label="item.label"
+          :label="item.value"
           style="margin-bottom:5px;"
           >{{ item.value }}</el-radio
         >
@@ -35,7 +35,7 @@
         <el-checkbox
           v-for="item in diseaseOptions"
           :key="item.value"
-          :label="item.label"
+          :label="item.value"
           style="margin-bottom:5px;"
           >{{ item.value }}</el-checkbox
         >
