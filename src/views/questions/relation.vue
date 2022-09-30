@@ -1,13 +1,14 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="listQuery.content" placeholder="表名或者字段名" style="width: 200px; margin-right: 10px" class="filter-item" @keyup.enter.native="handleFilter"/>
-      <span style="margin-left:10px;">筛选队列:</span>
+      <el-input v-model="listQuery.content" placeholder="表名或者字段名" style="width: 200px; margin-right: 10px; float: left;" class="filter-item" @keyup.enter.native="handleFilter"/>
+      <!-- <span style="margin-left:10px;">筛选队列:</span>
         <el-radio v-model="listQuery.disease_id" label="AML" style="margin-left: 10px">AML</el-radio>
         <el-radio v-model="listQuery.disease_id" label="MM">MM</el-radio>
         <el-radio v-model="listQuery.disease_id" label="MDS">MDS</el-radio>
         <el-radio v-model="listQuery.disease_id" label="ALL">ALL</el-radio>
-        <el-radio v-model="listQuery.disease_id" label="CLL">CLL</el-radio>
+        <el-radio v-model="listQuery.disease_id" label="CLL">CLL</el-radio> -->
+        <disease-select v-model="listQuery.disease_id" :tagType="diseaseSelectType" style ="float: left; margin-right:20px" :title="diseaseSelectTitle"/>
       <el-button v-waves class="filter-item"
         type="primary"
         icon="el-icon-search"
@@ -121,11 +122,12 @@ import waves from "@/directive/waves"; // waves directive
 import { parseTime } from "@/utils";
 import Pagination from "@/components/Pagination"; // secondary package based on el-pagination
 import questions from "@/api/question";
-
+import diseaseSelect from '@/views/public/disease_select'
 export default {
   name: "questionList",
   components: {
     Pagination,
+    diseaseSelect,
     "update-relation-dialog": () => import("./components/update_relation"),
     "create-relation-dialog": () => import("./components/create_relation")
   },
@@ -136,6 +138,8 @@ export default {
       list: null,
       total: 0,
       listLoading: true,
+      diseaseSelectTitle:'选择的队列',
+      diseaseSelectType:'select',
       listQuery: {
         page: 1,
         limit: 10,
