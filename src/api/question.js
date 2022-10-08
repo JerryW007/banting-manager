@@ -69,6 +69,14 @@ const question = {
             data: banting_body(data)
         })
     },
+    deleteRelation: function (data) {
+        return request({
+            url: this.url,
+            method: 'POST',
+            params: banting_params('QuestionLogic', 'deleteRelation'),
+            data: banting_body(data)
+        })
+    }
 
 }
 

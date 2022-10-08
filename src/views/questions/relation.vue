@@ -2,18 +2,8 @@
   <div class="app-container">
     <div class="filter-container">
       <el-input v-model="listQuery.content" placeholder="表名或者字段名" style="width: 200px; margin-right: 10px; float: left;" class="filter-item" @keyup.enter.native="handleFilter"/>
-      <!-- <span style="margin-left:10px;">筛选队列:</span>
-        <el-radio v-model="listQuery.disease_id" label="AML" style="margin-left: 10px">AML</el-radio>
-        <el-radio v-model="listQuery.disease_id" label="MM">MM</el-radio>
-        <el-radio v-model="listQuery.disease_id" label="MDS">MDS</el-radio>
-        <el-radio v-model="listQuery.disease_id" label="ALL">ALL</el-radio>
-        <el-radio v-model="listQuery.disease_id" label="CLL">CLL</el-radio> -->
         <disease-select v-model="listQuery.disease_id" :tagType="diseaseSelectType" style ="float: left; margin-right:20px" :title="diseaseSelectTitle"/>
-      <el-button v-waves class="filter-item"
-        type="primary"
-        icon="el-icon-search"
-        @click="handleFilter"
-      >
+      <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         搜索
       </el-button>
       <el-button
@@ -61,7 +51,6 @@
       <el-table-column
         label="表名"
         prop="id"
-        sortable="custom"
         align="center"
         :class-name="getSortClass('id')"
       >
@@ -99,14 +88,15 @@
           <span>{{ row.condition }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="创建时间" align="center">
+      <el-table-column label="创建时间" align="center" width="160px">
         <template slot-scope="{ row }">
           <span>{{ row.create_time.split(".")[0] }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center">
+      <el-table-column label="操作" align="center" width="200px">
         <template slot-scope="{ row }">
           <el-button type="primary" @click="handleUpdate(row)">修改</el-button>
+          <el-button type="danger" @click="handleDelete(row)">删除</el-button>
       </template>
       </el-table-column>
     </el-table>
@@ -195,6 +185,17 @@ export default {
         }, 1 * 200);
       });
     },
+    deleteRelation(id){
+      this.listLoading = true;
+      questions.deleteRelation({id:id}).then((response) => {
+        this.$message({
+            type: 'success:',
+            message: '删除成功!'
+          });
+        this.listLoading = false;  
+        this.relationList() 
+      });
+    },
     handleFilter() {
       this.listQuery.page = 1;
       this.relationList();
@@ -228,6 +229,21 @@ export default {
       }
       this.dialogUpdateVisible = true;
     },
+    handleDelete(row){
+      this.$confirm('确认要删除, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.deleteRelation(row.id)                  
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
+       
+    },
     handleUpLoad(){
       alert('该功能正在开发中...')
     },
@@ -251,6 +267,7 @@ export default {
       //   });
       //   this.downloadLoading = false;
       // });
+      
     },
     formatJson(filterVal) {
       return this.list.map((v) =>
