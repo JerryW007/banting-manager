@@ -85,15 +85,6 @@ export default {
       listLoading: false,
       diseaseSelectTitle:'操作的队列',
       diseaseSelectType:'radio',
-      info:{
-        disease_id: '',
-        table_name:'',
-        table_column:'',
-        permissible_value:[],
-        condition:'',
-        comment:'',
-        order:''
-      },
       table_options: [],
       column_options: [],
       term_options: [],
@@ -130,7 +121,7 @@ export default {
     getTableOptions() {
       this.listLoading = true;
       questions
-        .tableOptions({ disease_id: this.disease_id })
+        .tableOptions({ disease_id: this.row.disease_id })
         .then((response) => {
           const body = response.body;
           this.table_options = body.result;
@@ -145,7 +136,7 @@ export default {
       }
       questions
         .questionTerms({
-          disease_id: this.disease_id,
+          disease_id: this.row.disease_id,
           content: this.row.table_column,
         })
         .then((response) => {
@@ -167,7 +158,7 @@ export default {
       this.listLoading = true;
       questions
         .columnOptions({
-          disease_id: this.disease_id,
+          disease_id: this.row.disease_id,
           tableName: this.row.table_name,
         })
         .then((response) => {
