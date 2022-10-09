@@ -102,6 +102,16 @@ export default {
   watch: {
     disease_id: function(newValue, oldValue) {
       this.getList()
+    },
+    'row.table_name': function(newObj, oldObj){
+      this.getColumnOptions()
+    },
+    'row.table_column': function() {
+      this.getTermOptions()
+      this.row.permissible_value = []
+    },
+    'row.permissible_value': function(){
+      console.log(this.row.permissible_value)
     }
   },
   methods: {
