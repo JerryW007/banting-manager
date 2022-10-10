@@ -27,7 +27,11 @@
           <div name="data-id" :data-id="row.term_id">{{row.term_id}}</div>
         </template>
       </el-table-column>
-   
+      <el-table-column  label="顺序" >
+        <template slot-scope="{ row }">
+          <el-input v-model="row.index" placeholder="顺序"/>
+        </template>
+      </el-table-column>
       <el-table-column label="可选值类型" width="200px">
         <template slot-scope="{ row }">
           <el-checkbox v-model="item_type" :label="'radio.' + row.term_id"
@@ -106,9 +110,9 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      this.rowDrop();
-    });
+    // this.$nextTick(() => {
+    //   this.rowDrop();
+    // });
   },
   methods: {
     deleteRow(index, row){
@@ -135,7 +139,7 @@ export default {
         content: this.content,
         item_type: this.item_type,
         disease_id: this.disease_id,
-        term_orders: this.term_orders
+        orders: this.list
       };   
       this.listLoading = true;
       questions.saveTermInfos(formData).then((response) => {
