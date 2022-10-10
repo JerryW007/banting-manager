@@ -8,6 +8,10 @@
       <disease-select v-model="disease_id" :tagType="diseaseSelectType" style ="margin-right:20px" :title="diseaseSelectTitle"/>
     </div>
     <div style="margin-bottom: 15px">
+      <span style="font-weight: bold">名称:</span>
+      <el-input v-model="row.name" style="margin-left: 78px;width:29%" >{{row.name}}</el-input>
+    </div>
+    <div style="margin-bottom: 15px">
       <span style="font-weight: bold">排序:</span>
       <el-input v-model="row.project_term_id" style="margin-left: 78px;width:29%" >{{row.project_term_id}}</el-input>
     </div>
@@ -17,19 +21,34 @@
     </div>
     <div style="margin-bottom: 15px">
       <span style="font-weight: bold">父级表单:</span>
-      <el-input v-model="row.parent_form_id" style="margin-left: 50px;width:29%" >{{row.parent_form_id}}</el-input>
+      <el-select
+        v-model="row.parent_form_id"
+        filterable
+        clearable
+        placeholder="请选择"
+        style="margin-left: 50px; margin-right: 20px"
+      >
+        <el-option
+          v-for="item in formList"
+          :key="item.id"
+          :label="item.name"
+          :value="item.id"
+        >
+        </el-option>
+      </el-select>
     </div>
     <div style="margin-bottom: 15px">
       <span style="font-weight: bold">表单类型:</span>
-      <el-input v-model="row.type" style="margin-left: 50px;width:29%" >{{row.type}}</el-input>
+      <el-radio v-model="row.type" label="default" style="margin-left: 50px">默认</el-radio>
+      <el-radio v-model="row.type" label="project">项目</el-radio>
     </div>
     <span slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="updateRelation">保存</el-button>
+      <el-button type="primary" @click="updateFormLibrary">保存</el-button>
     </span>
   </el-dialog>
 </template>
 <script>
-import questions from "@/api/question";
+import formLibrary from "@/api/formLibrary";
 import diseaseSelect from '@/views/public/disease_select'
 export default {
   components:{
@@ -37,7 +56,7 @@ export default {
   },
   data() {
     return {
-      diseaseSelectTitle:'操作的队列',
+      diseaseSelectTitle:'关联的队列',
       diseaseSelectType:'radio',
       refresh: true,
       disease_id: "AML",
@@ -53,6 +72,7 @@ export default {
       table_options: [],
       column_options: [],
       term_options: [],
+      formList:[]
     };
   },
   props: {
@@ -60,9 +80,7 @@ export default {
     row: Object,
   },
   created() {
-    this.getTableOptions();
-    this.getColumnOptions();
-    this.getTermOptions();
+    this.allForm()
   },
   watch: {
     disease_id: function(newValue, oldValue) {
@@ -73,66 +91,24 @@ export default {
     handlerClose() {
       this.$emit("update:visible", false);      
     },
-    updateRelation() {
-      this.row.permissible_value  = this.row.permissible_value.join() 
+    updateFormLibrary() {
       this.listLoading = true;
-      questions.updateRelation(this.row).then((response) => {
+      formLibrary.updateFormLibrary(this.row).then((response) => {
         setTimeout(() => {
           this.listLoading = false;
           this.$emit("update:visible", false);
         }, 1 * 200);
       });
     },
-    getTableOptions() {
+    allForm() {
       this.listLoading = true;
-      questions
-        .tableOptions({ disease_id: this.disease_id })
-        .then((response) => {
-          const body = response.body;
-          this.table_options = body.result;
-          setTimeout(() => {
-            this.listLoading = false;
-          }, 1 * 200);
-        });
-    },
-    getTermOptions() {
-      if (this.column_name == '') {
-        return;
-      }
-      questions
-        .questionTerms({
-          disease_id: this.disease_id,
-          content: this.row.table_column,
-        })
-        .then((response) => {
-          const body = response.body;
-          let term_options = [];
-          for (let index in body.result) {
-            term_options.push({
-              value: body.result[index].term_id,
-              label: body.result[index].zh_cn,
-            });
-          }
-          this.term_options = term_options;
-          setTimeout(() => {
-            this.listLoading = false;
-          }, 1 * 200);
-        });
-    },
-    getColumnOptions() {
-      this.listLoading = true;
-      questions
-        .columnOptions({
-          disease_id: this.disease_id,
-          tableName: this.row.table_name,
-        })
-        .then((response) => {
-          const body = response.body;
-          this.column_options = body.result;
-          setTimeout(() => {
-            this.listLoading = false;
-          }, 1 * 200);
-        });
+      formLibrary.getForms(this.data).then((response) => {
+        const body = response.body
+        this.formList = body.result
+        setTimeout(() => {
+          this.listLoading = false;
+        }, 1 * 200);
+      });
     }
   },
 };

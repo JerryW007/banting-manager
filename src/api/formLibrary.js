@@ -37,6 +37,14 @@ const formLibrary = {
             data: banting_body(data)
         })
     },
+    deleteForm: function (data) {
+        return request({
+            url: this.url,
+            method: 'POST',
+            params: banting_params(this.className, 'deleteForm'),
+            data: banting_body(data)
+        })
+    },
 }
 
 export default formLibrary

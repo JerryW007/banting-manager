@@ -242,7 +242,6 @@ export default {
             message: '已取消删除'
           });          
         });
-       
     },
     handleUpLoad(){
       alert('该功能正在开发中...')

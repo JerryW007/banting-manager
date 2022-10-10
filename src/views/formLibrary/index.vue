@@ -55,9 +55,9 @@
           <span>{{ row.disease_id }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="父级ID" align="center">
+      <el-table-column label="父级" align="center">
         <template slot-scope="{ row }">
-          <span>{{ row.parent_form_id }}</span>
+          <span>{{ row.parent_name }}</span>
         </template>
       </el-table-column>
       <el-table-column label="类型" align="center">
@@ -65,9 +65,10 @@
           <span>{{ row.type }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center">
+      <el-table-column label="操作" align="center" width="180px">
         <template slot-scope="{ row }">
           <el-button type="primary" @click="showUpdate(row)">修改</el-button>
+          <el-button type="danger" @click="showDelete(row)">删除</el-button>
       </template>
       </el-table-column>
     </el-table>
@@ -132,7 +133,10 @@ export default {
     this.getList();
   },
   watch:{
-    dialogUpdateVisible:function() {
+    dialogCreateVisible: function() {
+      this.getList()
+    },
+    dialogUpdateVisible: function() {
       this.getList()
     }
   },
@@ -179,6 +183,31 @@ export default {
     showUpdate(row) {
       this.currentRow = row
       this.dialogUpdateVisible = true;
+    },
+    deleteForm(id) {
+      this.listLoading = true;
+      formLibrary.deleteForm({id:id}).then((response) => {
+        this.$message({
+            type: 'success:',
+            message: '删除成功!'
+          });
+        this.listLoading = false;  
+        this.getList() 
+      });
+    },
+    showDelete(row) {
+      this.$confirm('确认要删除, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.deleteForm(row.id)                  
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
     },
     handleUpload(){
       alert('该功能正在开发中...')

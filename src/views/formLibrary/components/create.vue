@@ -21,11 +21,25 @@
     </div>
     <div style="margin-bottom: 15px">
       <span style="font-weight: bold">父级表单:</span>
-      <el-input v-model="parent_form_id" style="margin-left: 50px;width:29%" >{{parent_form_id}}</el-input>
+      <el-select
+        v-model="parent_form_id"
+        filterable
+        placeholder="请选择"
+        style="margin-left: 50px; margin-right: 20px"
+      >
+        <el-option
+          v-for="item in formList"
+          :key="item.id"
+          :label="item.name"
+          :value="item.id"
+        >
+        </el-option>
+      </el-select>
     </div>
     <div style="margin-bottom: 15px">
       <span style="font-weight: bold">表单类型:</span>
-      <el-input v-model="type" style="margin-left: 50px;width:29%" >{{type}}</el-input>
+      <el-radio v-model="type" label="default" style="margin-left: 50px">默认</el-radio>
+      <el-radio v-model="type" label="project">项目</el-radio>
     </div>
     <span slot="footer" class="dialog-footer">
       <el-button type="primary" @click="saveFormLibrary">保存</el-button>
@@ -41,22 +55,24 @@ export default {
   },
   data() {
     return {
-      diseaseSelectTitle:'操作的队列',
+      diseaseSelectTitle:'关联的队列',
       diseaseSelectType:'radio',
       refresh: true,
       disease_id: "AML",
       listLoading: false,
-      project_term_id:'2',
-      name:'测试',
-      form_level: 1,
-      parent_form_id:222,
-      type:'dd',
+      project_term_id:'',
+      name:'',
+      form_level: '',
+      parent_form_id: '',
+      type:'default',
+      formList:[]
     };
   },
   props: {
     open: Boolean,
   },
   created() {
+    this.allForm()
   },
   watch: {
     disease_id: function(newValue, oldValue) {
@@ -65,7 +81,7 @@ export default {
   },
   methods: {
     handlerClose() {
-      this.$emit("update:visible", false);      
+      this.$emit("update:visible", false);           
     },
     saveFormLibrary() {
       this.listLoading = true;
@@ -84,12 +100,13 @@ export default {
         }, 1 * 200);
       });
     },
-    allForm(){
+    allForm() {
       this.listLoading = true;
       formLibrary.getForms(this.data).then((response) => {
+        const body = response.body
+        this.formList = body.result
         setTimeout(() => {
           this.listLoading = false;
-          this.$emit("update:visible", false);
         }, 1 * 200);
       });
     }
