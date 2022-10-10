@@ -104,6 +104,7 @@
     <pagination v-show="total > 0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="relationList"/>
     <create-relation-dialog :visible.sync="dialogCreateVisible" :open="dialogCreateVisible" v-if="dialogCreateVisible" />
     <update-relation-dialog :visible.sync="dialogUpdateVisible" :open="dialogUpdateVisible" v-if="dialogUpdateVisible" :row="currentRow" />
+    <download-dialog :visible.sync="dialogDownloadVisible" :open="dialogDownloadVisible" :content="downTitle" :dataSource="dataSource" v-if="dialogDownloadVisible" />
   </div>
 </template>
 
@@ -119,7 +120,8 @@ export default {
     Pagination,
     diseaseSelect,
     "update-relation-dialog": () => import("./components/update_relation"),
-    "create-relation-dialog": () => import("./components/create_relation")
+    "create-relation-dialog": () => import("./components/create_relation"),
+    "download-dialog": () => import("@/views/public/download_dialog")
   },
   directives: { waves },
   data() {
@@ -143,6 +145,7 @@ export default {
       ],
       dialogCreateVisible: false,
       dialogUpdateVisible: false,
+      dialogDownloadVisible: false,
       currentContent:'',
       currentRow:{},
       rules: {
@@ -160,6 +163,8 @@ export default {
       },
       downloadLoading: false,
       upLoading: false,
+      downTitle:'导出依赖',
+      dataSource:'relation'
     };
   },
   created() {
@@ -247,26 +252,7 @@ export default {
       alert('该功能正在开发中...')
     },
     handleDownload() {
-      alert('该功能正在开发中...')
-      // this.downloadLoading = true;
-      // import("@/vendor/Export2Excel").then((excel) => {
-      //   const tHeader = ["timestamp", "title", "type", "importance", "status"];
-      //   const filterVal = [
-      //     "timestamp",
-      //     "title",
-      //     "type",
-      //     "importance",
-      //     "status",
-      //   ];
-      //   const data = this.formatJson(filterVal);
-      //   excel.export_json_to_excel({
-      //     header: tHeader,
-      //     data,
-      //     filename: "table-list",
-      //   });
-      //   this.downloadLoading = false;
-      // });
-      
+      this.dialogDownloadVisible = true;
     },
     formatJson(filterVal) {
       return this.list.map((v) =>

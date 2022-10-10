@@ -85,6 +85,7 @@
 
     <pagination v-show="total > 0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList"/>
     <update-dialog :visible.sync="dialogUpdateVisible" :open="dialogUpdateVisible" :content="currentContent" v-if="dialogUpdateVisible" />
+    <download-dialog :visible.sync="dialogDownloadVisible" :open="dialogDownloadVisible" :content="downTitle" :dataSource="dataSource" v-if="dialogDownloadVisible" />
   </div>
 </template>
 
@@ -93,12 +94,14 @@ import waves from "@/directive/waves"; // waves directive
 import { parseTime } from "@/utils";
 import Pagination from "@/components/Pagination"; // secondary package based on el-pagination
 import questions from "@/api/question";
-
+import diseaseSelect from '@/views/public/disease_select'
 export default {
   name: "questionList",
   components: {
     Pagination,
-    "update-dialog": () => import("./components/update")
+    diseaseSelect,
+    "update-dialog": () => import("./components/update"),
+    "download-dialog": () => import("@/views/public/download_dialog")
   },
   directives: { waves },
   data() {
@@ -118,6 +121,7 @@ export default {
         { label: "ID Descending", key: "-id" },
       ],
       dialogUpdateVisible: false,
+      dialogDownloadVisible: false,
       currentContent:'',
       rules: {
         type: [
@@ -134,6 +138,10 @@ export default {
       },
       downloadLoading: false,
       uploading: false,
+      diseaseSelectType:'select',
+      diseaseSelectTitle:'下载的队列',
+      downTitle:'导出配置',
+      dataSource:'validation'
     };
   },
   created() {
@@ -201,25 +209,7 @@ export default {
       alert('该功能正在开发中...')
     },
     handleDownload() {
-      alert('该功能正在开发中...')
-      // this.downloadLoading = true;
-      // import("@/vendor/Export2Excel").then((excel) => {
-      //   const tHeader = ["timestamp", "title", "type", "importance", "status"];
-      //   const filterVal = [
-      //     "timestamp",
-      //     "title",
-      //     "type",
-      //     "importance",
-      //     "status",
-      //   ];
-      //   const data = this.formatJson(filterVal);
-      //   excel.export_json_to_excel({
-      //     header: tHeader,
-      //     data,
-      //     filename: "table-list",
-      //   });
-      //   this.downloadLoading = false;
-      // });
+      this.dialogDownloadVisible = true;
     },
     formatJson(filterVal) {
       return this.list.map((v) =>
