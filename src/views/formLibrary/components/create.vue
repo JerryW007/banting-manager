@@ -5,10 +5,7 @@
     :before-close="handlerClose"
   >
     <div style="margin-bottom: 15px">
-      <span style="font-weight: bold">关联的队列:</span>
-      <el-radio v-model="disease_id" label="AML" style="margin-left: 10px" >AML</el-radio>
-      <el-radio v-model="disease_id" label="MM">MM</el-radio>
-      <el-radio v-model="disease_id" label="MDS">MDS</el-radio>
+      <disease-select v-model="disease_id" :tagType="diseaseSelectType" style ="margin-right:20px" :title="diseaseSelectTitle"/>
     </div>
     <div style="margin-bottom: 15px">
       <span style="font-weight: bold">表单ID:</span>
@@ -37,10 +34,15 @@
 </template>
 <script>
 import formLibrary from "@/api/formLibrary";
-
+import diseaseSelect from '@/views/public/disease_select'
 export default {
+  components:{
+    diseaseSelect
+  },
   data() {
     return {
+      diseaseSelectTitle:'操作的队列',
+      diseaseSelectType:'radio',
       refresh: true,
       disease_id: "AML",
       listLoading: false,
