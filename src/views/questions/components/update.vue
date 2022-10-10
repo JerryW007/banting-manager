@@ -2,6 +2,7 @@
   <el-dialog
     :visible.sync="open"
     title="修改题目选项"
+    width="80%"
     :before-close="handlerClose"
   >
     <div style="margin-bottom: 10px">
@@ -42,7 +43,7 @@
           >
         </template>
       </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="操作" >
         <template slot-scope="scope">
           <el-button type="warning" @click="deleteRow(scope.$index,scope.row)">删除</el-button>
         </template>
