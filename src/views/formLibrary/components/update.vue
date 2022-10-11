@@ -5,7 +5,7 @@
     :before-close="handlerClose"
   >
     <div style="margin-bottom: 15px">
-      <disease-select v-model="disease_id" :tagType="diseaseSelectType" style ="margin-right:20px" :title="diseaseSelectTitle"/>
+      <disease-select v-model="row.disease_id" :tagType="diseaseSelectType" style ="margin-right:20px" :title="diseaseSelectTitle"/>
     </div>
     <div style="margin-bottom: 15px">
       <span style="font-weight: bold">名称:</span>
