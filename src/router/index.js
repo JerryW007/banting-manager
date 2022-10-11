@@ -98,12 +98,12 @@ export const asyncRoutes = [
         name: 'relation',
         meta: { title: '题库依赖配置', icon: 'el-icon-attract'},
       },
-      {
-        path: 'termConfig',
-        component: () => import('@/views/questions/termConfig'),
-        name: 'termConfig',
-        meta: { title: '题库选项配置', icon: 'edit' }
-      },
+      // {
+      //   path: 'termConfig',
+      //   component: () => import('@/views/questions/termConfig'),
+      //   name: 'termConfig',
+      //   meta: { title: '题库选项配置', icon: 'edit' }
+      // },
     ]
   },
   {
