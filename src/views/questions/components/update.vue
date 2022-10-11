@@ -5,12 +5,32 @@
     width="80%"
     :before-close="handlerClose"
   >
-    <div style="margin-bottom: 10px">
+    <div style="margin-bottom: 15px">
       <span style="font-weight: bold">全部:</span>
-      <el-radio v-model="all_item_type" label="radio" style="margin-left: 10px">单选</el-radio>
+      <el-radio v-model="all_item_type" label="radio" style="margin-left: 52px">单选</el-radio>
       <el-radio v-model="all_item_type" label="checkbox">复选</el-radio>
     </div>
     <disease-select v-model="disease_id" :tagType="diseaseSelectType" style ="margin-right:20px" :title="diseaseSelectTitle"/>
+    <div style="margin-bottom: 15px">
+      <span style="font-weight: bold">可选值:</span>
+      <el-select
+        v-model="add_term_id"
+        filterable
+        clearable
+        placeholder="请选择"
+        style="margin-left: 40px; margin-right: 20px"
+      >
+        <el-option
+          v-for="item in column_terms"
+          :key="item.term_id"
+          :label="item.zh_cn"
+          :value="item.term_id"
+          :disabled="term_orders.indexOf(item.term_id) != -1"
+        >
+        </el-option>
+      </el-select>
+      <el-button type="primary" @click="addTermId()">添加</el-button>
+    </div>
     <el-table
       id="qu"
       :data="list"
@@ -73,6 +93,8 @@ export default {
       item_type: [],
       term_orders:[],
       list: [],
+      column_terms:[],
+      add_term_id:''
     };
   },
   props: {
@@ -81,6 +103,7 @@ export default {
   },
   created() {
     this.getList();
+    this.getQuestionTerms();
   },
   watch: {
     item_type: function (new_list, old_list) {
@@ -116,6 +139,18 @@ export default {
     // });
   },
   methods: {
+    addTermId() {
+      if (this.add_term_id == '') {
+        return;
+      }
+      this.term_orders.push(this.add_term_id)
+      for (let item of this.column_terms) {
+        if (item.term_id == this.add_term_id) {
+          this.list.push({content:item.content,term_id:this.add_term_id,zh_cn:item.zh_cn})
+        }
+      }
+      this.add_term_id = ''
+    },
     deleteRow(index, row){
       this.list.splice(index, 1)
       this.$nextTick(()=>{
@@ -183,6 +218,23 @@ export default {
           this.listLoading = false;
         }, 1 * 200);
       });
+    },
+    getQuestionTerms() {
+      if (this.content == '') {
+        return;
+      }
+      this.listLoading = true
+      questions.questionTerms({
+          disease_id: this.disease_id,
+          content: this.content,
+        })
+        .then((response) => {
+          const body = response.body;
+          this.column_terms = body.result;
+          setTimeout(() => {
+            this.listLoading = false;
+          }, 1 * 200);
+        });
     },
   },
 };
