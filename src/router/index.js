@@ -120,7 +120,7 @@ export const asyncRoutes = [
         path: 'list',
         component: () => import('@/views/formLibrary/index'),
         name: 'formLibraryList',
-        meta: { title: '表单列表', icon: 'list' }
+        meta: { title: '表单列表', icon: 'el-icon-film' }
       }
     ]
   },
