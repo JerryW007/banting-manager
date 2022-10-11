@@ -55,6 +55,8 @@ export default {
         { value: "ALL", label: "急性淋巴细胞白血病" },
         { value: "AML", label: "急性髓系白血病" },
         { value: "CML", label: "慢性髓性白血病" },
+        { value: "SLL", label: "小淋巴细胞淋巴瘤" },
+        { value: "CLL", label: "慢性淋巴细胞白血病" },
         { value: "DLBCL", label: "弥漫性大B细胞淋巴瘤" },
         { value: "HMP", label: "血友病" },
         { value: "Leukemia", label: "白血病" },
