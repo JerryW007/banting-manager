@@ -3,7 +3,7 @@
     <div class="dashboard-editor-container">
       <db-info />
       <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
-        <line-chart :chart-data="lineChartData" />
+        <dict-config/>
       </el-row>
 
       <el-row :gutter="32">
@@ -29,6 +29,7 @@
 
 <script>
 import DbInfo from './components/DbInfo'
+import DictConfig from './components/DictConfig'
 import LineChart from './components/LineChart'
 import RaddarChart from './components/RaddarChart'
 import PieChart from './components/PieChart'
@@ -57,6 +58,7 @@ export default {
   name: 'DashboardAdmin',
   components: {
     DbInfo,
+    DictConfig,
     LineChart,
     RaddarChart,
     PieChart,

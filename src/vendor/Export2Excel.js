@@ -155,7 +155,6 @@ export function export_json_to_excel({
 } = {}) {
   /* original data */
   filename = filename || 'excel-list'
-  console.log(data)
   data = [...data]
   data.unshift(header);
 

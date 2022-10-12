@@ -21,7 +21,6 @@ const question = {
         })
     },
     saveTermInfos: function (data) {
-        console.log(banting_body(data))
         return request({
             url: this.url,
             method: 'POST',
@@ -90,6 +89,22 @@ const question = {
             url: this.url,
             method: 'POST',
             params: banting_params('QuestionLogic', 'downloadRelation'),
+            data: banting_body(data)
+        })
+    },
+    validationStat: function (data) {
+        return request({
+            url: this.url,
+            method: 'POST',
+            params: banting_params('QuestionLogic', 'validationStat'),
+            data: banting_body(data)
+        })
+    },
+    relationStat: function (data) {
+        return request({
+            url: this.url,
+            method: 'POST',
+            params: banting_params('QuestionLogic', 'relationStat'),
             data: banting_body(data)
         })
     },
