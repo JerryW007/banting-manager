@@ -5,6 +5,7 @@
       <el-select
         v-model="self_disease_id"
         filterable
+        clearable
         placeholder="请选择"
         style="margin-left: 10px"
       >

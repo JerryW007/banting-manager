@@ -40,6 +40,7 @@
       <span style="font-weight: bold">表单类型:</span>
       <el-radio v-model="type" label="default" style="margin-left: 50px">默认</el-radio>
       <el-radio v-model="type" label="project">项目</el-radio>
+      <el-radio v-model="type" label="queue">队列</el-radio>
     </div>
     <span slot="footer" class="dialog-footer">
       <el-button type="primary" @click="saveFormLibrary">保存</el-button>
@@ -56,7 +57,7 @@ export default {
   data() {
     return {
       diseaseSelectTitle:'关联的队列',
-      diseaseSelectType:'radio',
+      diseaseSelectType:'select',
       refresh: true,
       disease_id: "AML",
       listLoading: false,
