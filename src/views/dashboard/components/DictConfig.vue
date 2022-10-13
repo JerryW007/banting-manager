@@ -43,8 +43,13 @@ export default {
             yAxis: {
                 type: "value",
             },
+            legend:{
+                show:true,
+                data:['字段配置','依赖配置']
+            },
             series: [
                 {
+                    name:'字段配置',
                     data: yValidationData,
                     type: "bar",
                     showBackground: true,
@@ -65,6 +70,7 @@ export default {
                     }
                 },
                 {
+                    name:'依赖配置',
                     data: yRelationData,
                     type: "bar",
                     showBackground: true,
