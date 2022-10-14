@@ -124,6 +124,24 @@ export const asyncRoutes = [
       }
     ]
   },
+  {
+    path:'/driver',
+    component: Layout,
+    name:'formLibrary',
+    redirect:'/driver/example',
+    meta: {
+      title: '数据驱动管理',
+      icon: 'el-icon-film'
+    },
+    children:[
+      {
+        path: 'example',
+        component: () => import('@/views/data_driver/example'),
+        name: 'formLibraryList',
+        meta: { title: '数据驱动样例', icon: 'el-icon-film' }
+      }
+    ]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
