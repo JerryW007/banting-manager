@@ -131,14 +131,14 @@ export const asyncRoutes = [
     redirect:'/driver/example',
     meta: {
       title: '数据驱动管理',
-      icon: 'el-icon-film'
+      icon: 'el-icon-office-building'
     },
     children:[
       {
         path: 'example',
         component: () => import('@/views/data_driver/example'),
         name: 'formLibraryList',
-        meta: { title: '数据驱动样例', icon: 'el-icon-film' }
+        meta: { title: '数据驱动样例', icon: 'el-icon-office-building' }
       }
     ]
   },
