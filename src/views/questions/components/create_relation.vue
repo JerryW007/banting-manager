@@ -64,6 +64,7 @@
       <span style="font-weight: bold">依赖类型:</span>
       <el-radio v-model="relation_type" label="OPTION_RELATION" style="margin-left: 20px">选项依赖</el-radio>
       <el-radio v-model="relation_type" label="OPTION_OTHER">OTHER依赖</el-radio>
+      <el-radio v-model="relation_type" label="SHOW">SHOW依赖</el-radio>
     </div>
     <span slot="footer" class="dialog-footer">
       <el-button type="primary" @click="saveRelations">保存</el-button>
@@ -142,7 +143,7 @@ export default {
     relation_type: function (newValue, oldValue) {
       if (newValue == "OPTION_RELATION") {
         this.getQuestionTerms();
-      }else {
+      } else {
         this.permissible_value = []
       }
     },
@@ -183,6 +184,7 @@ export default {
         table_name: this.table_name,
         table_column: this.column_name,
         relations: this.relation_data,
+        relation_type: this.relation_type
       };
       this.listLoading = true;
       questions.saveRelations(formData).then((response) => {

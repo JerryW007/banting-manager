@@ -1,6 +1,7 @@
 <template>
   <div>
     <question />
+    <question />
   </div>
 </template>
 <script>
