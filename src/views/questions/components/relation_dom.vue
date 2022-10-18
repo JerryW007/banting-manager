@@ -94,11 +94,11 @@ export default {
   watch: {
     'form_data.table_name': function (newValue, oldValue) {
       this.getColumnOptions();
-      this.term_id = []
+      this.form_data.term_id = []
     },
     'form_data.column_name': function (newValue, oldValue) {
       this.getTermOptions();
-      this.term_id = []
+      this.form_data.term_id = []
     },
     'form_data.term_id': function(new_list, old_list) {
       this.deliverData();

@@ -45,7 +45,7 @@
       </el-select>
       <span style="font-weight: bold;margin-left:25px;">列名:</span>
       <el-select
-        v-model="column_name"
+        v-model="content"
         filterable
         placeholder="请选择"
         style="margin-left: 10px"
@@ -110,7 +110,7 @@ export default {
       table_options: [],
       table_name: "",
       column_options: [],
-      column_name: "",
+      content: "",
       relation_count:[],
       relation_data:{},
     };
@@ -127,7 +127,7 @@ export default {
       this.column_options = []
       this.permissible_value = []
     },
-    column_name: function (newValue, oldValue) {
+    content: function (newValue, oldValue) {
       this.getQuestionTerms();
     },
     all_item_type: function (newValue, oldValue) {
@@ -182,7 +182,7 @@ export default {
         comment:this.comment,
         permissible_value: this.permissible_value,
         table_name: this.table_name,
-        table_column: this.column_name,
+        table_column: this.content,
         relations: this.relation_data,
         relation_type: this.relation_type
       };
@@ -207,13 +207,13 @@ export default {
         });
     },
     getQuestionTerms() {
-      if (this.column_name == '') {
+      if (this.content == '') {
         return;
       }
       questions
         .questionTerms({
           disease_id: this.disease_id,
-          content: this.column_name,
+          content: this.content,
         })
         .then((response) => {
           const body = response.body;
