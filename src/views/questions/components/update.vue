@@ -225,7 +225,7 @@ export default {
       }
       this.listLoading = true
       questions.questionTerms({
-          disease_id: this.disease_id,
+          // disease_id: this.disease_id,
           content: this.content,
         })
         .then((response) => {
