@@ -1,91 +1,134 @@
 <template>
   <div style="margin-left: 10px; margin-top: 10px">
     <div style="margin-bottom: 10px">
-      {{ title }}
+      {{ question.title }}
     </div>
-    <template v-for="item in options">
-      <el-checkbox
-        v-model="check_result"
-        v-if="item.item_type == 'checkbox'"
-        :label="item.term_id"
-        :key="item.term_id"
-        @change="changeOption(item.term_id)"
-        >{{ item.zh_cn }}</el-checkbox
-      >
-      <el-radio
-        v-model="check_result"
-        v-if="item.item_type == 'radio'"
-        :label="item.term_id"
-        :key="item.term_id"
-        >{{ item.zh_cn }}</el-radio
-      >
+    <template v-if="question.question_type == 'list'">
+      <template v-for="item in question.options">
+        <el-checkbox
+          v-model="item.check_status"
+          v-if="item.item_type == 'checkbox' && optionMonitor(item)"
+          :label="item.term_id"
+          :key="item.term_id"
+          style="margin-bottom:10px"
+          @change="changeOption(item)"
+          >{{ item.zh_cn }}
+          <template v-if="'other_key' in item">
+            <input
+              :key="item.term_id"
+              type="text"
+              name="signal"
+              class="el-input__inner"
+              v-model="item[item.other_key]"
+            />
+          </template>
+          </el-checkbox>
+        <el-radio
+          v-model="item.check_status"
+          v-if="item.item_type == 'radio' && optionMonitor(item)"
+          :label="item.term_id"
+          :key="item.term_id"         
+          style="margin-bottom:10px" 
+          @change="changeOption(item)"
+          >{{ item.zh_cn }}
+          <template v-if="'other_key' in item">
+            <input
+              :key="item.term_id"
+              type="text"
+              name="signal"
+              class="el-input__inner"
+              v-model="item[item.other_key]"
+            />
+          </template>
+        </el-radio>
+      </template>
+    </template>
+    <template v-if="question.question_type == 'datetime' || question.question_type == 'date'">
+      <el-date-picker v-model="question.column_value" type="date" placeholder="选择日期">
+      </el-date-picker>
+    </template>
+    <template v-if="question.question_type == 'String'">
+      <el-input v-model="question.column_value" style="width:100%" placeholder="请输入内容"></el-input>
     </template>
   </div>
 </template>
-  <script>
+<script>
 export default {
   data() {
-    return {
-      check_result: [],
-    };
+    return {}
   },
   props: {
-    title: {
-      type: String,
-      default: "题目",
+    question: {
+      type: Object,
+      default: {},
     },
-    column_name: {
-      type: String,
-      default: "result_cd",
-    },
-    options: {
-      type: Array,
-      default: function () {
-        return [
-          {
-            term_id: "1",
-            item_type: "checkbox",
-            zh_cn: "是",
-          },
-          {
-            term_id: "2",
-            item_type: "checkbox",
-            zh_cn: "否",
-          },
-          {
-            term_id: "3",
-            item_type: "radio",
-            zh_cn: "不知道",
-          },
-          {
-            term_id: "4",
-            item_type: "radio",
-            zh_cn: "未设置",
-          },
-          {
-            term_id: "5",
-            item_type: "radio",
-            zh_cn: "其他",
-          },
-        ];
-      },
-    },
+    questions: {
+      type: Object,
+      default: {}
+    }
   },
-  created() {},
+  created() {
+  },
   watch: {
-    check_result: function (newValue, oldValue) {
-        console.log(newValue)
-    },
   },
   methods: {
-    changeOption(term_id) {
-      if (!Array.isArray(this.check_result)) {
-        this.check_result = [term_id];
+    changeOption(option) {
+      if (option.item_type == "radio") {
+        for (let option_item of this.question.options) {
+          if (option_item.term_id != option.term_id) {
+            option_item.check_status = false;
+          }
+        }
+      } else {
+        for (let option_item of this.question.options) {
+          if (option_item.term_id != option.term_id && option_item.item_type == 'radio') {
+            option_item.check_status = false;
+          }
+        }
       }
+      // 修改返回值
+      let values = []
+      for (let option_item of this.question.options) {
+        if (option_item.check_status) {
+          values.push(option_item.term_id)
+        }
+      }
+      this.question.column_value = values.join(',')
     },
+    optionMonitor(option) {
+      var match = true;
+      if (!('show' in option)) {
+        return true;
+      }
+      for (let show_conditions of option.show) {
+        for (let key of Object.keys(show_conditions)) {
+          if (
+            !(key in this.questions) ||
+            !this.questions[key].column_value.includes(show_conditions[key])
+          ) {
+            match = false;
+          }
+        }
+        if (match) {
+          return true;
+        }
+      }
+      return false;
+    }
   },
 };
 </script>
-  <style scoped>
+<style scoped>
+.el-input__inner {
+  width: 220px;
+  border-top-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 1px;
+  height: 15px;
+  /* margin-left: -2px; */
+  padding-left: 10px;
+  outline: medium;
+}
 </style>
   
