@@ -47,8 +47,8 @@
       <el-date-picker v-model="question.column_value" type="date" placeholder="选择日期">
       </el-date-picker>
     </template>
-    <template v-if="question.question_type == 'String'">
-      <el-input v-model="question.column_value" style="width:100%" placeholder="请输入内容"></el-input>
+    <template v-if="question.question_type == 'string'">
+      <el-input v-model="question.column_value" style="width:30%" placeholder="请输入内容"></el-input>
     </template>
   </div>
 </template>
@@ -96,7 +96,7 @@ export default {
       this.question.column_value = values.join(',')
     },
     optionMonitor(option) {
-      var match = true;
+      let match = true;
       if (!('show' in option)) {
         return true;
       }
@@ -112,6 +112,7 @@ export default {
         if (match) {
           return true;
         }
+        match = true;
       }
       return false;
     }
