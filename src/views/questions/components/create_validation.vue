@@ -109,7 +109,6 @@ export default {
     },
     saveTermInfos() {
       this.listLoading = true;
-      console.log(this.formData)
       questions.saveTermInfos(this.formData).then((response) => {
         setTimeout(() => {
           this.listLoading = false;

@@ -12,7 +12,7 @@
           :key="item.term_id"
           style="margin-bottom:10px"
           @change="changeOption(item)"
-          >{{ item.zh_cn }}
+          >{{item.zh_cn }}
           <template v-if="'other_key' in item">
             <input
               :key="item.term_id"
@@ -85,6 +85,7 @@ export default {
             option_item.check_status = false;
           }
         }
+        
       }
       // 修改返回值
       let values = []

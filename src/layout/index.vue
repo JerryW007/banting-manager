@@ -41,7 +41,6 @@ export default {
       fixedHeader: state => state.settings.fixedHeader
     }),
     classObj() {
-      console.log(this.sidebar)
       return {
         hideSidebar: !this.sidebar.opened,
         openSidebar: this.sidebar.opened,
