@@ -2689,6 +2689,9 @@ export default {
               show: [{ mh_category_cd: "mh_category_cd_2" }],
             },
           ],
+          show:[{
+            "mh_category_cd":"mh_category_cd_2"
+          }]
         },
         mh_term_cd: {
           question_type: "list",
