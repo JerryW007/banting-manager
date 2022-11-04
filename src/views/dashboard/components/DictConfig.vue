@@ -22,7 +22,7 @@ export default {
     this.getValidationData();
     setTimeout(() => {
         this.getRelationData();
-    },100)
+    },200)
     
     
   },
@@ -31,7 +31,7 @@ export default {
         var chartDom = document.getElementById("dc");
         var myChart = echarts.init(chartDom);
         myChart.setOption(this.setOption(this.xAxisData, this.yValidationData, this.yRelationData));
-    }, 200)
+    }, 400)
   },
   methods: {
     setOption(xAxisData, yValidationData, yRelationData) {
@@ -39,6 +39,10 @@ export default {
             xAxis: {
                 data: xAxisData,
                 type: "category",
+                axisLabel:{
+                    show:true,
+                    interval: 0
+                }
             },
             yAxis: {
                 type: "value",
