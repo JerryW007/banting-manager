@@ -98,7 +98,7 @@ export default {
     },
     optionMonitor(option) {
       let match = true;
-      if (!('show' in option)) {
+      if (!('show' in option) || option.show.length == 0) {
         return true;
       }
       for (let show_conditions of option.show) {

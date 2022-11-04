@@ -45,7 +45,6 @@
   </div>
 </template>
 <script>
-// import diseaseInfo from "@/api/disease_info";
 export default {
   name: "diseaseSelect",
   data() {
