@@ -61,10 +61,10 @@
           <span>{{ row.content }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="termID计数" align="center">
-        <template slot-scope="{ row }">
-          <span>{{ row.count }}</span>
-        </template>
+      <el-table-column label="termID计数" align="center">        
+          <template slot-scope="{ row }">
+            <span>{{ row.count }}</span>
+          </template>        
       </el-table-column>
       <el-table-column label="备注" align="center">
         <template slot-scope="{ row }">

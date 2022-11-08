@@ -13,7 +13,8 @@
             :key="item.term_id"
             :style="{'margin-bottom':'10px','display': question.as_sub_option ? 'block' : 'inner-block'}"
             @change="changeOption(item)"
-            >{{item.zh_cn }}
+            >
+            {{item.zh_cn }}
             <template v-if="'other_key' in item">
               <input
                 :key="item.term_id"
@@ -55,8 +56,6 @@
   </div>
 </template>
 <script>
-import { is } from '@babel/types';
-
 export default {
   data() {
     return {

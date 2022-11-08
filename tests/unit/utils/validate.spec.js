@@ -5,11 +5,6 @@ describe('Utils:validate', () => {
     expect(validUsername('editor')).toBe(true)
     expect(validUsername('xxxx')).toBe(false)
   })
-  it('validURL', () => {
-    expect(validURL('https://github.com/PanJiaChen/banting')).toBe(true)
-    expect(validURL('http://github.com/PanJiaChen/banting')).toBe(true)
-    expect(validURL('github.com/PanJiaChen/banting')).toBe(false)
-  })
   it('validLowerCase', () => {
     expect(validLowerCase('abc')).toBe(true)
     expect(validLowerCase('Abc')).toBe(false)
