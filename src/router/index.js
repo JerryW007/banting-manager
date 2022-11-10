@@ -135,10 +135,22 @@ export const asyncRoutes = [
     },
     children:[
       {
-        path: 'example',
-        component: () => import('@/views/data_driver/example'),
+        path: 'example_sll',
+        component: () => import('@/views/data_driver/example_sll'),
         name: 'formLibraryList',
-        meta: { title: '数据驱动样例', icon: 'el-icon-office-building' }
+        meta: { title: '数据驱动样例SLL', icon: 'el-icon-office-building' }
+      },
+      {
+        path: 'example_aml',
+        component: () => import('@/views/data_driver/example_aml'),
+        name: 'formLibraryList',
+        meta: { title: '数据驱动样例AML', icon: 'el-icon-office-building' }
+      },
+      {
+        path: 'example_all',
+        component: () => import('@/views/data_driver/example_all'),
+        name: 'formLibraryList',
+        meta: { title: '数据驱动样例ALL', icon: 'el-icon-office-building' }
       }
     ]
   },
