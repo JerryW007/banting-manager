@@ -128,12 +128,18 @@ export const asyncRoutes = [
     path:'/driver',
     component: Layout,
     name:'formLibrary',
-    redirect:'/driver/example',
+    redirect:'/driver/questionnaire',
     meta: {
       title: '数据驱动管理',
       icon: 'el-icon-office-building'
     },
     children:[
+      {
+        path: 'questionnaire',
+        component: () => import('@/views/data_driver/questionnaire'),
+        name: 'formLibraryList',
+        meta: { title: '问卷列表', icon: 'el-icon-office-building' }
+      },
       {
         path: 'example_sll',
         component: () => import('@/views/data_driver/example_sll'),
@@ -151,6 +157,12 @@ export const asyncRoutes = [
         component: () => import('@/views/data_driver/example_all'),
         name: 'formLibraryList',
         meta: { title: '数据驱动样例ALL', icon: 'el-icon-office-building' }
+      },
+      {
+        path: 'example_condition',
+        component: () => import('@/views/data_driver/example_condition'),
+        name: 'formLibraryList',
+        meta: { title: '数据驱动样例-合并症', icon: 'el-icon-office-building' }
       }
     ]
   },

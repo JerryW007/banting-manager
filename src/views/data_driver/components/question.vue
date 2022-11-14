@@ -1,56 +1,135 @@
 <template>
-  <div style="margin-left: 10px; margin-top: 10px" >
-    <div style="margin-bottom: 10px" v-if="!('as_sub_option' in question) && isShow ||'as_sub_option' in question && !question.as_sub_option && isShow">
+  <div style="margin-left: 10px; margin-top: 10px">
+    <div
+      style="margin-bottom: 10px"
+      v-if="
+        (!('as_sub_option' in question) && isShow) ||
+        ('as_sub_option' in question && !question.as_sub_option && isShow)
+      "
+    >
       {{ question.title }}
     </div>
     <div :id="question.column_key">
       <template v-if="question.question_type == 'list'">
-        <template v-for="item in question.options">
-          <el-checkbox
-            v-model="item.check_status"
-            v-if="item.item_type == 'checkbox' && optionMonitor(item)"
-            :label="item.term_id"
-            :key="item.term_id"
-            :style="{'margin-bottom':'10px','display': question.as_sub_option ? 'block' : 'inner-block'}"
-            @change="changeOption(item)"
+        <template v-if="typeOf(question.options) == '[object Array]'">
+          <template v-for="item in question.options">
+            <el-checkbox
+              v-model="item.check_status"
+              v-if="item.item_type == 'checkbox' && optionMonitor(item)"
+              :label="item.term_id"
+              :key="item.term_id"
+              :style="{
+                'margin-bottom': '10px',
+                display: question.as_sub_option ? 'block' : 'inner-block',
+              }"
+              @change="changeOption(item)"
             >
-            {{item.zh_cn }}
-            <template v-if="'other_key' in item">
-              <input
-                :key="item.term_id"
-                type="text"
-                name="signal"
-                class="el-input__inner"
-                v-model="item[item.other_key]"
-              />
-            </template>
+              {{ item.zh_cn }}
+              <template v-if="'other_key' in item">
+                <input
+                  :key="item.term_id"
+                  type="text"
+                  name="signal"
+                  class="el-input__inner"
+                  v-model="item[item.other_key]"
+                />
+              </template>
             </el-checkbox>
-          <el-radio
-            v-model="item.check_status"
-            v-if="item.item_type == 'radio' && optionMonitor(item)"
-            :label="item.term_id"
-            :key="item.term_id"         
-            :style="{'margin-bottom':'10px','display': question.as_sub_option ? 'block' : 'inner-block'}"
-            @change="changeOption(item)"
-            >{{ item.zh_cn }}
-            <template v-if="'other_key' in item">
-              <input
+            <el-radio
+              v-model="item.check_status"
+              v-if="item.item_type == 'radio' && optionMonitor(item)"
+              :label="item.term_id"
+              :key="item.term_id"
+              :style="{
+                'margin-bottom': '10px',
+                display: question.as_sub_option ? 'block' : 'inner-block',
+              }"
+              @change="changeOption(item)"
+              >{{ item.zh_cn }}
+              <template v-if="'other_key' in item">
+                <input
+                  :key="item.term_id"
+                  type="text"
+                  name="signal"
+                  class="el-input__inner"
+                  v-model="item[item.other_key]"
+                />
+              </template>
+            </el-radio>
+          </template>
+        </template>
+        <template v-if="typeOf(question.options) == '[object Object]'">
+          <div v-for="(groupOptions, key) in question.options" :key="key">
+            <div style="margin-bottom: 10px">
+              {{ key }}
+            </div>
+            <template v-for="item in groupOptions">
+              <el-checkbox
+                v-model="item.check_status"
+                v-if="item.item_type == 'checkbox' && optionMonitor(item)"
+                :label="item.term_id"
                 :key="item.term_id"
-                type="text"
-                name="signal"
-                class="el-input__inner"
-                v-model="item[item.other_key]"
-              />
+                :style="{
+                  'margin-bottom': '10px',
+                  display: question.as_sub_option ? 'block' : 'inner-block',
+                }"
+                @change="changeOption(item)"
+              >
+                {{ item.zh_cn }}
+                <template v-if="'other_key' in item">
+                  <input
+                    :key="item.term_id"
+                    type="text"
+                    name="signal"
+                    class="el-input__inner"
+                    v-model="item[item.other_key]"
+                  />
+                </template>
+              </el-checkbox>
+              <el-radio
+                v-model="item.check_status"
+                v-if="item.item_type == 'radio' && optionMonitor(item)"
+                :label="item.term_id"
+                :key="item.term_id"
+                :style="{
+                  'margin-bottom': '10px',
+                  display: question.as_sub_option ? 'block' : 'inner-block',
+                }"
+                @change="changeOption(item)"
+                >{{ item.zh_cn }}
+                <template v-if="'other_key' in item">
+                  <input
+                    :key="item.term_id"
+                    type="text"
+                    name="signal"
+                    class="el-input__inner"
+                    v-model="item[item.other_key]"
+                  />
+                </template>
+              </el-radio>
             </template>
-          </el-radio>
+          </div>
         </template>
       </template>
-      <template v-if="question.question_type == 'datetime' || question.question_type == 'date'">
-        <el-date-picker v-model="question.column_value" type="date" placeholder="选择日期">
+      <template
+        v-if="
+          question.question_type == 'datetime' ||
+          question.question_type == 'date'
+        "
+      >
+        <el-date-picker
+          v-model="question.column_value"
+          type="date"
+          placeholder="选择日期"
+        >
         </el-date-picker>
       </template>
       <template v-if="question.question_type == 'string'">
-        <el-input v-model="question.column_value" style="width:30%" placeholder="请输入内容"></el-input>
+        <el-input
+          v-model="question.column_value"
+          style="width: 30%"
+          placeholder="请输入内容"
+        ></el-input>
       </template>
     </div>
   </div>
@@ -59,8 +138,8 @@
 export default {
   data() {
     return {
-      isShow: false
-    }
+      isShow: false,
+    };
   },
   props: {
     question: {
@@ -69,53 +148,90 @@ export default {
     },
     questions: {
       type: Object,
-      default: {}
-    }
+      default: {},
+    },
   },
-  created() {    
+  created() {},
+  mounted() {
+    this.hasOption();
   },
-  mounted(){
-    this.hasOption()
+  updated() {
+    this.hasOption();
   },
-  updated(){
-    this.hasOption()
-  },
-  watch: {
-  },
+  watch: {},
   methods: {
+    typeOf(data) {
+      return Object.prototype.toString.call(data);
+    },
     hasOption() {
-        let optionDom = document.getElementById(this.question.column_key);
-        if (optionDom != undefined) {
-          this.isShow = optionDom.childElementCount > 0;
-        }
+      let optionDom = document.getElementById(this.question.column_key);
+      if (optionDom != undefined) {
+        this.isShow = optionDom.childElementCount > 0;
+      }
     },
     changeOption(option) {
+      let isArray = this.question.options instanceof Array;
       if (option.item_type == "radio") {
-        for (let option_item of this.question.options) {
-          if (option_item.term_id != option.term_id) {
-            option_item.check_status = false;
+        if (isArray) {
+          for (let option_item of this.question.options) {
+            if (option_item.term_id != option.term_id) {
+              option_item.check_status = false;
+            }
+          }
+        } else {
+          for (let groupKey in this.question.options) {
+            for (let option_item of this.question.options[groupKey]) {
+              if (option_item.term_id != option.term_id) {
+                option_item.check_status = false;
+              }
+            }
           }
         }
       } else {
-        for (let option_item of this.question.options) {
-          if (option_item.term_id != option.term_id && option_item.item_type == 'radio') {
-            option_item.check_status = false;
+        if (isArray) {
+          for (let option_item of this.question.options) {
+            if (
+              option_item.term_id != option.term_id &&
+              option_item.item_type == "radio"
+            ) {
+              option_item.check_status = false;
+            }
+          }
+        } else {
+          for (let groupKey in this.question.options) {
+            for (let option_item of this.question.options[groupKey]) {
+              if (
+                option_item.term_id != option.term_id &&
+                option_item.item_type == "radio"
+              ) {
+                option_item.check_status = false;
+              }
+            }
           }
         }
-        
       }
       // 修改返回值
-      let values = []
-      for (let option_item of this.question.options) {
-        if (option_item.check_status) {
-          values.push(option_item.term_id)
+      let values = [];
+      if (isArray) {
+        for (let option_item of this.question.options) {
+          if (option_item.check_status) {
+            values.push(option_item.term_id);
+          }
+        }
+      } else {
+        for (let groupKey in this.question.options) {
+          for (let option_item of this.question.options[groupKey]) {
+          if (option_item.check_status) {
+            values.push(option_item.term_id);
+          }
+        }
         }
       }
-      this.question.column_value = values.join(',')
+      this.question.column_value = values.join(",");
     },
     optionMonitor(option) {
       let match = true;
-      if (!('show' in option) || option.show.length == 0) {
+      if (!("show" in option) || option.show.length == 0) {
         return true;
       }
       for (let show_conditions of option.show) {
@@ -133,7 +249,7 @@ export default {
         match = true;
       }
       return false;
-    }
+    },
   },
 };
 </script>
