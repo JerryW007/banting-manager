@@ -27,6 +27,11 @@ module.exports = {
       "/banting":{
         target: "http://localhost:8887",
         changOrigin: true
+      },
+      "/execute":{
+        target: "http://localhost:20339",
+        ws:true,
+        changOrigin: true
       }
     },
   },

@@ -1,61 +1,26 @@
 <template>
-  <el-dialog
-    width="80%"
-    :visible.sync="open"
-    title="添加题目依赖"
-    :before-close="handlerClose"
-  >    
-    <disease-select v-model="disease_id" :tagType="diseaseSelectType" style ="margin-right:20px" :title="diseaseSelectTitle"/>
-    
+  <el-dialog width="80%" :visible.sync="open" title="添加题目依赖" :before-close="handlerClose">
+    <disease-select v-model="disease_id" :tagType="diseaseSelectType" style="margin-right:20px" :title="diseaseSelectTitle" />
+
     <div style="margin-bottom: 15px">
       <span style="font-weight: bold">排序:</span>
-      <el-input
-        style="width: 17.7%; margin-left: 50px"
-        size="medium"
-        v-model="order"
-        placeholder="排序"
-      />
-      
+      <el-input style="width: 17.7%; margin-left: 50px" size="medium" v-model="order" placeholder="排序" />
+
     </div>
     <div style="margin-bottom: 15px">
       <span style="font-weight: bold">备注:</span>
-      <el-input
-        style="width: 17.7%; margin-left: 50px"
-        size="medium"
-        v-model="comment"
-        placeholder="备注"
-      />
+      <el-input style="width: 17.7%; margin-left: 50px" size="medium" v-model="comment" placeholder="备注" />
     </div>
 
     <div style="margin-bottom: 10px">
       <span style="font-weight: bold">表:</span>
-      <el-select
-        v-model="table_name"
-        filterable
-        placeholder="请选择"
-        style="margin-left: 64px; margin-right: 20px"
-      >
-        <el-option
-          v-for="item in table_options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        >
+      <el-select v-model="table_name" filterable placeholder="请选择" style="margin-left: 64px; margin-right: 20px">
+        <el-option v-for="item in table_options" :key="item.value" :label="item.label" :value="item.value">
         </el-option>
       </el-select>
       <span style="font-weight: bold;margin-left:25px;">列名:</span>
-      <el-select
-        v-model="content"
-        filterable
-        placeholder="请选择"
-        style="margin-left: 10px"
-      >
-        <el-option
-          v-for="item in column_options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        >
+      <el-select v-model="content" filterable placeholder="请选择" style="margin-left: 10px">
+        <el-option v-for="item in column_options" :key="item.value" :label="item.label" :value="item.value">
         </el-option>
       </el-select>
       <el-button type="primary" @click="addRelation" style="margin-left:30px">添加依赖</el-button>
@@ -72,33 +37,25 @@
     <div id="permissionTag" v-if="column_terms.length > 0 && relation_type == 'OPTION_RELATION'">
       <span style="margin-right: 20px; margin-bottom: 15px; font-weight: bold;float: left;">可选值:</span>
       <div style="margin-bottom: 15px;margin-left: 80px;">
-        <el-checkbox
-          style="margin-bottom: 5px; align-self: center"
-          align="left"
-          v-for="item in column_terms"
-          v-bind:key="item.term_id"
-          v-model="permissible_value"
-          :label="item.term_id"
-          >{{ item.zh_cn }}</el-checkbox
-        > 
+        <el-checkbox style="margin-bottom: 5px; align-self: center" align="left" v-for="item in column_terms" v-bind:key="item.term_id" v-model="permissible_value" :label="item.term_id">{{ item.zh_cn }}</el-checkbox>
       </div>
-      <div style="margin-bottom: 5px"></div>     
+      <div style="margin-bottom: 5px"></div>
     </div>
-    <relation-dom :disease_id="disease_id" @addRelationData="addRelationData" @removeRelation="removeRelation" :index="n" :relation_count="relation_count" v-for="n in relation_count" :key="n"/>
+    <relation-dom :disease_id="disease_id" @addRelationData="addRelationData" @removeRelation="removeRelation" :index="n" :relation_count="relation_count" v-for="n in relation_count" :key="n" />
   </el-dialog>
 </template>
 <script>
 import questions from "@/api/question";
-import diseaseSelect from '@/views/public/disease_select'
+import diseaseSelect from "@/views/public/disease_select";
 export default {
   components: {
     diseaseSelect,
-    'relation-dom': () => import('./relation_dom'),
+    "relation-dom": () => import("./relation_dom"),
   },
   data() {
     return {
-      diseaseSelectTitle:'操作的队列',
-      diseaseSelectType:'radio',
+      diseaseSelectTitle: "操作的队列",
+      diseaseSelectType: "radio",
       refresh: true,
       disease_id: "AML",
       order: "",
@@ -111,8 +68,8 @@ export default {
       table_name: "",
       column_options: [],
       content: "",
-      relation_count:[],
-      relation_data:{},
+      relation_count: [],
+      relation_data: {},
     };
   },
   props: {
@@ -121,11 +78,11 @@ export default {
   created() {
     this.getTableOptions();
   },
-  watch: {  
+  watch: {
     table_name: function (newValue, oldValue) {
       this.getColumnOptions();
-      this.column_options = []
-      this.permissible_value = []
+      this.column_options = [];
+      this.permissible_value = [];
     },
     content: function (newValue, oldValue) {
       this.getQuestionTerms();
@@ -144,22 +101,22 @@ export default {
       if (newValue == "OPTION_RELATION") {
         this.getQuestionTerms();
       } else {
-        this.permissible_value = []
+        this.permissible_value = [];
       }
     },
   },
   mounted() {},
   methods: {
-    addRelationData: function(index, relation_data){
-      this.relation_data[index] = relation_data
+    addRelationData: function (index, relation_data) {
+      this.relation_data[index] = relation_data;
     },
     addRelation() {
-      this.relation_count.push(this.relation_count.length)
+      this.relation_count.push(this.relation_count.length);
     },
     removeRelation(index) {
       for (let i in this.relation_count) {
         if (this.relation_count[i] == index) {
-          this.relation_count.splice(i, 1)
+          this.relation_count.splice(i, 1);
         }
       }
     },
@@ -179,12 +136,12 @@ export default {
       const formData = {
         order: this.order,
         disease_id: this.disease_id,
-        comment:this.comment,
+        comment: this.comment,
         permissible_value: this.permissible_value,
         table_name: this.table_name,
         table_column: this.content,
         relations: this.relation_data,
-        relation_type: this.relation_type
+        relation_type: this.relation_type,
       };
       this.listLoading = true;
       questions.saveRelations(formData).then((response) => {
@@ -207,7 +164,7 @@ export default {
         });
     },
     getQuestionTerms() {
-      if (this.content == '') {
+      if (this.content == "") {
         return;
       }
       questions

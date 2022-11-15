@@ -21,15 +21,6 @@ export default {
   },
   data() {
     return {
-      keys: [
-        "gender_cd",
-        "mh_category_cd_1",
-        "mh_sub_category_cd_1",
-        "mh_sub_category_cd_2",
-        "mh_sub_category_cd_3",
-        "mh_sub_category_cd_4",
-        "condition_term_cd",
-      ],
       questions: {
         gender_cd: {
           question_type: "list",
@@ -56,6 +47,12 @@ export default {
               check_status: false,
             },
           ],
+        },
+        init_diagnosis_date: {
+          question_type: "datetime",
+          title: "该病首次确诊日期",
+          column_key: "init_diagnosis_date",
+          column_value: "",
         },
         mh_category_cd_1: {
           question_type: "list",
@@ -836,6 +833,16 @@ export default {
           },
         },
       },
+      keys: [
+        "gender_cd",
+        "init_diagnosis_date",
+        "mh_category_cd_1",
+        "mh_sub_category_cd_1",
+        "mh_sub_category_cd_2",
+        "mh_sub_category_cd_4",
+        "mh_sub_category_cd_3",
+        "condition_term_cd",
+      ],
     };
   },
   created() {},

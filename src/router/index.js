@@ -135,33 +135,39 @@ export const asyncRoutes = [
     },
     children:[
       {
+        path: 'create_questionnaire',
+        component: () => import('@/views/data_driver/create_questionnaire'),
+        name: 'createQuestionnaire',
+        meta: { title: '创建问卷', icon: 'el-icon-office-building' }
+      },
+      {
         path: 'questionnaire',
         component: () => import('@/views/data_driver/questionnaire'),
-        name: 'formLibraryList',
+        name: 'questionnaire',
         meta: { title: '问卷列表', icon: 'el-icon-office-building' }
       },
       {
         path: 'example_sll',
         component: () => import('@/views/data_driver/example_sll'),
-        name: 'formLibraryList',
+        name: 'exampleSll',
         meta: { title: '数据驱动样例SLL', icon: 'el-icon-office-building' }
       },
       {
         path: 'example_aml',
         component: () => import('@/views/data_driver/example_aml'),
-        name: 'formLibraryList',
+        name: 'exampleAml',
         meta: { title: '数据驱动样例AML', icon: 'el-icon-office-building' }
       },
       {
         path: 'example_all',
         component: () => import('@/views/data_driver/example_all'),
-        name: 'formLibraryList',
+        name: 'exampleAll',
         meta: { title: '数据驱动样例ALL', icon: 'el-icon-office-building' }
       },
       {
         path: 'example_condition',
         component: () => import('@/views/data_driver/example_condition'),
-        name: 'formLibraryList',
+        name: 'exampleCondition',
         meta: { title: '数据驱动样例-合并症', icon: 'el-icon-office-building' }
       }
     ]
