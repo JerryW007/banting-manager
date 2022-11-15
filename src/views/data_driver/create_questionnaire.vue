@@ -46,7 +46,12 @@
     <div style="display: flex; margin-top: 10px;">
       <div style=" width: 30%; min-height: 500px; margin-right: 10px;border:1px #FF44AA solid; border-radius: 5px;">
         <template v-if="questions.length > 0">
-          <pre>{{questions}}</pre>
+          <draggable class="wrapper" v-model="questions">
+              <div v-for="oneQuestion,index in questions" :key="index" style="border:1px #66CCFF solid;">
+                <el-button type="danger" icon="el-icon-delete" circle style="float:right;margin:5px;" size="mini" @click="deleteQuestion(index)"></el-button>
+                <pre >{{oneQuestion}}</pre>
+              </div>
+          </draggable>
         </template>
       </div>
       <div style="width: 70%; min-height: 500px; border:1px #33FF33 solid;border-radius: 5px;">
@@ -65,6 +70,7 @@
   </div>
 </template>
 <script>
+import draggable from 'vuedraggable'
 import questions from "@/api/question";
 import pApi from "@/api/python_api";
 import diseaseSelect from "@/views/public/disease_select";
@@ -78,8 +84,8 @@ export default {
       disease_id: "AML",
       question_type: "sample",
       column: {
-        table_name: "patient_disease_info",
-        column_name: "init_diagnosis_date",
+        table_name: "",
+        column_name: "",
       },
       relation: {
         table_name: "",
@@ -89,15 +95,14 @@ export default {
       table_options: [],
       column_options: [],
       column_terms: [],
-      questions: [
-        "init_diagnosis_date"
-      ],
+      questions: [],
       question_configs:{}
     };
   },
   components: {
     diseaseSelect,
-    question
+    question,
+    draggable
   },
   created() {
     this.getTableOptions();
@@ -155,6 +160,9 @@ export default {
             this.listLoading = false;
           }, 1 * 200);
         });
+    },
+    deleteQuestion(index){
+      this.questions.splice(index, 1); 
     },
     addQuestion() {
       if (this.question_type == "sample") {

@@ -146,30 +146,30 @@ export const asyncRoutes = [
         name: 'questionnaire',
         meta: { title: '问卷列表', icon: 'el-icon-office-building' }
       },
-      {
-        path: 'example_sll',
-        component: () => import('@/views/data_driver/example_sll'),
-        name: 'exampleSll',
-        meta: { title: '数据驱动样例SLL', icon: 'el-icon-office-building' }
-      },
-      {
-        path: 'example_aml',
-        component: () => import('@/views/data_driver/example_aml'),
-        name: 'exampleAml',
-        meta: { title: '数据驱动样例AML', icon: 'el-icon-office-building' }
-      },
-      {
-        path: 'example_all',
-        component: () => import('@/views/data_driver/example_all'),
-        name: 'exampleAll',
-        meta: { title: '数据驱动样例ALL', icon: 'el-icon-office-building' }
-      },
-      {
-        path: 'example_condition',
-        component: () => import('@/views/data_driver/example_condition'),
-        name: 'exampleCondition',
-        meta: { title: '数据驱动样例-合并症', icon: 'el-icon-office-building' }
-      }
+      // {
+      //   path: 'example_sll',
+      //   component: () => import('@/views/data_driver/example_sll'),
+      //   name: 'exampleSll',
+      //   meta: { title: '数据驱动样例SLL', icon: 'el-icon-office-building' }
+      // },
+      // {
+      //   path: 'example_aml',
+      //   component: () => import('@/views/data_driver/example_aml'),
+      //   name: 'exampleAml',
+      //   meta: { title: '数据驱动样例AML', icon: 'el-icon-office-building' }
+      // },
+      // {
+      //   path: 'example_all',
+      //   component: () => import('@/views/data_driver/example_all'),
+      //   name: 'exampleAll',
+      //   meta: { title: '数据驱动样例ALL', icon: 'el-icon-office-building' }
+      // },
+      // {
+      //   path: 'example_condition',
+      //   component: () => import('@/views/data_driver/example_condition'),
+      //   name: 'exampleCondition',
+      //   meta: { title: '数据驱动样例-合并症', icon: 'el-icon-office-building' }
+      // }
     ]
   },
   // 404 page must be placed at the end !!!
