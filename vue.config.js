@@ -28,10 +28,10 @@ module.exports = {
         target: "http://localhost:8887",
         changOrigin: true
       },
-      "/execute":{
-        target: "http://localhost:20339",
+      "/prt":{
+        target: "http://dev-02.hsasystem.com",
         ws:true,
-        changOrigin: true
+        changOrigin: true,
       }
     },
   },
@@ -42,6 +42,10 @@ module.exports = {
       alias: {
         '@': resolve('src')
       }
+    },
+    performance:{//打包文件大小配置
+      "maxEntrypointSize": 10000000,
+      "maxAssetSize": 30000000
     },
     plugins:[new HtmlWebpackPlugin({
       template:'./public/index.html'

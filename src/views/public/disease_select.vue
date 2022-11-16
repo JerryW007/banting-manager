@@ -64,6 +64,7 @@ export default {
         { value: "MF", label: "骨髓纤维化" },
         { value: "MM", label: "多发性骨髓瘤" },
         { value: "NHL", label: "非霍奇金淋巴瘤" },
+        { value: "GH", label: "General hematology" },
       ],
     };
   },
