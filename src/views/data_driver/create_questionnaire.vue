@@ -47,7 +47,7 @@
       <div style="display:inline-block;position:relative; left:100px;bottom:2%;">
         <el-button type="primary" @click="showQuestions">题目配置</el-button>
         <el-button type="warning" @click="showQuestionnaire">问卷配置</el-button>
-        <pre style="position:fixed;left:50%;top:30%;width:800px;border: 1px #FFCC33 solid; background-color: #FFFFFF;border-radius: 5px;height:500px;overflow:scroll" v-if="showStatus && questions.length > 0">{{showInfo}}</pre>
+        <pre style="position:fixed;left:50%;top:30%;width:50%;;z-index:1000;border: 1px #FFCC33 solid; background-color: #DDDDDD;border-radius: 5px;height:500px;overflow:scroll" v-if="showStatus && questions.length > 0">{{showInfo}}</pre>
       </div>
     </div>
     <div style="display: flex; margin-top: 10px;">
@@ -114,6 +114,7 @@ export default {
     draggable,
   },
   created() {
+    this.enterEvent();
     this.getTableOptions();
   },
   mounted() {},
@@ -155,6 +156,18 @@ export default {
     },
   },
   methods: {
+    enterEvent() {
+      document.onkeydown =  (e) => {
+        //事件对象兼容
+        let e1 = e || window.event || arguments.callee.caller.arguments[0]
+        console.log("键盘按键==",e1,e1.keyCode )
+        //键盘按键判断:左箭头-37;上箭头-38；右箭头-39;下箭头-40
+        //左
+        if(e1 && e1.keyCode == 13 ){
+          this.addQuestion()
+        }
+      }
+    },
     showQuestions() {
       if (this.questions.length == 0) {
         alert("请添加题目");
@@ -192,6 +205,7 @@ export default {
       this.questions.splice(index, 1);
     },
     addQuestion() {
+      console.log('sss')
       if (this.question_type == "sample") {
         this.questions.push(this.column.column_name);
       } else {
