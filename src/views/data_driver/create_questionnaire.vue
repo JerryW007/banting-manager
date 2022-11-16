@@ -160,7 +160,6 @@ export default {
       document.onkeydown =  (e) => {
         //事件对象兼容
         let e1 = e || window.event || arguments.callee.caller.arguments[0]
-        console.log("键盘按键==",e1,e1.keyCode )
         //键盘按键判断:左箭头-37;上箭头-38；右箭头-39;下箭头-40
         //左
         if(e1 && e1.keyCode == 13 ){
@@ -205,7 +204,14 @@ export default {
       this.questions.splice(index, 1);
     },
     addQuestion() {
-      console.log('sss')
+      if (this.column.column_name == '' ) {
+        alert('请先选择关联字段!')
+        return;
+      }
+      if (this.question_type != 'sample' && this.relation.column_name == '') {
+        alert('请选择依赖字段!')
+        return;
+      }
       if (this.question_type == "sample") {
         this.questions.push(this.column.column_name);
       } else {
@@ -276,8 +282,8 @@ export default {
       for (let show_conditions of questionItem.show) {
         for (let key of Object.keys(show_conditions)) {
           if (
-            !(key in this.questions) ||
-            !this.questions[key].column_value.includes(show_conditions[key])
+            !(key in this.question_configs.questions) ||
+            !this.question_configs.questions[key].column_value.includes(show_conditions[key])
           ) {
             match = false;
           }
@@ -287,6 +293,7 @@ export default {
         }
         match = true;
       }
+      console.log('showMonitor')
       return false;
     },
   },

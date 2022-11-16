@@ -1,59 +1,30 @@
 <template>
   <div style="margin-left: 10px; margin-top: 10px">
-    <div
-      style="margin-bottom: 10px"
-      v-if="
+    <div style="margin-bottom: 10px" v-if="
         (!('as_sub_option' in question) && isShow) ||
         ('as_sub_option' in question && !question.as_sub_option && isShow)
-      "
-    >
+      ">
       {{ question.title }}
     </div>
     <div :id="question.column_key">
       <template v-if="question.question_type == 'list'">
         <template v-if="typeOf(question.options) == '[object Array]'">
           <template v-for="item in question.options">
-            <el-checkbox
-              v-model="item.check_status"
-              v-if="item.item_type == 'checkbox' && optionMonitor(item)"
-              :label="item.term_id"
-              :key="item.term_id"
-              :style="{
+            <el-checkbox v-model="item.check_status" v-if="item.item_type == 'checkbox' && optionMonitor(item)" :label="item.term_id" :key="item.term_id" :style="{
                 'margin-bottom': '10px',
                 display: question.as_sub_option ? 'block' : 'inner-block',
-              }"
-              @change="changeOption(item)"
-            >
+              }" @change="changeOption(item)">
               {{ item.zh_cn }}
               <template v-if="'other_key' in item">
-                <input
-                  :key="item.term_id"
-                  type="text"
-                  name="signal"
-                  class="el-input__inner"
-                  v-model="item[item.other_key]"
-                />
+                <input :key="item.term_id" type="text" name="signal" class="el-input__inner" v-model="item[item.other_key]" />
               </template>
             </el-checkbox>
-            <el-radio
-              v-model="item.check_status"
-              v-if="item.item_type == 'radio' && optionMonitor(item)"
-              :label="item.term_id"
-              :key="item.term_id"
-              :style="{
+            <el-radio v-model="item.check_status" v-if="item.item_type == 'radio' && optionMonitor(item)" :label="item.term_id" :key="item.term_id" :style="{
                 'margin-bottom': '10px',
                 display: question.as_sub_option ? 'block' : 'inner-block',
-              }"
-              @change="changeOption(item)"
-              >{{ item.zh_cn }}
+              }" @change="changeOption(item)">{{ item.zh_cn }}
               <template v-if="'other_key' in item">
-                <input
-                  :key="item.term_id"
-                  type="text"
-                  name="signal"
-                  class="el-input__inner"
-                  v-model="item[item.other_key]"
-                />
+                <input :key="item.term_id" type="text" name="signal" class="el-input__inner" v-model="item[item.other_key]" />
               </template>
             </el-radio>
           </template>
@@ -64,72 +35,36 @@
               {{ key }}
             </div>
             <template v-for="item in groupOptions">
-              <el-checkbox
-                v-model="item.check_status"
-                v-if="item.item_type == 'checkbox' && optionMonitor(item)"
-                :label="item.term_id"
-                :key="item.term_id"
-                :style="{
+              <el-checkbox v-model="item.check_status" v-if="item.item_type == 'checkbox' && optionMonitor(item)" :label="item.term_id" :key="item.term_id" :style="{
                   'margin-bottom': '10px',
                   display: question.as_sub_option ? 'block' : 'inner-block',
-                }"
-                @change="changeOption(item)"
-              >
+                }" @change="changeOption(item)">
                 {{ item.zh_cn }}
                 <template v-if="'other_key' in item">
-                  <input
-                    :key="item.term_id"
-                    type="text"
-                    name="signal"
-                    class="el-input__inner"
-                    v-model="item[item.other_key]"
-                  />
+                  <input :key="item.term_id" type="text" name="signal" class="el-input__inner" v-model="item[item.other_key]" />
                 </template>
               </el-checkbox>
-              <el-radio
-                v-model="item.check_status"
-                v-if="item.item_type == 'radio' && optionMonitor(item)"
-                :label="item.term_id"
-                :key="item.term_id"
-                :style="{
+              <el-radio v-model="item.check_status" v-if="item.item_type == 'radio' && optionMonitor(item)" :label="item.term_id" :key="item.term_id" :style="{
                   'margin-bottom': '10px',
                   display: question.as_sub_option ? 'block' : 'inner-block',
-                }"
-                @change="changeOption(item)"
-                >{{ item.zh_cn }}
+                }" @change="changeOption(item)">{{ item.zh_cn }}
                 <template v-if="'other_key' in item">
-                  <input
-                    :key="item.term_id"
-                    type="text"
-                    name="signal"
-                    class="el-input__inner"
-                    v-model="item[item.other_key]"
-                  />
+                  <input :key="item.term_id" type="text" name="signal" class="el-input__inner" v-model="item[item.other_key]" />
                 </template>
               </el-radio>
             </template>
           </div>
         </template>
       </template>
-      <template
-        v-if="
+      <template v-if="
           question.question_type == 'datetime' ||
           question.question_type == 'date'
-        "
-      >
-        <el-date-picker
-          v-model="question.column_value"
-          type="date"
-          placeholder="选择日期"
-        >
+        ">
+        <el-date-picker v-model="question.column_value" type="date" placeholder="选择日期">
         </el-date-picker>
       </template>
       <template v-if="question.question_type == 'string'">
-        <el-input
-          v-model="question.column_value"
-          style="width: 30%"
-          placeholder="请输入内容"
-        ></el-input>
+        <el-input v-model="question.column_value" style="width: 30%" placeholder="请输入内容"></el-input>
       </template>
     </div>
   </div>
@@ -221,10 +156,10 @@ export default {
       } else {
         for (let groupKey in this.question.options) {
           for (let option_item of this.question.options[groupKey]) {
-          if (option_item.check_status) {
-            values.push(option_item.term_id);
+            if (option_item.check_status) {
+              values.push(option_item.term_id);
+            }
           }
-        }
         }
       }
       this.question.column_value = values.join(",");
