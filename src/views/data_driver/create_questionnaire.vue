@@ -102,23 +102,7 @@ export default {
       table_options: [],
       column_options: [],
       column_terms: [],
-      questions: [
-  {
-    "column_key": "mh_term_cd",
-    "relation_type": "sub_question",
-    "relation_key": "mh_category_cd"
-  },
-  {
-    "column_key": "mh_term_cd",
-    "relation_type": "sub_question",
-    "relation_key": "mh_sub_category_cd"
-  },
-  {
-    "column_key": "condition_term_cd",
-    "relation_type": "sub_group",
-    "relation_key": "condition_loc_cd"
-  }
-],
+      questions: [],
       question_configs: {},
       showStatus: false,
       showInfo: "",
