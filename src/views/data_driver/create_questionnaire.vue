@@ -13,10 +13,13 @@
             <el-option v-for="item in column_options" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
-          <el-button type="primary" style="margin: 5px" @click="addQuestion">添加</el-button>
+          <el-button type="primary" style="margin-left: 10px" @click="addQuestion">添加</el-button>
+          <el-button type="success" icon="el-icon-refresh-left" style="margin-left:10px;" @click="generate">刷新</el-button>
+          <el-button type="danger" @click="showQuestions">题目配置</el-button>
+          <el-button type="warning" @click="showQuestionnaire">问卷配置</el-button>
         </div>
       </div>
-      <div style="display: inline-block;">
+      <div style="display: inline-block;margin-top:5px;">
         <div>
           <span style="font-weight: bold;">题目类型:</span>
           <el-radio v-model="question_type" label="sample" style="margin-left: 26px">简单</el-radio>
@@ -42,9 +45,7 @@
           </template>
         </div>
       </div>
-      <div style="display:inline-block;position:relative; left:100px;bottom:2%;">
-        <el-button type="primary" @click="showQuestions">题目配置</el-button>
-        <el-button type="warning" @click="showQuestionnaire">问卷配置</el-button>
+      <div style="display:inline-block;position:relative; left:100px;bottom:2%;">       
         <el-drawer title="配置信息" :visible.sync="showStatus" :with-header="false" size="40%">
           <span>
             <pre style="height:100%;overflow-y: auto;height:100%;width:100%;position:absolute;">{{showInfo}}</pre>
@@ -64,9 +65,6 @@
         </template>
       </div>
       <div style="width: 70%; min-height: 500px; border:1px #33FF33 solid;border-radius: 5px;">
-        <div>
-          <el-button type="primary" icon="el-icon-refresh-left" circle style="float:right;margin:5px;" @click="generate"></el-button>
-        </div>
         <template v-if="questions.length > 0">
           <div>
             <div v-for="qKey in question_configs.keys" :key="qKey" style="margin-right: 20px; margin-bottom: 10px">
@@ -201,6 +199,7 @@ export default {
         })
         .then((response) => {
           this.question_configs = response.data;
+          console.log(response)
           setTimeout(() => {
             this.listLoading = false;
           }, 1 * 200);
