@@ -47,7 +47,11 @@
       <div style="display:inline-block;position:relative; left:100px;bottom:2%;">
         <el-button type="primary" @click="showQuestions">题目配置</el-button>
         <el-button type="warning" @click="showQuestionnaire">问卷配置</el-button>
-        <pre style="position:fixed;left:50%;top:30%;width:50%;;z-index:1000;border: 1px #FFCC33 solid; background-color: #DDDDDD;border-radius: 5px;height:500px;overflow:scroll" v-if="showStatus && questions.length > 0">{{showInfo}}</pre>
+        <el-drawer title="配置信息" :visible.sync="showStatus" :with-header="false" size="40%">
+          <span>
+            <pre style="height:100%;overflow-y: auto;height:100%;width:100%;position:absolute;">{{showInfo}}</pre>
+          </span>
+        </el-drawer>
       </div>
     </div>
     <div style="display: flex; margin-top: 10px;">
@@ -88,7 +92,7 @@ export default {
       listLoading: false,
       diseaseSelectTitle: "操作的队列",
       diseaseSelectType: "radio",
-      disease_id: "AML",
+      disease_id: "CML",
       question_type: "sample",
       column: {
         table_name: "",
@@ -102,7 +106,7 @@ export default {
       table_options: [],
       column_options: [],
       column_terms: [],
-      questions: [],
+      questions: ["response_type_cd", "response_result_cd"],
       question_configs: {},
       showStatus: false,
       showInfo: "",
@@ -157,15 +161,15 @@ export default {
   },
   methods: {
     enterEvent() {
-      document.onkeydown =  (e) => {
+      document.onkeydown = (e) => {
         //事件对象兼容
-        let e1 = e || window.event || arguments.callee.caller.arguments[0]
+        let e1 = e || window.event || arguments.callee.caller.arguments[0];
         //键盘按键判断:左箭头-37;上箭头-38；右箭头-39;下箭头-40
         //左
-        if(e1 && e1.keyCode == 13 ){
-          this.addQuestion()
+        if (e1 && e1.keyCode == 13) {
+          this.addQuestion();
         }
-      }
+      };
     },
     showQuestions() {
       if (this.questions.length == 0) {
@@ -176,7 +180,11 @@ export default {
       this.showStatus = !this.showStatus;
     },
     showQuestionnaire() {
-      if (this.question_configs == '' || this.question_configs == undefined ||  Object.keys(this.question_configs).length == 0) {
+      if (
+        this.question_configs == "" ||
+        this.question_configs == undefined ||
+        Object.keys(this.question_configs).length == 0
+      ) {
         alert("问卷配置为空");
         return;
       }
@@ -204,12 +212,12 @@ export default {
       this.questions.splice(index, 1);
     },
     addQuestion() {
-      if (this.column.column_name == '' ) {
-        alert('请先选择关联字段!')
+      if (this.column.column_name == "") {
+        alert("请先选择关联字段!");
         return;
       }
-      if (this.question_type != 'sample' && this.relation.column_name == '') {
-        alert('请选择依赖字段!')
+      if (this.question_type != "sample" && this.relation.column_name == "") {
+        alert("请选择依赖字段!");
         return;
       }
       if (this.question_type == "sample") {
@@ -283,7 +291,9 @@ export default {
         for (let key of Object.keys(show_conditions)) {
           if (
             !(key in this.question_configs.questions) ||
-            !this.question_configs.questions[key].column_value.includes(show_conditions[key])
+            !this.question_configs.questions[key].column_value.includes(
+              show_conditions[key]
+            )
           ) {
             match = false;
           }
@@ -293,7 +303,7 @@ export default {
         }
         match = true;
       }
-      console.log('showMonitor')
+      console.log("showMonitor");
       return false;
     },
   },
