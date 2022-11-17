@@ -5765,9 +5765,17 @@ let translationMap = {
     "rcp_type_cd_13": "姑（受）",
     "rcp_type_cd_12": "表妹（受）",
     "fungal_inft_cd": "移植前真菌感染"
-  }
+}
+import translation from "@/api/translation"
+function getTranslationMap() {
+    translation.getTranslationList().then(response => {
+        console.log(response)
+        translationMap = response.body
+    })
+}
+getTranslationMap()
 
- export function get_zh_cn(term_id) {
+export function get_zh_cn(term_id) {
     if (term_id in translationMap) {
         return translationMap[term_id]
     }
