@@ -4,7 +4,7 @@
         (!('as_sub_option' in question) && isShow) ||
         ('as_sub_option' in question && !question.as_sub_option && isShow)
       ">
-      {{ question.title }}
+      {{ get_zh_cn(question.column_key) }}
     </div>
     <div :id="question.column_key">
       <template v-if="question.question_type == 'list'">
@@ -14,7 +14,7 @@
                 'margin-bottom': '10px',
                 display: question.as_sub_option ? 'block' : 'inner-block',
               }" @change="changeOption(item)">
-              {{ item.zh_cn }}
+              {{ get_zh_cn(item.term_id) }}
               <template v-if="'other_key' in item">
                 <input :key="item.term_id" type="text" name="signal" class="el-input__inner" v-model="item[item.other_key]" />
               </template>
@@ -22,7 +22,7 @@
             <el-radio v-model="item.check_status" v-if="item.item_type == 'radio' && optionMonitor(item)" :label="item.term_id" :key="item.term_id" :style="{
                 'margin-bottom': '10px',
                 display: question.as_sub_option ? 'block' : 'inner-block',
-              }" @change="changeOption(item)">{{ item.zh_cn }}
+              }" @change="changeOption(item)">{{ get_zh_cn(item.term_id) }}
               <template v-if="'other_key' in item">
                 <input :key="item.term_id" type="text" name="signal" class="el-input__inner" v-model="item[item.other_key]" />
               </template>
@@ -32,14 +32,14 @@
         <template v-if="typeOf(question.options) == '[object Object]'">
           <div v-for="(groupOptions, key) in question.options" :key="key">
             <div style="margin-bottom: 10px">
-              {{ key }}
+              {{ get_zh_cn(key) }}
             </div>
             <template v-for="item in groupOptions">
               <el-checkbox v-model="item.check_status" v-if="item.item_type == 'checkbox' && optionMonitor(item)" :label="item.term_id" :key="item.term_id" :style="{
                   'margin-bottom': '10px',
                   display: question.as_sub_option ? 'block' : 'inner-block',
                 }" @change="changeOption(item)">
-                {{ item.zh_cn }}
+                {{ get_zh_cn(item.term_id) }}
                 <template v-if="'other_key' in item">
                   <input :key="item.term_id" type="text" name="signal" class="el-input__inner" v-model="item[item.other_key]" />
                 </template>
@@ -47,7 +47,7 @@
               <el-radio v-model="item.check_status" v-if="item.item_type == 'radio' && optionMonitor(item)" :label="item.term_id" :key="item.term_id" :style="{
                   'margin-bottom': '10px',
                   display: question.as_sub_option ? 'block' : 'inner-block',
-                }" @change="changeOption(item)">{{ item.zh_cn }}
+                }" @change="changeOption(item)">{{ get_zh_cn(item.term_id) }}
                 <template v-if="'other_key' in item">
                   <input :key="item.term_id" type="text" name="signal" class="el-input__inner" v-model="item[item.other_key]" />
                 </template>
@@ -70,9 +70,11 @@
   </div>
 </template>
 <script>
+import {get_zh_cn} from "@/utils/translation";
 export default {
   data() {
     return {
+      get_zh_cn: get_zh_cn,
       isShow: false,
     };
   },
@@ -172,8 +174,8 @@ export default {
       for (let show_conditions of option.show) {
         for (let key of Object.keys(show_conditions)) {
           if (
-            key in this.questions && 
-            'column_value' in this.questions[key] &&
+            key in this.questions &&
+            "column_value" in this.questions[key] &&
             !this.questions[key].column_value.includes(show_conditions[key])
           ) {
             match = false;

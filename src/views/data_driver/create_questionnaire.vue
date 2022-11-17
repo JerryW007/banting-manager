@@ -102,7 +102,23 @@ export default {
       table_options: [],
       column_options: [],
       column_terms: [],
-      questions: [],
+      questions: [
+  {
+    "column_key": "mh_term_cd",
+    "relation_type": "sub_question",
+    "relation_key": "mh_category_cd"
+  },
+  {
+    "column_key": "mh_term_cd",
+    "relation_type": "sub_question",
+    "relation_key": "mh_sub_category_cd"
+  },
+  {
+    "column_key": "condition_term_cd",
+    "relation_type": "sub_group",
+    "relation_key": "condition_loc_cd"
+  }
+],
       question_configs: {},
       showStatus: false,
       showInfo: "",
@@ -199,7 +215,6 @@ export default {
         })
         .then((response) => {
           this.question_configs = response.data;
-          console.log(response)
           setTimeout(() => {
             this.listLoading = false;
           }, 1 * 200);
@@ -258,7 +273,6 @@ export default {
         .then((response) => {
           const body = response.body;
           this.column_terms = body.result;
-          console.log(this.column_terms);
           setTimeout(() => {
             this.listLoading = false;
           }, 1 * 200);
@@ -286,7 +300,6 @@ export default {
       }
       for (let show_conditions of questionItem.show) {
         for (let key of Object.keys(show_conditions)) {
-          console.log(this.question_configs.questions[key])
           if (
             key in this.question_configs.questions && 
             'column_value' in this.question_configs.questions[key] &&
@@ -300,7 +313,6 @@ export default {
         }
         match = true;
       }
-      console.log("showMonitor");
       return false;
     },
   },
