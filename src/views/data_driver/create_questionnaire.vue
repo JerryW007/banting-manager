@@ -2,10 +2,7 @@
   <div style="margin-left: 10px; margin-top: 10px">
     <div style="width: 100%; border:1px #DDDDDD solid;padding: 10px;border-radius: 5px;">
       <div style="margin-bottom: 10px;">
-        <disease-select v-model="disease_id" :tagType="diseaseSelectType" style="margin-right:20px;float: left;width:80%" :title="diseaseSelectTitle" />
-        <div style="margin-left: 93%;margin-top:0px; float: inline-end;">
-          <el-button type="primary" style="margin: 5px" @click="addQuestion">添加</el-button>
-        </div>
+        <disease-select v-model="disease_id" :tagType="diseaseSelectType" style="margin-right:20px;float: left;width:80%" :title="diseaseSelectTitle" />       
         <div style="display:inline-block">
           <span style="font-weight: bold">关联字段:</span>
           <el-select v-model="column.table_name" filterable placeholder="请选择表" style="margin-left: 26px; margin-right: 20px">
@@ -16,6 +13,7 @@
             <el-option v-for="item in column_options" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
+          <el-button type="primary" style="margin: 5px" @click="addQuestion">添加</el-button>
         </div>
       </div>
       <div style="display: inline-block;">
@@ -106,7 +104,7 @@ export default {
       table_options: [],
       column_options: [],
       column_terms: [],
-      questions: ["response_type_cd", "response_result_cd"],
+      questions: [],
       question_configs: {},
       showStatus: false,
       showInfo: "",
@@ -289,11 +287,11 @@ export default {
       }
       for (let show_conditions of questionItem.show) {
         for (let key of Object.keys(show_conditions)) {
+          console.log(this.question_configs.questions[key])
           if (
-            !(key in this.question_configs.questions) ||
-            !this.question_configs.questions[key].column_value.includes(
-              show_conditions[key]
-            )
+            key in this.question_configs.questions && 
+            'column_value' in this.question_configs.questions[key] &&
+            !this.question_configs.questions[key].column_value.includes(show_conditions[key])
           ) {
             match = false;
           }

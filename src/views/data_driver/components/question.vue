@@ -172,7 +172,8 @@ export default {
       for (let show_conditions of option.show) {
         for (let key of Object.keys(show_conditions)) {
           if (
-            !(key in this.questions) ||
+            key in this.questions && 
+            'column_value' in this.questions[key] &&
             !this.questions[key].column_value.includes(show_conditions[key])
           ) {
             match = false;

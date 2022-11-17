@@ -28,6 +28,11 @@ module.exports = {
         target: "http://localhost:8887",
         changOrigin: true
       },
+      "/execute":{
+        target: "http://localhost:20339",
+        ws:true,
+        changOrigin: true,
+      },
       "/prt":{
         target: "http://dev-02.hsasystem.com",
         ws:true,
