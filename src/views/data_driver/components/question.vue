@@ -4,7 +4,7 @@
         (!('as_sub_option' in question) && isShow) ||
         ('as_sub_option' in question && !question.as_sub_option && isShow)
       ">
-      {{ get_zh_cn(question.column_key) }}
+      {{ get_zh_cn(question.column_key) == undefined ? question.title : get_zh_cn(question.column_key) }}
     </div>
     <div :id="question.column_key">
       <template v-if="question.question_type == 'list'">

@@ -5769,7 +5769,6 @@ let translationMap = {
 import translation from "@/api/translation"
 function getTranslationMap() {
     translation.getTranslationList().then(response => {
-        console.log(response)
         translationMap = response.body
     })
 }
@@ -5779,5 +5778,5 @@ export function get_zh_cn(term_id) {
     if (term_id in translationMap) {
         return translationMap[term_id]
     }
-    return "未找到翻译"
+    return undefined
 }
