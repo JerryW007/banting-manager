@@ -101,11 +101,7 @@ export default {
       table_options: [],
       column_options: [],
       column_terms: [],
-      questions: [
-        "mh_category_cd",
-        "mh_sub_category_cd",
-        "mh_term_cd"
-      ],
+      questions: [],
       question_configs: {},
       showStatus: false,
       showInfo: "",
