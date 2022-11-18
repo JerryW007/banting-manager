@@ -2,7 +2,7 @@
   <div style="margin-left: 10px; margin-top: 10px">
     <div style="width: 100%; border:1px #DDDDDD solid;padding: 10px;border-radius: 5px;">
       <div style="margin-bottom: 10px;">
-        <disease-select v-model="disease_id" :tagType="diseaseSelectType" style="margin-right:20px;float: left;width:80%" :title="diseaseSelectTitle" />       
+        <disease-select v-model="disease_id" :tagType="diseaseSelectType" style="margin-right:20px;float: left;width:80%" :title="diseaseSelectTitle" />
         <div style="display:inline-block">
           <span style="font-weight: bold">关联字段:</span>
           <el-select v-model="column.table_name" filterable placeholder="请选择表" style="margin-left: 26px; margin-right: 20px">
@@ -45,9 +45,9 @@
           </template>
         </div>
       </div>
-      <div style="display:inline-block;position:relative; left:100px;bottom:2%;">       
-        <el-drawer title="配置信息" :visible.sync="showStatus" style="width:33.5%;border: 1px grey solid; border-radius: 5px;" :with-header="true" size="100%" direction="ltr" :modal="false" :wrapperClosable="false">
-            <pre style="margin-top:10px;height:100%;overflow-y: auto;height:100%;width:100%;position:absolute;">{{showInfo}}</pre>
+      <div style="display:inline-block;position:relative; left:100px;bottom:2%;">
+        <el-drawer title="配置信息" :visible.sync="showStatus" style="width:33.5%;border: 1px grey solid; border-radius: 5px;" :with-header="false" size="100%" direction="ltr" :modal="false" :wrapperClosable="false">
+          <pre style="margin-top:10px;height:100%;overflow-y: auto;height:100%;width:100%;position:absolute;">{{showInfo}}</pre>
         </el-drawer>
       </div>
     </div>
@@ -83,7 +83,7 @@ import question from "./components/question";
 export default {
   data() {
     return {
-      direction:'ltr',
+      direction: "ltr",
       listLoading: false,
       diseaseSelectTitle: "操作的队列",
       diseaseSelectType: "radio",
@@ -189,7 +189,6 @@ export default {
         this.showStatus = !this.showStatus;
       }
       this.showInfo = this.question_configs;
-      
     },
     generate() {
       // 生成问卷
@@ -289,9 +288,11 @@ export default {
       for (let show_conditions of questionItem.show) {
         for (let key of Object.keys(show_conditions)) {
           if (
-            key in this.question_configs.questions && 
-            'column_value' in this.question_configs.questions[key] &&
-            !this.question_configs.questions[key].column_value.includes(show_conditions[key])
+            key in this.question_configs.questions &&
+            "column_value" in this.question_configs.questions[key] &&
+            !this.question_configs.questions[key].column_value.includes(
+              show_conditions[key]
+            )
           ) {
             match = false;
           }
@@ -308,8 +309,8 @@ export default {
 </script>
 <style scoped>
 /deep/ .el-drawer__header {
-  margin-bottom:10px !important;
-  border-bottom:1px grey solid !important;
+  margin-bottom: 10px !important;
+  border-bottom: 1px grey solid !important;
   padding-bottom: 10px !important;
 }
 .el-input__inner {
