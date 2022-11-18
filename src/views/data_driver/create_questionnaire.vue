@@ -46,8 +46,8 @@
         </div>
       </div>
       <div style="display:inline-block;position:relative; left:100px;bottom:2%;">       
-        <el-drawer title="配置信息" :visible.sync="showStatus" style="width:34%;" :with-header="true" size="100%" direction="ltr" :modal="false" :wrapperClosable="false">
-            <pre style="height:100%;overflow-y: auto;height:100%;width:100%;position:absolute;margin-left:10px;">{{showInfo}}</pre>
+        <el-drawer title="配置信息" :visible.sync="showStatus" style="width:33.5%;border: 1px grey solid; border-radius: 5px;" :with-header="true" size="100%" direction="ltr" :modal="false" :wrapperClosable="false">
+            <pre style="height:100%;overflow-y: auto;height:100%;width:100%;position:absolute;">{{showInfo}}</pre>
         </el-drawer>
       </div>
     </div>
