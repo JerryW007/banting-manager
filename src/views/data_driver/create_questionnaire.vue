@@ -46,10 +46,8 @@
         </div>
       </div>
       <div style="display:inline-block;position:relative; left:100px;bottom:2%;">       
-        <el-drawer title="配置信息" :visible.sync="showStatus" :with-header="false" size="40%">
-          <span>
-            <pre style="height:100%;overflow-y: auto;height:100%;width:100%;position:absolute;">{{showInfo}}</pre>
-          </span>
+        <el-drawer title="配置信息" :visible.sync="showStatus" style="width:34%;" :with-header="true" size="100%" direction="ltr" :modal="false" :wrapperClosable="false">
+            <pre style="height:100%;overflow-y: auto;height:100%;width:100%;position:absolute;margin-left:10px;">{{showInfo}}</pre>
         </el-drawer>
       </div>
     </div>
@@ -85,6 +83,7 @@ import question from "./components/question";
 export default {
   data() {
     return {
+      direction:'ltr',
       listLoading: false,
       diseaseSelectTitle: "操作的队列",
       diseaseSelectType: "radio",
@@ -102,7 +101,11 @@ export default {
       table_options: [],
       column_options: [],
       column_terms: [],
-      questions: [],
+      questions: [
+        "mh_category_cd",
+        "mh_sub_category_cd",
+        "mh_term_cd"
+      ],
       question_configs: {},
       showStatus: false,
       showInfo: "",
@@ -172,8 +175,10 @@ export default {
         alert("请添加题目");
         return;
       }
+      if (this.showInfo == this.questions) {
+        this.showStatus = !this.showStatus;
+      }
       this.showInfo = this.questions;
-      this.showStatus = !this.showStatus;
     },
     showQuestionnaire() {
       if (
@@ -184,8 +189,11 @@ export default {
         alert("问卷配置为空");
         return;
       }
+      if (this.showInfo == this.question_configs) {
+        this.showStatus = !this.showStatus;
+      }
       this.showInfo = this.question_configs;
-      this.showStatus = !this.showStatus;
+      
     },
     generate() {
       // 生成问卷
