@@ -47,7 +47,7 @@
       </div>
       <div style="display:inline-block;position:relative; left:100px;bottom:2%;">       
         <el-drawer title="配置信息" :visible.sync="showStatus" style="width:33.5%;border: 1px grey solid; border-radius: 5px;" :with-header="true" size="100%" direction="ltr" :modal="false" :wrapperClosable="false">
-            <pre style="height:100%;overflow-y: auto;height:100%;width:100%;position:absolute;">{{showInfo}}</pre>
+            <pre style="margin-top:10px;height:100%;overflow-y: auto;height:100%;width:100%;position:absolute;">{{showInfo}}</pre>
         </el-drawer>
       </div>
     </div>
@@ -55,8 +55,8 @@
       <div style=" width: 30%; min-height: 500px; margin-right: 10px;border:1px #FF44AA solid; border-radius: 5px;">
         <template v-if="questions.length > 0">
           <draggable class="wrapper" v-model="questions">
-            <div v-for="oneQuestion,index in questions" :key="index" style="border:1px #66CCFF solid;">
-              <el-button type="danger" icon="el-icon-delete" circle style="float:right;margin:5px;" size="mini" @click="deleteQuestion(index)"></el-button>
+            <div v-for="oneQuestion,index in questions" :key="index" style="border-bottom:1px #66CCFF solid;">
+              <el-button type="danger" icon="el-icon-delete" circle style="float:right;margin-top: -4px;margin-right:5px;" size="mini" @click="deleteQuestion(index)"></el-button>
               <pre style="margin-left:10px;margin: 10px 5px;font-family:Verdana,Genva,Arial,sans-serif;">{{oneQuestion}}</pre>
             </div>
           </draggable>
@@ -311,6 +311,11 @@ export default {
 };
 </script>
 <style scoped>
+/deep/ .el-drawer__header {
+  margin-bottom:10px !important;
+  border-bottom:1px grey solid !important;
+  padding-bottom: 10px !important;
+}
 .el-input__inner {
   width: 220px;
   border-top-width: 0px;
