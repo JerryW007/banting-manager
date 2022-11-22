@@ -70,7 +70,7 @@
   </div>
 </template>
 <script>
-import {get_zh_cn} from "@/utils/translation";
+import { get_zh_cn } from "@/utils/translation";
 export default {
   data() {
     return {

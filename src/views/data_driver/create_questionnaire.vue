@@ -51,18 +51,23 @@
         </el-drawer>
       </div>
     </div>
-    <div style="display: flex; margin-top: 10px;">
-      <div style=" width: 30%; min-height: 500px; margin-right: 10px;border:1px #FF44AA solid; border-radius: 5px;">
+    <div style="display: flex;">
+      <div :style="{
+                'width': '30%',
+                'min-height':windowHeight() + 'px',
+                'margin-bottom':'2px',
+                'margin-right': '10px',
+                'border-right':'1px #FF44AA solid'}">
         <template v-if="questions.length > 0">
-          <draggable class="wrapper" v-model="questions">
-            <div v-for="oneQuestion,index in questions" :key="index" style="border-bottom:1px #66CCFF solid;">
-              <el-button type="danger" icon="el-icon-delete" circle style="float:right;margin-top: -4px;margin-right:5px;" size="mini" @click="deleteQuestion(index)"></el-button>
+          <draggable class="wrapper" v-model="questions" style="margin-top:2px;margin-right:2px;">
+            <div v-for="oneQuestion,index in questions" :key="index" style="border:1px #66CCFF solid;margin-bottom: 2px;border-radius: 5px;">
+              <el-button type="danger" icon="el-icon-delete" circle style="float:right;margin-top: 4px;margin-right:5px;" size="mini" @click="deleteQuestion(index)"></el-button>
               <pre style="margin-left:10px;margin: 10px 5px;font-family:Verdana,Genva,Arial,sans-serif;">{{oneQuestion}}</pre>
             </div>
           </draggable>
         </template>
       </div>
-      <div style="width: 70%; min-height: 500px; border:1px #33FF33 solid;border-radius: 5px;">
+      <div style="width: 70%; ">
         <template v-if="questions.length > 0">
           <div>
             <div v-for="qKey in question_configs.keys" :key="qKey" style="margin-right: 20px; margin-bottom: 10px">
@@ -155,6 +160,9 @@ export default {
     },
   },
   methods: {
+    windowHeight() {
+      return window.innerHeight - 190;
+    },
     enterEvent() {
       document.onkeydown = (e) => {
         //事件对象兼容
@@ -201,7 +209,12 @@ export default {
           source_keys: this.questions,
         })
         .then((response) => {
-          this.question_configs = response.data;
+          // 修改NaN类型数据,防止格式化失败
+          let body = response.data;
+          if (typeof body == 'string' && body.indexOf('NaN') != -1) {
+            body = JSON.parse(body.replace(/NaN/g,'NaN'))
+          }
+          this.question_configs = body;
           setTimeout(() => {
             this.listLoading = false;
           }, 1 * 200);
