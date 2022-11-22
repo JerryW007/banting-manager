@@ -106,7 +106,10 @@ export default {
       table_options: [],
       column_options: [],
       column_terms: [],
-      questions: [],
+      questions: [
+  "primary_diag_cd",
+  "primary_sub_diag_cd"
+],
       question_configs: {},
       showStatus: false,
       showInfo: "",
@@ -212,7 +215,7 @@ export default {
           // 修改NaN类型数据,防止格式化失败
           let body = response.data;
           if (typeof body == 'string' && body.indexOf('NaN') != -1) {
-            body = JSON.parse(body.replace(/NaN/g,'NaN'))
+            body = JSON.parse(body.replace(/NaN/g,"\"NaN\""))
           }
           this.question_configs = body;
           setTimeout(() => {
