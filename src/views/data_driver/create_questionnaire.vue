@@ -47,7 +47,7 @@
       </div>
       <div style="display:inline-block;position:relative; left:100px;bottom:2%;">
         <el-drawer title="配置信息" :visible.sync="showStatus" style="width:33.5%;border: 1px grey solid; border-radius: 5px;" :with-header="false" size="100%" direction="ltr" :modal="false" :wrapperClosable="false">
-          <pre style="margin-top:10px;height:100%;overflow-y: auto;height:100%;width:100%;position:absolute;">{{showInfo}}</pre>
+          <pre style="margin-top:10px;overflow-y: auto;height:100%;width:100%;position:absolute;">{{showInfo}}</pre>
         </el-drawer>
       </div>
     </div>
@@ -62,7 +62,7 @@
           <draggable class="wrapper" v-model="questions" style="margin-top:2px;margin-right:2px;">
             <div v-for="oneQuestion,index in questions" :key="index" style="border:1px #66CCFF solid;margin-bottom: 2px;border-radius: 5px;">
               <el-button type="danger" icon="el-icon-delete" circle style="float:right;margin-top: 4px;margin-right:5px;" size="mini" @click="deleteQuestion(index)"></el-button>
-              <pre style="margin-left:10px;margin: 10px 5px;font-family:Verdana,Genva,Arial,sans-serif;">{{oneQuestion}}</pre>
+              <pre style="margin-left:10px;font-family:Verdana,Genva,Arial,sans-serif;">{{oneQuestion}}</pre>
             </div>
           </draggable>
         </template>
