@@ -148,15 +148,19 @@ export default {
       this.getTableOptions();
     },
     "column.table_name": function () {
+      this.column.column_name = ''
       this.getColumnOptions(this.column.table_name);
       this.column_options = [];
     },
     "relation.table_name": function () {
+      this.relation.column_name = ''
       this.getColumnOptions(this.relation.table_name);
       this.column_options = [];
     },
     "relation.column_name": function () {
+      this.relation.term_id = ''
       this.getQuestionTerms(this.relation.column_name);
+      this.column_terms = []
     },
   },
   methods: {
