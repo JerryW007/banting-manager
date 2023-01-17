@@ -5769,14 +5769,17 @@ let translationMap = {
 import translation from "@/api/translation"
 function getTranslationMap() {
     translation.getTranslationList().then(response => {
-        translationMap = response.body
+        translationMap = response.body            
     })
 }
 getTranslationMap()
 
 export function get_zh_cn(term_id) {
+    console.log(translationMap)
+    console.log(term_id)
     if (term_id in translationMap) {
         return translationMap[term_id]
     }
+    console.log(translationMap[term_id])
     return undefined
 }

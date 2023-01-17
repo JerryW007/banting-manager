@@ -106,10 +106,7 @@ export default {
       table_options: [],
       column_options: [],
       column_terms: [],
-      questions: [
-  "primary_diag_cd",
-  "primary_sub_diag_cd"
-],
+      questions: [],
       question_configs: {},
       showStatus: false,
       showInfo: "",
@@ -121,7 +118,7 @@ export default {
     draggable,
   },
   created() {
-    this.enterEvent();
+    // this.enterEvent();
     this.getTableOptions();
   },
   mounted() {},
