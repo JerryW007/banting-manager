@@ -38,7 +38,7 @@
           </el-select>
           <template v-if="question_type == 'sub_question'">
             <span style="font-weight: bold;margin-left:10px;">限定可选值:</span>
-            <el-select v-model="relation.term_id" filterable placeholder="请选择可选值" style="margin-left: 10px">
+            <el-select v-model="relation.term_id" filterable placeholder="请选择可选值" multiple style="margin-left: 10px">
               <el-option v-for="item in column_terms" :key="item.term_id" :label="item.zh_cn" :value="item.term_id">
               </el-option>
             </el-select>
