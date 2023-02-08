@@ -11,6 +11,10 @@
       <el-radio v-model="all_item_type" label="checkbox">复选</el-radio>
     </div>
     <disease-select v-model="disease_id" :tagType="diseaseSelectType" style ="margin-right:20px" :title="diseaseSelectTitle"/>
+    <div style="margin-bottom:15px;">
+      <span style="font-weight: bold">所属项目:</span>
+      <el-input v-model="project_tag" style="width: 20%;margin-left: 15px;">{{project_tag}}</el-input>
+    </div>
     <div style="margin-bottom: 15px">
       <span style="font-weight: bold">可选值:</span>
       <el-select
@@ -90,6 +94,7 @@ export default {
       disease_id: "AML",
       listLoading: false,
       all_item_type: "",
+      project_tag: '',
       item_type: [],
       term_orders:[],
       list: [],
@@ -129,7 +134,10 @@ export default {
         this.item_type = new_item_type;
       }     
     },
-    disease_id:function(newValue, oldValue) {
+    disease_id: function(newValue, oldValue) {
+      this.getList()
+    },
+    project_tag:function(newValue, oldValue) {
       this.getList()
     }
   },
@@ -175,6 +183,7 @@ export default {
         content: this.content,
         item_type: this.item_type,
         disease_id: this.disease_id,
+        project_tag: this.project_tag,
         orders: this.list
       };   
       this.listLoading = true;
@@ -200,7 +209,7 @@ export default {
     },
     getList() {
       this.listLoading = true;
-      questions.questionTerms({content: this.content, disease_id: this.disease_id}).then((response) => {
+      questions.questionTerms({content: this.content, disease_id: this.disease_id,project_tag: this.project_tag}).then((response) => {
         const body = response.body;
         this.list = body.result;
         let item_type = []

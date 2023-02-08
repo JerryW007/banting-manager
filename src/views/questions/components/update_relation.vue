@@ -7,6 +7,10 @@
     <div style="margin-bottom: 15px">
       <disease-select v-model="row.disease_id" :tagType="diseaseSelectType" style ="margin-right:20px" :title="diseaseSelectTitle"/>
     </div>
+    <div style="margin-bottom:15px;">
+      <span style="font-weight: bold">所属项目:</span>
+      <el-input v-model="row.project_tag" style="width: 20%;margin-left: 20px;">{{row.project_tag}}</el-input>
+    </div>
     <div style="margin-bottom: 15px">
       <span style="font-weight: bold">排序:</span>
       <el-input v-model="row.order" style="margin-left: 50px;width:29%" >{{row.order}}</el-input>

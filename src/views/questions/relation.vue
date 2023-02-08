@@ -68,7 +68,7 @@
           <span>{{ row.order }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="备注" align="center">
+      <el-table-column label="备注" align="center" width="120px">
         <template slot-scope="{ row }">
           <span>{{ row.comment }}</span>
         </template>
@@ -78,7 +78,12 @@
           <span>{{ row.disease_id }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="选项" align="center" :show-overflow-tooltip="true">
+      <el-table-column label="所属项目" align="center" width="80px">
+        <template slot-scope="{ row }">
+          <span>{{ row.project_tag }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="选项" align="center" width="80px" :show-overflow-tooltip="true">
         <template slot-scope="{ row }">
           <span>{{ row.permissible_value }}</span>
         </template>

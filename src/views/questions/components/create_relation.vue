@@ -1,7 +1,10 @@
 <template>
   <el-dialog width="80%" :visible.sync="open" title="添加题目依赖" :before-close="handlerClose">
     <disease-select v-model="disease_id" :tagType="diseaseSelectType" style="margin-right:20px" :title="diseaseSelectTitle" />
-
+    <div style="margin-bottom:15px;">
+      <span style="font-weight: bold">所属项目:</span>
+      <el-input v-model="project_tag" style="width: 17.7%;margin-left: 22px;">{{project_tag}}</el-input>
+    </div>
     <div style="margin-bottom: 15px">
       <span style="font-weight: bold">排序:</span>
       <el-input style="width: 17.7%; margin-left: 50px" size="medium" v-model="order" placeholder="排序" />
@@ -58,6 +61,7 @@ export default {
       diseaseSelectType: "radio",
       refresh: true,
       disease_id: "AML",
+      project_tag:'',
       order: "",
       comment: "",
       relation_type: "",
@@ -136,6 +140,7 @@ export default {
       const formData = {
         order: this.order,
         disease_id: this.disease_id,
+        project_tag: this.project_tag,
         comment: this.comment,
         permissible_value: this.permissible_value,
         table_name: this.table_name,

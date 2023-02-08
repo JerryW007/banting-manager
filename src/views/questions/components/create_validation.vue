@@ -12,12 +12,16 @@
       :title="diseaseSelectTitle"
     />
     <div style="margin-bottom:15px;">
+      <span style="font-weight: bold">所属项目:</span>
+      <el-input v-model="formData.project_tag" style="width: 20%;margin-left: 15px;">{{formData.project_tag}}</el-input>
+    </div>
+    <div style="margin-bottom:15px;">
       <span style="font-weight: bold">配置表:</span>
       <el-select
         v-model="formData.table_name"
         filterable
         placeholder="请选择"
-        style="margin-left: 20px; margin-right: 20px"
+        style="margin-left: 28px; margin-right: 20px"
       >
         <el-option
           v-for="item in table_options"
@@ -45,17 +49,17 @@
     </div>
     <div style="margin-bottom: 15px">
       <span style="font-weight: bold">字段类型:</span>
-      <el-radio v-model="formData.item_type" label="datetime" style="margin-left: 10px">日期类型</el-radio>
+      <el-radio v-model="formData.item_type" label="datetime" style="margin-left: 15px">日期类型</el-radio>
       <el-radio v-model="formData.item_type" label="string">字符串类型</el-radio>
     </div>
     <div style="margin-bottom: 15px">
       <span style="font-weight: bold">动态校验:</span>
-      <el-radio v-model="formData.validate_type" label="dynamic" style="margin-left: 10px">是</el-radio>
+      <el-radio v-model="formData.validate_type" label="dynamic" style="margin-left: 15px">是</el-radio>
       <el-radio v-model="formData.validate_type" label="static">否</el-radio>
     </div>
     <div style="margin-bottom: 15px" class="demo-input-suffix">
       <span style="font-weight: bold">值配置:</span>
-      <el-input v-model="formData.start" style="margin-left: 24px;width: 10%;" placeholder="最小值"/>
+      <el-input v-model="formData.start" style="margin-left: 30px;width: 10%;" placeholder="最小值"/>
       <span style="margin-left: 10px; margin-right: 10px;">-</span>
       <el-input v-model="formData.end" style="width: 10%;"  placeholder="最大值"/>
     </div>
@@ -82,6 +86,7 @@ export default {
         content:'',
         item_type:'',
         validate_type:'',
+        project_tag:'',        
         start:'',
         end:''
       },

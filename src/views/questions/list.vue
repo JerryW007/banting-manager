@@ -12,7 +12,7 @@
       <el-button
         class="filter-item"
         style="margin-left: 10px"
-        type="primary"
+        type="success"
         icon="el-icon-edit"
         @click="handleCreate"
       >
@@ -32,7 +32,7 @@
         v-waves
         :loading="downloadLoading"
         class="filter-item"
-        type="primary"
+        type="warning"
         icon="el-icon-download"
         @click="handleDownload"
       >
