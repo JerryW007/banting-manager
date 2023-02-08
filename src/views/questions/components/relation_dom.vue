@@ -104,6 +104,11 @@ export default {
     'form_data.term_id': function(new_list, old_list) {
       this.deliverData();
     },
+    'project_tag': function(new_list, old_list) {
+      this.getTermOptions();
+      this.form_data.term_id = []
+      this.column_options = []
+    },
   },
   methods: {
     deliverData() {
@@ -158,6 +163,7 @@ export default {
         .columnOptions({
           disease_id: this.disease_id,
           tableName: this.form_data.table_name,
+          project_tag:this.project_tag
         })
         .then((response) => {
           const body = response.body;
