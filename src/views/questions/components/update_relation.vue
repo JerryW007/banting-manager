@@ -175,6 +175,7 @@ export default {
         .columnOptions({
           disease_id: this.row.disease_id,
           tableName: this.row.table_name,
+          project_tag: this.row.project_tag
         })
         .then((response) => {
           const body = response.body;

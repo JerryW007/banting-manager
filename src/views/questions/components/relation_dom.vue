@@ -71,6 +71,7 @@ export default {
   setup() {},
   props: {
     disease_id: String,
+    project_tag: String,
     index: Number,
     relation_count: Array
   },
@@ -134,6 +135,7 @@ export default {
         .questionTerms({
           disease_id: this.disease_id,
           content: this.form_data.column_name,
+          project_tag: this.project_tag
         })
         .then((response) => {
           const body = response.body;

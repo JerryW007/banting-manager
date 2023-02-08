@@ -44,7 +44,7 @@
       </div>
       <div style="margin-bottom: 5px"></div>
     </div>
-    <relation-dom :disease_id="disease_id" @addRelationData="addRelationData" @removeRelation="removeRelation" :index="n" :relation_count="relation_count" v-for="n in relation_count" :key="n" />
+    <relation-dom :disease_id="disease_id" :project_tag="project_tag" @addRelationData="addRelationData" @removeRelation="removeRelation" :index="n" :relation_count="relation_count" v-for="n in relation_count" :key="n" />
   </el-dialog>
 </template>
 <script>
@@ -195,6 +195,7 @@ export default {
         .columnOptions({
           disease_id: this.disease_id,
           tableName: this.table_name,
+          project_tag:this.project_tag
         })
         .then((response) => {
           const body = response.body;
