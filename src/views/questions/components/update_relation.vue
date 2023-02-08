@@ -152,6 +152,7 @@ export default {
         .questionTerms({
           disease_id: this.row.disease_id,
           content: this.row.table_column,
+          project_tag: this.row.project_tag
         })
         .then((response) => {
           const body = response.body;

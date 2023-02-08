@@ -101,6 +101,9 @@ export default {
     disease_id: function (newValue, oldValue) {
       this.getQuestionTerms();
     },
+    project_tag: function (newValue, oldValue) {
+      this.getQuestionTerms();
+    },
     relation_type: function (newValue, oldValue) {
       if (newValue == "OPTION_RELATION") {
         this.getQuestionTerms();
@@ -176,6 +179,7 @@ export default {
         .questionTerms({
           disease_id: this.disease_id,
           content: this.content,
+          project_tag: this.project_tag
         })
         .then((response) => {
           const body = response.body;
