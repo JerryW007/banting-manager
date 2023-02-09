@@ -2,8 +2,15 @@
   <div style="margin-left: 10px; margin-top: 10px">
     <div style="width: 100%; border:1px #DDDDDD solid;padding: 10px;border-radius: 5px;">
       <div style="margin-bottom: 10px;">
-        <disease-select v-model="disease_id" :tagType="diseaseSelectType" style="margin-right:20px;float: left;width:80%" :title="diseaseSelectTitle" />
+        <div>
+          <disease-select v-model="disease_id" :tagType="diseaseSelectType" style="margin-right:20px;float: left;width:80%" :title="diseaseSelectTitle" />         
+        </div>
+        
         <div style="display:inline-block">
+          <div style="margin-bottom: 10px;">
+            <span style="font-weight: bold">所属项目:</span>
+            <el-input v-model="project_tag" style="width: 30%;margin-left: 25px;">{{project_tag}}</el-input>
+          </div>
           <span style="font-weight: bold">关联字段:</span>
           <el-select v-model="column.table_name" filterable placeholder="请选择表" style="margin-left: 26px; margin-right: 20px">
             <el-option v-for="item in table_options" :key="item.value" :label="item.label" :value="item.value">
@@ -92,7 +99,8 @@ export default {
       listLoading: false,
       diseaseSelectTitle: "操作的队列",
       diseaseSelectType: "radio",
-      disease_id: "CML",
+      disease_id: "AML",
+      project_tag: '',
       question_type: "sample",
       column: {
         table_name: "",
@@ -189,6 +197,7 @@ export default {
       pApi
         .getQuestion({
           disease_id: this.disease_id,
+          project_tag:this.project_tag,
           source_keys: this.questions,
         })
         .then((response) => {
@@ -252,6 +261,7 @@ export default {
         .questionTerms({
           disease_id: this.disease_id,
           content: column_name,
+          project_tag:this.project_tag
         })
         .then((response) => {
           const body = response.body;
