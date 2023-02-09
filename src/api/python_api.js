@@ -15,6 +15,7 @@ const pApi = {
                     data: {
                         patientInfo: {
                             disease_id: data.disease_id,
+                            project_tag: data.project_tag,
                             empi: 20,
                             patient_id: '1524197'
                         },
