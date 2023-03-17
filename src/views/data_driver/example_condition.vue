@@ -31,19 +31,19 @@ export default {
             {
               term_id: "gender_cd_1",
               item_type: "radio",
-              zh_cn: "男",
+              zh-CN: "男",
               check_status: false,
             },
             {
               term_id: "gender_cd_2",
               item_type: "radio",
-              zh_cn: "女",
+              zh-CN: "女",
               check_status: false,
             },
             {
               term_id: "gender_cd_99",
               item_type: "radio",
-              zh_cn: "其它",
+              zh-CN: "其它",
               check_status: false,
             },
           ],
@@ -63,56 +63,56 @@ export default {
             {
               term_id: "mh_term_cd_43",
               item_type: "checkbox",
-              zh_cn: "化疗",
+              zh-CN: "化疗",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_52",
               item_type: "checkbox",
-              zh_cn: "免疫治疗（ATG等）",
+              zh-CN: "免疫治疗（ATG等）",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_45",
               item_type: "checkbox",
-              zh_cn: "放疗",
+              zh-CN: "放疗",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_67",
               item_type: "checkbox",
-              zh_cn: "靶向治疗（TKI、BTK抑制剂、BCL-2抑制剂等）",
+              zh-CN: "靶向治疗（TKI、BTK抑制剂、BCL-2抑制剂等）",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_46",
               item_type: "checkbox",
-              zh_cn: "CAR-T",
+              zh-CN: "CAR-T",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_68",
               item_type: "checkbox",
-              zh_cn: "移植",
+              zh-CN: "移植",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_48",
               item_type: "radio",
-              zh_cn: "无",
+              zh-CN: "无",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_001",
               item_type: "radio",
-              zh_cn: "未知",
+              zh-CN: "未知",
               check_status: false,
               show: [],
             },
@@ -127,140 +127,140 @@ export default {
             {
               term_id: "mh_term_cd_53",
               item_type: "checkbox",
-              zh_cn: "贫血",
+              zh-CN: "贫血",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_54",
               item_type: "checkbox",
-              zh_cn: "出血倾向",
+              zh-CN: "出血倾向",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_55",
               item_type: "checkbox",
-              zh_cn: "原因不明的发热",
+              zh-CN: "原因不明的发热",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_56",
               item_type: "checkbox",
-              zh_cn: "黄疸",
+              zh-CN: "黄疸",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_57",
               item_type: "checkbox",
-              zh_cn: "淋巴结肿大",
+              zh-CN: "淋巴结肿大",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_58",
               item_type: "checkbox",
-              zh_cn: "肝/脾肿大",
+              zh-CN: "肝/脾肿大",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_9",
               item_type: "checkbox",
-              zh_cn: "口腔感染",
+              zh-CN: "口腔感染",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_13",
               item_type: "checkbox",
-              zh_cn: "皮肤病",
+              zh-CN: "皮肤病",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_4",
               item_type: "checkbox",
-              zh_cn: "肝炎",
+              zh-CN: "肝炎",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_5",
               item_type: "checkbox",
-              zh_cn: "结核病",
+              zh-CN: "结核病",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_6",
               item_type: "checkbox",
-              zh_cn: "溃疡性结肠炎",
+              zh-CN: "溃疡性结肠炎",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_7",
               item_type: "checkbox",
-              zh_cn: "克罗恩病",
+              zh-CN: "克罗恩病",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_8",
               item_type: "checkbox",
-              zh_cn: "精神病",
+              zh-CN: "精神病",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_10",
               item_type: "checkbox",
-              zh_cn: "肛周疾病",
+              zh-CN: "肛周疾病",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_11",
               item_type: "checkbox",
-              zh_cn: "耳鼻喉疾病",
+              zh-CN: "耳鼻喉疾病",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_12",
               item_type: "checkbox",
-              zh_cn: "眼部疾病",
+              zh-CN: "眼部疾病",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_1",
               item_type: "checkbox",
-              zh_cn: "高血压",
+              zh-CN: "高血压",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_2",
               item_type: "checkbox",
-              zh_cn: "糖尿病",
+              zh-CN: "糖尿病",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_3",
               item_type: "checkbox",
-              zh_cn: "冠心病",
+              zh-CN: "冠心病",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_991",
               item_type: "checkbox",
-              zh_cn: "其他既往疾病",
+              zh-CN: "其他既往疾病",
               check_status: false,
               show: [],
               other_key: "mh_term_other",
@@ -268,14 +268,14 @@ export default {
             {
               term_id: "mh_term_cd_14",
               item_type: "radio",
-              zh_cn: "无既往病史",
+              zh-CN: "无既往病史",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_002",
               item_type: "radio",
-              zh_cn: "未知",
+              zh-CN: "未知",
               check_status: false,
               show: [],
             },
@@ -290,21 +290,21 @@ export default {
             {
               term_id: "mh_term_cd_59",
               item_type: "checkbox",
-              zh_cn: "肝脏手术",
+              zh-CN: "肝脏手术",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_15",
               item_type: "checkbox",
-              zh_cn: "切脾手术",
+              zh-CN: "切脾手术",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_992",
               item_type: "checkbox",
-              zh_cn: "其它手术",
+              zh-CN: "其它手术",
               check_status: false,
               show: [],
               other_key: "mh_term_other",
@@ -312,14 +312,14 @@ export default {
             {
               term_id: "mh_term_cd_16",
               item_type: "radio",
-              zh_cn: "无既往手术史",
+              zh-CN: "无既往手术史",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_003",
               item_type: "radio",
-              zh_cn: "未知",
+              zh-CN: "未知",
               check_status: false,
               show: [],
             },
@@ -334,56 +334,56 @@ export default {
             {
               term_id: "mh_term_cd_17",
               item_type: "checkbox",
-              zh_cn: "青霉素类",
+              zh-CN: "青霉素类",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_18",
               item_type: "checkbox",
-              zh_cn: "头孢类",
+              zh-CN: "头孢类",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_19",
               item_type: "checkbox",
-              zh_cn: "磺胺类",
+              zh-CN: "磺胺类",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_20",
               item_type: "checkbox",
-              zh_cn: "解热镇痛类（阿司匹林等）",
+              zh-CN: "解热镇痛类（阿司匹林等）",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_21",
               item_type: "checkbox",
-              zh_cn: "镇静类（苯巴比妥等）",
+              zh-CN: "镇静类（苯巴比妥等）",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_22",
               item_type: "checkbox",
-              zh_cn: "血清制剂",
+              zh-CN: "血清制剂",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_23",
               item_type: "checkbox",
-              zh_cn: "中草药",
+              zh-CN: "中草药",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_994",
               item_type: "checkbox",
-              zh_cn: "其它药物过敏",
+              zh-CN: "其它药物过敏",
               check_status: false,
               show: [],
               other_key: "mh_term_other",
@@ -391,14 +391,14 @@ export default {
             {
               term_id: "mh_term_cd_24",
               item_type: "radio",
-              zh_cn: "无药物过敏史",
+              zh-CN: "无药物过敏史",
               check_status: false,
               show: [],
             },
             {
               term_id: "mh_term_cd_005",
               item_type: "radio",
-              zh_cn: "未知",
+              zh-CN: "未知",
               check_status: false,
               show: [],
             },
@@ -413,7 +413,7 @@ export default {
             {
               term_id: "mh_term_cd_25",
               item_type: "checkbox",
-              zh_cn: "膀胱癌",
+              zh-CN: "膀胱癌",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -423,7 +423,7 @@ export default {
             {
               term_id: "mh_term_cd_69",
               item_type: "checkbox",
-              zh_cn: "急性髓系白血病（AML）",
+              zh-CN: "急性髓系白血病（AML）",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -433,7 +433,7 @@ export default {
             {
               term_id: "mh_term_cd_62",
               item_type: "checkbox",
-              zh_cn: "慢性髓性白血病(CML)",
+              zh-CN: "慢性髓性白血病(CML)",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -443,7 +443,7 @@ export default {
             {
               term_id: "mh_term_cd_61",
               item_type: "checkbox",
-              zh_cn: "慢性淋巴细胞白血病(CLL)",
+              zh-CN: "慢性淋巴细胞白血病(CLL)",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -453,7 +453,7 @@ export default {
             {
               term_id: "mh_term_cd_70",
               item_type: "checkbox",
-              zh_cn: "小淋巴细胞淋巴瘤（SLL）",
+              zh-CN: "小淋巴细胞淋巴瘤（SLL）",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -463,7 +463,7 @@ export default {
             {
               term_id: "mh_term_cd_63",
               item_type: "checkbox",
-              zh_cn: "慢性粒单核细胞白血病（CMML）",
+              zh-CN: "慢性粒单核细胞白血病（CMML）",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -473,7 +473,7 @@ export default {
             {
               term_id: "mh_term_cd_64",
               item_type: "checkbox",
-              zh_cn: "骨髓增殖性肿瘤（MPN）",
+              zh-CN: "骨髓增殖性肿瘤（MPN）",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -483,7 +483,7 @@ export default {
             {
               term_id: "mh_term_cd_65",
               item_type: "checkbox",
-              zh_cn: "骨髓增生异常综合征（MDS）",
+              zh-CN: "骨髓增生异常综合征（MDS）",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -493,7 +493,7 @@ export default {
             {
               term_id: "mh_term_cd_66",
               item_type: "checkbox",
-              zh_cn: "其他血液癌",
+              zh-CN: "其他血液癌",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -503,7 +503,7 @@ export default {
             {
               term_id: "mh_term_cd_26",
               item_type: "checkbox",
-              zh_cn: "脑和脊髓癌",
+              zh-CN: "脑和脊髓癌",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -513,7 +513,7 @@ export default {
             {
               term_id: "mh_term_cd_27",
               item_type: "checkbox",
-              zh_cn: "乳腺癌",
+              zh-CN: "乳腺癌",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -523,7 +523,7 @@ export default {
             {
               term_id: "mh_term_cd_28",
               item_type: "checkbox",
-              zh_cn: "乳腺原位癌",
+              zh-CN: "乳腺原位癌",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -533,7 +533,7 @@ export default {
             {
               term_id: "mh_term_cd_31",
               item_type: "checkbox",
-              zh_cn: "结直肠癌",
+              zh-CN: "结直肠癌",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -543,7 +543,7 @@ export default {
             {
               term_id: "mh_term_cd_32",
               item_type: "checkbox",
-              zh_cn: "肾癌",
+              zh-CN: "肾癌",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -553,7 +553,7 @@ export default {
             {
               term_id: "mh_term_cd_33",
               item_type: "checkbox",
-              zh_cn: "肺癌",
+              zh-CN: "肺癌",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -563,7 +563,7 @@ export default {
             {
               term_id: "mh_term_cd_35",
               item_type: "checkbox",
-              zh_cn: "胰腺癌",
+              zh-CN: "胰腺癌",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -573,7 +573,7 @@ export default {
             {
               term_id: "mh_term_cd_37",
               item_type: "checkbox",
-              zh_cn: "皮肤黑色素瘤",
+              zh-CN: "皮肤黑色素瘤",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -583,7 +583,7 @@ export default {
             {
               term_id: "mh_term_cd_38",
               item_type: "checkbox",
-              zh_cn: "皮肤基底细胞癌或皮肤局部鳞状细胞癌",
+              zh-CN: "皮肤基底细胞癌或皮肤局部鳞状细胞癌",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -593,7 +593,7 @@ export default {
             {
               term_id: "mh_term_cd_40",
               item_type: "checkbox",
-              zh_cn: "甲状腺癌",
+              zh-CN: "甲状腺癌",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -603,35 +603,35 @@ export default {
             {
               term_id: "mh_term_cd_34",
               item_type: "checkbox",
-              zh_cn: "卵巢癌",
+              zh-CN: "卵巢癌",
               check_status: false,
               show: [{ gender_cd: "gender_cd_2" }],
             },
             {
               term_id: "mh_term_cd_41",
               item_type: "checkbox",
-              zh_cn: "子宫癌",
+              zh-CN: "子宫癌",
               check_status: false,
               show: [{ gender_cd: "gender_cd_2" }],
             },
             {
               term_id: "mh_term_cd_29",
               item_type: "checkbox",
-              zh_cn: "子宫颈癌",
+              zh-CN: "子宫颈癌",
               check_status: false,
               show: [{ gender_cd: "gender_cd_2" }],
             },
             {
               term_id: "mh_term_cd_30",
               item_type: "checkbox",
-              zh_cn: "子宫颈原位癌",
+              zh-CN: "子宫颈原位癌",
               check_status: false,
               show: [{ gender_cd: "gender_cd_2" }],
             },
             {
               term_id: "mh_term_cd_993",
               item_type: "checkbox",
-              zh_cn: "其它恶性肿瘤",
+              zh-CN: "其它恶性肿瘤",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -642,7 +642,7 @@ export default {
             {
               term_id: "mh_term_cd_42",
               item_type: "radio",
-              zh_cn: "无既往恶性肿瘤史",
+              zh-CN: "无既往恶性肿瘤史",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -652,7 +652,7 @@ export default {
             {
               term_id: "mh_term_cd_004",
               item_type: "radio",
-              zh_cn: "未知",
+              zh-CN: "未知",
               check_status: false,
               show: [
                 { gender_cd: "gender_cd_2" },
@@ -662,14 +662,14 @@ export default {
             {
               term_id: "mh_term_cd_36",
               item_type: "checkbox",
-              zh_cn: "前列腺癌",
+              zh-CN: "前列腺癌",
               check_status: false,
               show: [{ gender_cd: "gender_cd_1" }],
             },
             {
               term_id: "mh_term_cd_39",
               item_type: "checkbox",
-              zh_cn: "睾丸癌",
+              zh-CN: "睾丸癌",
               check_status: false,
               show: [{ gender_cd: "gender_cd_1" }],
             },
@@ -685,7 +685,7 @@ export default {
               {
                 term_id: "condition_term_cd_99",
                 item_type: "checkbox",
-                zh_cn: "其它",
+                zh-CN: "其它",
                 check_status: false,
                 show: [],
                 other_key: "condition_term_other",
@@ -693,7 +693,7 @@ export default {
               {
                 term_id: "condition_term_cd_38",
                 item_type: "radio",
-                zh_cn: "无",
+                zh-CN: "无",
                 check_status: false,
                 show: [],
               },
@@ -702,7 +702,7 @@ export default {
               {
                 term_id: "condition_term_cd_17",
                 item_type: "checkbox",
-                zh_cn: "糖尿病",
+                zh-CN: "糖尿病",
                 check_status: false,
                 show: [],
               },
@@ -711,35 +711,35 @@ export default {
               {
                 term_id: "condition_term_cd_21",
                 item_type: "checkbox",
-                zh_cn: "心肌梗死",
+                zh-CN: "心肌梗死",
                 check_status: false,
                 show: [],
               },
               {
                 term_id: "condition_term_cd_1",
                 item_type: "checkbox",
-                zh_cn: "充血性心力衰竭",
+                zh-CN: "充血性心力衰竭",
                 check_status: false,
                 show: [],
               },
               {
                 term_id: "condition_term_cd_39",
                 item_type: "checkbox",
-                zh_cn: "周围血管疾病",
+                zh-CN: "周围血管疾病",
                 check_status: false,
                 show: [],
               },
               {
                 term_id: "condition_term_cd_24",
                 item_type: "checkbox",
-                zh_cn: "脑血管疾病",
+                zh-CN: "脑血管疾病",
                 check_status: false,
                 show: [],
               },
               {
                 term_id: "condition_term_cd_45",
                 item_type: "checkbox",
-                zh_cn: "偏瘫",
+                zh-CN: "偏瘫",
                 check_status: false,
                 show: [],
               },
@@ -748,7 +748,7 @@ export default {
               {
                 term_id: "condition_term_cd_40",
                 item_type: "checkbox",
-                zh_cn: "痴呆症",
+                zh-CN: "痴呆症",
                 check_status: false,
                 show: [],
               },
@@ -757,7 +757,7 @@ export default {
               {
                 term_id: "condition_term_cd_41",
                 item_type: "checkbox",
-                zh_cn: "慢性肺部疾病",
+                zh-CN: "慢性肺部疾病",
                 check_status: false,
                 show: [],
               },
@@ -766,7 +766,7 @@ export default {
               {
                 term_id: "condition_term_cd_42",
                 item_type: "checkbox",
-                zh_cn: "结缔组织疾病",
+                zh-CN: "结缔组织疾病",
                 check_status: false,
                 show: [],
               },
@@ -775,7 +775,7 @@ export default {
               {
                 term_id: "condition_term_cd_43",
                 item_type: "checkbox",
-                zh_cn: "溃疡病",
+                zh-CN: "溃疡病",
                 check_status: false,
                 show: [],
               },
@@ -784,7 +784,7 @@ export default {
               {
                 term_id: "condition_term_cd_44",
                 item_type: "checkbox",
-                zh_cn: "肝脏疾病",
+                zh-CN: "肝脏疾病",
                 check_status: false,
                 show: [],
               },
@@ -793,7 +793,7 @@ export default {
               {
                 term_id: "condition_term_cd_46",
                 item_type: "checkbox",
-                zh_cn: "中/重度肾脏疾病",
+                zh-CN: "中/重度肾脏疾病",
                 check_status: false,
                 show: [],
               },
@@ -802,21 +802,21 @@ export default {
               {
                 term_id: "condition_term_cd_47",
                 item_type: "checkbox",
-                zh_cn: "肿瘤",
+                zh-CN: "肿瘤",
                 check_status: false,
                 show: [],
               },
               {
                 term_id: "condition_term_cd_48",
                 item_type: "checkbox",
-                zh_cn: "淋巴瘤",
+                zh-CN: "淋巴瘤",
                 check_status: false,
                 show: [],
               },
               {
                 term_id: "condition_term_cd_49",
                 item_type: "checkbox",
-                zh_cn: "转移性肿瘤",
+                zh-CN: "转移性肿瘤",
                 check_status: false,
                 show: [],
               },
@@ -825,7 +825,7 @@ export default {
               {
                 term_id: "condition_term_cd_50",
                 item_type: "checkbox",
-                zh_cn: "获得性免疫缺陷综合征",
+                zh-CN: "获得性免疫缺陷综合征",
                 check_status: false,
                 show: [],
               },

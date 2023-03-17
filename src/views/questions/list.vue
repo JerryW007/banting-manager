@@ -68,7 +68,7 @@
       </el-table-column>
       <el-table-column label="备注" align="center">
         <template slot-scope="{ row }">
-          <span>{{ row.zh_cn }}</span>
+          <span>{{ row['zh-CN'] }}</span>
         </template>
       </el-table-column>
       <el-table-column label="完成的队列" align="center">

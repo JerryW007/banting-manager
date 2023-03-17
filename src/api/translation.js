@@ -10,7 +10,7 @@ const translation = {
             url: this.url,
             method: 'POST',
             params: banting_params(this.className, 'getAllTranslation'),
-            data: banting_body({ "lang_id": "zh_cn" })
+            data: banting_body({ "lang_id": "zh-CN" })
         })
     },
 }

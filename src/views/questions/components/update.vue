@@ -27,7 +27,7 @@
         <el-option
           v-for="item in column_terms"
           :key="item.term_id"
-          :label="item.zh_cn"
+          :label="item['zh-CN']"
           :value="item.term_id"
           :disabled="term_orders.indexOf(item.term_id) != -1"
         >
@@ -46,7 +46,7 @@
       style="width: 100%"
     >
       <el-table-column prop="content" label="字段名" />  
-      <el-table-column prop="zh_cn" label="翻译" />   
+      <el-table-column prop="zh-CN" label="翻译" />   
       <el-table-column prop="term_id" label="可选值" >
         <template slot-scope="{ row }">
           <div name="data-id" :data-id="row.term_id">{{row.term_id}}</div>
@@ -154,7 +154,7 @@ export default {
       this.term_orders.push(this.add_term_id)
       for (let item of this.column_terms) {
         if (item.term_id == this.add_term_id) {
-          this.list.push({content:item.content,term_id:this.add_term_id,zh_cn:item.zh_cn})
+          this.list.push({content:item.content,term_id:this.add_term_id,'zh-CN':item['zh-CN']})
         }
       }
       this.add_term_id = ''

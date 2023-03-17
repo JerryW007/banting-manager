@@ -40,7 +40,7 @@
     <div id="permissionTag" v-if="column_terms.length > 0 && relation_type == 'OPTION_RELATION'">
       <span style="margin-right: 20px; margin-bottom: 15px; font-weight: bold;float: left;">可选值:</span>
       <div style="margin-bottom: 15px;margin-left: 80px;">
-        <el-checkbox style="margin-bottom: 5px; align-self: center" align="left" v-for="item in column_terms" v-bind:key="item.term_id" v-model="permissible_value" :label="item.term_id">{{ item.zh_cn }}</el-checkbox>
+        <el-checkbox style="margin-bottom: 5px; align-self: center" align="left" v-for="item in column_terms" v-bind:key="item.term_id" v-model="permissible_value" :label="item.term_id">{{ item['zh-CN'] }}</el-checkbox>
       </div>
       <div style="margin-bottom: 5px"></div>
     </div>

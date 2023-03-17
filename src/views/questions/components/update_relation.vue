@@ -160,7 +160,7 @@ export default {
           for (let index in body.result) {
             term_options.push({
               value: body.result[index].term_id,
-              label: body.result[index].zh_cn,
+              label: body.result[index]['zh-CN'],
             });
           }
           this.term_options = term_options;
