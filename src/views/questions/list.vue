@@ -1,22 +1,24 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="listQuery.content" placeholder="翻译" style="width: 200px; margin-right: 10px" class="filter-item" @keyup.enter.native="handleFilter"/>
+      <el-input v-model="listQuery.content" placeholder="翻译" style="width: 200px; margin-right: 10px" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-button v-waves class="filter-item"
-        type="primary"
-        icon="el-icon-search"
-        @click="handleFilter"
-      >
+                 type="primary"
+                 icon="el-icon-search"
+                 @click="handleFilter">
         搜索
       </el-button>
       <el-button
-        class="filter-item"
-        style="margin-left: 10px"
-        type="success"
-        icon="el-icon-edit"
-        @click="handleCreate"
-      >
+                 class="filter-item"
+                 style="margin-left: 10px"
+                 type="success"
+                 icon="el-icon-edit"
+                 @click="handleCreate">
         添加
+      </el-button>
+      <el-button class="filter-item" style="margin-left: 10px" type="warning" icon="el-icon-edit"
+                 @click="downloadExcel">
+        下载
       </el-button>
       <!-- <el-button
         v-waves
@@ -29,42 +31,39 @@
         上传
       </el-button> -->
       <el-button
-        v-waves
-        :loading="downloadLoading"
-        class="filter-item"
-        type="warning"
-        icon="el-icon-download"
-        @click="handleDownload"
-      >
+                 v-waves
+                 :loading="downloadLoading"
+                 class="filter-item"
+                 type="warning"
+                 icon="el-icon-download"
+                 @click="handleDownload">
         导出
       </el-button>
     </div>
 
     <el-table
-      :key="tableKey"
-      v-loading="listLoading"
-      :data="list"
-      border
-      fit
-      highlight-current-row
-      style="width: 100%"
-      @sort-change="sortChange"
-    >
+              :key="tableKey"
+              v-loading="listLoading"
+              :data="list"
+              border
+              fit
+              highlight-current-row
+              style="width: 100%"
+              @sort-change="sortChange">
       <el-table-column
-        label="列名"
-        prop="id"
-        sortable="custom"
-        align="center"
-        :class-name="getSortClass('id')"
-      >
+                       label="列名"
+                       prop="id"
+                       sortable="custom"
+                       align="center"
+                       :class-name="getSortClass('id')">
         <template slot-scope="{ row }">
           <span>{{ row.content }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="termID计数" align="center">        
-          <template slot-scope="{ row }">
-            <span>{{ row.count }}</span>
-          </template>        
+      <el-table-column label="termID计数" align="center">
+        <template slot-scope="{ row }">
+          <span>{{ row.count }}</span>
+        </template>
       </el-table-column>
       <el-table-column label="备注" align="center">
         <template slot-scope="{ row }">
@@ -79,11 +78,11 @@
       <el-table-column label="操作" align="center">
         <template slot-scope="{ row }">
           <el-button type="primary" @click="showUpdate(row.content)">修改</el-button>
-      </template>
+        </template>
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total > 0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList"/>
+    <pagination v-show="total > 0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
     <create-dialog :visible.sync="dialogCreateVisible" :open="dialogCreateVisible" v-if="dialogCreateVisible" />
     <update-dialog :visible.sync="dialogUpdateVisible" :open="dialogUpdateVisible" :content="currentContent" v-if="dialogUpdateVisible" />
     <download-dialog :visible.sync="dialogDownloadVisible" :open="dialogDownloadVisible" :content="downTitle" :dataSource="dataSource" v-if="dialogDownloadVisible" />
@@ -95,6 +94,7 @@ import waves from "@/directive/waves"; // waves directive
 import { parseTime } from "@/utils";
 import Pagination from "@/components/Pagination"; // secondary package based on el-pagination
 import questions from "@/api/question";
+import Axios from "axios";
 import diseaseSelect from '@/views/public/disease_select'
 export default {
   name: "questionList",
@@ -125,7 +125,7 @@ export default {
       dialogCreateVisible: false,
       dialogUpdateVisible: false,
       dialogDownloadVisible: false,
-      currentContent:'',
+      currentContent: '',
       rules: {
         type: [
           { required: true, message: "type is required", trigger: "change" },
@@ -141,21 +141,42 @@ export default {
       },
       downloadLoading: false,
       uploading: false,
-      diseaseSelectType:'select',
-      diseaseSelectTitle:'下载的队列',
-      downTitle:'导出配置',
-      dataSource:'validation'
+      diseaseSelectType: 'select',
+      diseaseSelectTitle: '下载的队列',
+      downTitle: '导出配置',
+      dataSource: 'validation'
     };
   },
   created() {
     this.getList();
   },
-  watch:{
-    dialogUpdateVisible:function(){
+  watch: {
+    dialogUpdateVisible: function () {
       this.getList()
     }
   },
   methods: {
+    downloadExcel() {
+      Axios({
+        url: 'http://localhost:8887/banting/venetoclax/v1?serviceId=VenetoclaxLogic.downProjectPatientInfo',
+        responseType: 'blob',
+        method: 'post',
+        headers: {
+          'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc19hZG1pbiI6MSwidXNlcl9pZCI6MSwicGhvbmUiOiIxMzUwOTY2MjUxNCIsInVwZGF0ZV9wd2QiOnRydWUsInNleCI6MCwibmlja25hbWUiOiLotoXnuqfns7vnu5_nrqHnkIblkZgiLCJzdGF0dXMiOjAsImlhdCI6MTY4NjgwOTU5N30.AHTykMC_TSW-jiPSMPjk7DXw05-qy0-tfASivkR6j-w'
+        },
+        data: {
+          'user_group_id': 101
+        }
+      }).then((res) => {
+        const link = document.createElement('a')
+        let blob = new Blob([res.data], { type: 'application/vnd.ms-excel' });
+        link.style.display = 'none';
+        link.href = URL.createObjectURL(blob);
+        link.download = 'aa.xls'
+        document.body.appendChild(link)
+        link.click()
+      })
+    },
     getList() {
       this.listLoading = true;
       questions.getAllQuestions(this.listQuery).then((response) => {
@@ -208,7 +229,7 @@ export default {
         this.$refs["dataForm"].clearValidate();
       });
     },
-    handleUpload(){
+    handleUpload() {
       alert('该功能正在开发中...')
     },
     handleDownload() {

@@ -23,19 +23,19 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    proxy:{
-      "/banting":{
-        target: "http://localhost:8887",
+    proxy: {
+      "/banting": {
+        target: "http://dev-02.hsasystem.com:8887",
         changOrigin: true
       },
-      "/prt":{
+      "/prt": {
         target: "http://dev-02.hsasystem.com",
-        ws:true,
+        ws: true,
         changOrigin: true,
       },
-      "/execute":{
+      "/execute": {
         target: "http://localhost:20339",
-        ws:true,
+        ws: true,
         changOrigin: true,
       }
     },
@@ -48,16 +48,16 @@ module.exports = {
         '@': resolve('src')
       }
     },
-    performance:{//打包文件大小配置
+    performance: {//打包文件大小配置
       "maxEntrypointSize": 10000000,
       "maxAssetSize": 30000000
     },
-    plugins:[new HtmlWebpackPlugin({
-      template:'./public/index.html'
+    plugins: [new HtmlWebpackPlugin({
+      template: './public/index.html'
     })]
   },
-  pages:{
-    index:{
+  pages: {
+    index: {
       entry: 'src/main.js'
     }
   },
@@ -69,7 +69,7 @@ module.exports = {
         include: 'initial'
       }
     ])
-   
+
 
     config.plugins.delete('prefetch')
 
@@ -97,10 +97,10 @@ module.exports = {
           //   .plugin('html')
           //   .use(HtmlWebpackPlugin).tap();
           config
-          .plugin('ScriptExtHtmlWebpackPlugin')
-          .after('html')
-          .use('script-ext-html-webpack-plugin')
-          .end()
+            .plugin('ScriptExtHtmlWebpackPlugin')
+            .after('html')
+            .use('script-ext-html-webpack-plugin')
+            .end()
           config
             .optimization.splitChunks({
               chunks: 'all',
